@@ -1,0 +1,28 @@
+/**
+ * Copyright (c) 2014 Ralph Janke. All rights reserved.
+ *
+ * Author: Ralph Janke virtnosis@jankeconsulting.ca
+ */
+
+#ifndef VIRTNOSISWINDOW_H
+#define VIRTNOSISWINDOW_H
+
+#include <QMainWindow>
+
+namespace Ui {
+class VirtnosisWindow;
+}
+
+class VirtnosisWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    explicit VirtnosisWindow(QWidget *parent = 0);
+    ~VirtnosisWindow();
+
+private:
+    Ui::VirtnosisWindow *ui;
+};
+
+#endif // VIRTNOSISWINDOW_H
