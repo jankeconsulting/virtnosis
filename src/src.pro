@@ -17,3 +17,5 @@ SOURCES += main.cpp\
 HEADERS  += virtnosiswindow.h
 
 FORMS    += virtnosiswindow.ui
+
+unix|win32: LIBS += -lvirt
