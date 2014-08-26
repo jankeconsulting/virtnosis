@@ -1,6 +1,8 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2014-08-16T15:57:55
+# Copyright (c) 2014 Ralph Janke. All rights reserved.
+#
+# Author: Ralph Janke virtnosis@jankeconsulting.ca
 #
 #-------------------------------------------------
 
@@ -12,9 +14,11 @@ TARGET = virtnosis
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        virtnosiswindow.cpp
+        virtnosiswindow.cpp \
+    hypervisor.cpp
 
-HEADERS  += virtnosiswindow.h
+HEADERS  += virtnosiswindow.h \
+    hypervisor.h
 
 FORMS    += virtnosiswindow.ui
 
