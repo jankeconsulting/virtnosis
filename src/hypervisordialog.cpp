@@ -6,8 +6,10 @@
 
 #include "hypervisordialog.h"
 #include "ui_hypervisordialog.h"
+#include "virtnosiswindow.h"
+#include <QDebug>
 
-HypervisorDialog::HypervisorDialog(QString host, QString account, int port, QWidget *parent) :
+HypervisorDialog::HypervisorDialog(QWidget *parent, QString host, QString account, int port) :
     QDialog(parent),
     ui(new Ui::HypervisorDialog)
 {
@@ -40,5 +42,10 @@ int HypervisorDialog::port()
 
 void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
 {
-
+//    TODO: EditLineValidators
+//    TODO: storing inputs in hypervisor object and return it
+    Hypervisor *hypervisor = new Hypervisor(host(), account(), port());
+    qDebug() << "HypervisorDialog::on_hypervisorDialogbuttonBox_accepted: hypervisor->uri = " << hypervisor->uri();
+    VirtnosisWindow *widget = qobject_cast<VirtnosisWindow *>(parent());
+    widget->addHypervisor(hypervisor);
 }

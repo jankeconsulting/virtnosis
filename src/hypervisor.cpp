@@ -32,6 +32,11 @@ QString Hypervisor::uri()
     return protocol+"://"+account+"@"+host+":"+QString("%1").arg(port)+"/"+path;
 }
 
+QString Hypervisor::name()
+{
+    return host;
+}
+
 void Hypervisor::start()
 {
 

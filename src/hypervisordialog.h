@@ -8,6 +8,8 @@
 #define HYPERVISORDIALOG_H
 
 #include <QDialog>
+#include "hypervisor.h"
+#include <QStandardItem>
 
 namespace Ui {
 class HypervisorDialog;
@@ -18,7 +20,7 @@ class HypervisorDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit HypervisorDialog(QString host = "", QString account = "", int port = 22, QWidget *parent = 0);
+    explicit HypervisorDialog(QWidget *parent = 0, QString host = "", QString account = "", int port = 22);
     ~HypervisorDialog();
 
     QString host();

@@ -14,6 +14,8 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui(new Ui::VirtnosisWindow)
 {
     ui->setupUi(this);
+    QStandardItemModel *model = new QStandardItemModel(this);
+    ui->domainView->setModel(model);
 }
 
 VirtnosisWindow::~VirtnosisWindow()
@@ -49,8 +51,15 @@ void VirtnosisWindow::retrieve_domains(Hypervisor *hypervisor)
     free(domains);
 }
 
+void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
+{
+    QStandardItem *item = new QStandardItem(hypervisor->name());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->domainView->model());
+    model->appendRow(item);
+}
+
 void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 {
-    HypervisorDialog *dialog = new HypervisorDialog();
+    HypervisorDialog *dialog = new HypervisorDialog(this);
     dialog->show();
 }

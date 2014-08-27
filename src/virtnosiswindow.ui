@@ -14,7 +14,7 @@
    <string>VirtnosisWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTreeView" name="treeView">
+   <widget class="QTreeView" name="domainView">
     <property name="geometry">
      <rect>
       <x>10</x>
