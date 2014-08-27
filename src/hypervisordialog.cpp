@@ -37,3 +37,8 @@ int HypervisorDialog::port()
     return ui->portField->text().toInt();
 
 }
+
+void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
+{
+
+}

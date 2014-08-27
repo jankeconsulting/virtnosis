@@ -16,7 +16,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="hypervisorDialogbuttonBox">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -78,7 +78,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>hypervisorDialogbuttonBox</sender>
    <signal>accepted()</signal>
    <receiver>HypervisorDialog</receiver>
    <slot>accept()</slot>
@@ -94,7 +94,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>hypervisorDialogbuttonBox</sender>
    <signal>rejected()</signal>
    <receiver>HypervisorDialog</receiver>
    <slot>reject()</slot>

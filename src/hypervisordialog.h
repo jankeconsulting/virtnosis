@@ -25,6 +25,11 @@ public:
     QString account();
     int port();
 
+private slots:
+    void on_buttonBox_accepted();
+
+    void on_hypervisorDialogbuttonBox_accepted();
+
 private:
     Ui::HypervisorDialog *ui;
 };
