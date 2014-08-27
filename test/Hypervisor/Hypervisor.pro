@@ -18,8 +18,8 @@ TEMPLATE = app
 
 HEADERS += ../../src/hypervisor.h
 
-SOURCES += tst_hypervisortest.cpp
-SOURCES += ../../src/hypervisor.cpp
+SOURCES += tst_hypervisortest.cpp \
+             ../../src/hypervisor.cpp
 
 
 
