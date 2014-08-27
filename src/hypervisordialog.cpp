@@ -14,7 +14,7 @@ HypervisorDialog::HypervisorDialog(QString host, QString account, int port, QWid
     ui->setupUi(this);
     ui->hostField->setText(host);
     ui->accountField->setText(account);
-    ui->portField->setText(QString().arg(port));
+    ui->portField->setText(QString("%1").arg(port));
 }
 
 HypervisorDialog::~HypervisorDialog()
