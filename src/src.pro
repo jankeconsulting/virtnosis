@@ -15,11 +15,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         virtnosiswindow.cpp \
-    hypervisor.cpp
+    hypervisor.cpp \
+    hypervisordialog.cpp
 
 HEADERS  += virtnosiswindow.h \
-    hypervisor.h
+    hypervisor.h \
+    hypervisordialog.h
 
-FORMS    += virtnosiswindow.ui
+FORMS    += virtnosiswindow.ui \
+    hypervisordialog.ui
 
 unix|win32: LIBS += -lvirt
