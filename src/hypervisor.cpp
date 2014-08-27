@@ -6,6 +6,17 @@
 
 #include "hypervisor.h"
 
+
+Hypervisor::Hypervisor(QObject *parent) :
+    QObject(parent)
+{
+    this->host = "";
+    this->account = "";
+    this->port = 22;
+    this->protocol = "qemu+ssh";
+    this->path = "system";
+}
+
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
     QObject(parent)
 {
