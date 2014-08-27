@@ -14,7 +14,7 @@
    <string>VirtnosisWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTextBrowser" name="textBrowser">
+   <widget class="QTreeView" name="treeView">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -44,6 +44,7 @@
     <property name="title">
      <string>Hypervisor</string>
     </property>
+    <addaction name="action_New"/>
    </widget>
    <widget class="QMenu" name="menuVirtualMachine">
     <property name="title">
@@ -77,6 +78,11 @@
   <action name="actionE_xit">
    <property name="text">
     <string>E&amp;xit</string>
+   </property>
+  </action>
+  <action name="action_New">
+   <property name="text">
+    <string>&amp;New</string>
    </property>
   </action>
  </widget>
