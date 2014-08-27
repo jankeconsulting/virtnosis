@@ -49,7 +49,7 @@ void VirtnosisWindow::retrieve_domains(Hypervisor *hypervisor)
     free(domains);
 }
 
-void VirtnosisWindow::on_action_New_triggered()
+void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 {
     HypervisorDialog *dialog = new HypervisorDialog();
     dialog->show();

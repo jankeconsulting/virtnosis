@@ -27,7 +27,7 @@ public:
     void retrieve_domains(Hypervisor *hypervisor);
 
 private slots:
-    void on_action_New_triggered();
+    void on_menuHypervisorActionNew_triggered();
 
 private:
     Ui::VirtnosisWindow *ui;
