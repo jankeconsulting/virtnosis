@@ -18,6 +18,8 @@ public:
 private Q_SLOTS:
     void testUriAllParameters();
     void testUriOnlyHostAndAccount();
+    void testUriOnlyHost();
+    void testUriOnlyHostAndPort();
 };
 
 HypervisorTest::HypervisorTest()
@@ -38,9 +40,23 @@ void HypervisorTest::testUriOnlyHostAndAccount()
     hypervisor = new Hypervisor("test.example.org", "user");
     QCOMPARE(hypervisor->uri(), QString("qemu+ssh://user@test.example.org:22/system"));
     delete hypervisor;
-    hypervisor = 0; // Just for sanity
 }
 
+void HypervisorTest::testUriOnlyHost()
+{
+    Hypervisor *hypervisor;
+    hypervisor = new Hypervisor("test.example.org", "");
+    QCOMPARE(hypervisor->uri(), QString("qemu+ssh://test.example.org:22/system"));
+    delete hypervisor;
+}
+
+void HypervisorTest::testUriOnlyHostAndPort()
+{
+    Hypervisor *hypervisor;
+    hypervisor = new Hypervisor("test.example.org", "", 33);
+    QCOMPARE(hypervisor->uri(), QString("qemu+ssh://test.example.org:33/system"));
+    delete hypervisor;
+}
 
 QTEST_APPLESS_MAIN(HypervisorTest)
 
