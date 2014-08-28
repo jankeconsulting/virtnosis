@@ -26,9 +26,13 @@ public:
     QString host();
     QString account();
     int port();
+    void updateUri();
 
 private slots:
     void on_hypervisorDialogbuttonBox_accepted();
+    void on_hostField_textChanged(const QString &text);
+    void on_accountField_textChanged(const QString &text);
+    void on_portField_textChanged(const QString &text);
 
 private:
     Ui::HypervisorDialog *ui;

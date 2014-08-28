@@ -17,6 +17,7 @@ public:
     explicit Hypervisor(QString host, QString user, int port = 22, QString protocol = "qemu+ssh", QString path = "system", QObject *parent = 0);
 
     QString uri();
+    static QString uri(QString host, QString account, int port, QString protocol = "qemu+ssh", QString path = "system");
     QString name();
 
 signals:

@@ -40,6 +40,11 @@ int HypervisorDialog::port()
 
 }
 
+void HypervisorDialog::updateUri()
+{
+    ui->uri->setText(Hypervisor::uri(host(), account(), port()));
+}
+
 void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
 {
 //    TODO: EditLineValidators
@@ -48,4 +53,23 @@ void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
     qDebug() << "HypervisorDialog::on_hypervisorDialogbuttonBox_accepted: hypervisor->uri = " << hypervisor->uri();
     VirtnosisWindow *widget = qobject_cast<VirtnosisWindow *>(parent());
     widget->addHypervisor(hypervisor);
+}
+
+void HypervisorDialog::on_hostField_textChanged(const QString &text)
+{
+    Q_UNUSED(text);
+    updateUri();
+}
+
+void HypervisorDialog::on_accountField_textChanged(const QString &text)
+{
+    Q_UNUSED(text);
+    updateUri();
+}
+
+
+void HypervisorDialog::on_portField_textChanged(const QString &text)
+{
+    Q_UNUSED(text);
+    updateUri();
 }

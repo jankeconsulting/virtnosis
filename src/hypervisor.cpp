@@ -29,6 +29,11 @@ Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, Q
 
 QString Hypervisor::uri()
 {
+    return uri(host, account, port, protocol, path);
+}
+
+QString Hypervisor::uri(QString host, QString account, int port, QString protocol, QString path)
+{
     return protocol+"://"+account+"@"+host+":"+QString("%1").arg(port)+"/"+path;
 }
 
