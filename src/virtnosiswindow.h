@@ -27,6 +27,7 @@ public:
     ~VirtnosisWindow();
     void retrieve_domains(Hypervisor *hypervisor);
     void addHypervisor(Hypervisor *hypervisor);
+    void addDomainsFromHypervisor(Hypervisor *hypervisor, QStandardItem *item);
 
 private slots:
     void on_menuHypervisorActionNew_triggered();

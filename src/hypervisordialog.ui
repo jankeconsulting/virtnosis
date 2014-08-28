@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Add Hypervisor connection</string>
   </property>
   <widget class="QDialogButtonBox" name="hypervisorDialogbuttonBox">
    <property name="geometry">
@@ -35,10 +35,10 @@
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>40</y>
+     <x>30</x>
+     <y>80</y>
      <width>341</width>
-     <height>131</height>
+     <height>101</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
@@ -73,6 +73,22 @@
      <widget class="QLineEdit" name="portField"/>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>321</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Please enter the information for the connection to the Hypervisor</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <resources/>
