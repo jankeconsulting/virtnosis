@@ -34,7 +34,13 @@ QString Hypervisor::uri()
 
 QString Hypervisor::uri(QString host, QString account, int port, QString protocol, QString path)
 {
-    return protocol+"://"+account+"@"+host+":"+QString("%1").arg(port)+"/"+path;
+    QString result;
+    if(account.isEmpty()) {
+        result = protocol+"://"+host+":"+QString("%1").arg(port)+"/"+path;
+    } else {
+        result = protocol+"://"+account+"@"+host+":"+QString("%1").arg(port)+"/"+path;
+    }
+    return result;
 }
 
 QString Hypervisor::name()
