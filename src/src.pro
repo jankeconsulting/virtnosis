@@ -16,11 +16,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         virtnosiswindow.cpp \
     hypervisor.cpp \
-    hypervisordialog.cpp
+    hypervisordialog.cpp \
+    domainviewitemdelegate.cpp
 
 HEADERS  += virtnosiswindow.h \
     hypervisor.h \
-    hypervisordialog.h
+    hypervisordialog.h \
+    domainviewitemdelegate.h
 
 FORMS    += virtnosiswindow.ui \
     hypervisordialog.ui
