@@ -13,6 +13,7 @@
 #include "hypervisor.h"
 #include "hypervisordialog.h"
 #include <QStandardItemModel>
+#include "domainitem.h"
 
 namespace Ui {
 class VirtnosisWindow;

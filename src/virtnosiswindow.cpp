@@ -53,7 +53,7 @@ void VirtnosisWindow::retrieve_domains(Hypervisor *hypervisor)
 
 void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
 {
-    QStandardItem *item = new QStandardItem(hypervisor->name());
+    DomainItem *item = new DomainItem(hypervisor);
     addDomainsFromHypervisor(hypervisor, item);
     QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->domainView->model());
     model->appendRow(item);
@@ -81,7 +81,7 @@ void VirtnosisWindow::addDomainsFromHypervisor(Hypervisor *hypervisor, QStandard
     for (i = 0; i < number_of_domains; i++) {
 
         qDebug() << "VirtnosisWindow::list_domains: domains[" << i << "] = " << domains[i] << "name = " << virDomainGetName(domains[i]);
-        domain_item = new QStandardItem(virDomainGetName(domains[i]));
+        domain_item = new DomainItem(virDomainGetName(domains[i]));
         item->appendRow(domain_item);
         //here or in a separate loop if needed
         virDomainFree(domains[i]);
