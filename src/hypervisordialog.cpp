@@ -54,8 +54,6 @@ void HypervisorDialog::updateUri()
 
 void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
 {
-//    TODO: EditLineValidators
-//    TODO: storing inputs in hypervisor object and return it
     Hypervisor *hypervisor = new Hypervisor(host(), account(), port());
     qDebug() << "HypervisorDialog::on_hypervisorDialogbuttonBox_accepted: hypervisor->uri = " << hypervisor->uri();
     VirtnosisWindow *widget = qobject_cast<VirtnosisWindow *>(parent());
