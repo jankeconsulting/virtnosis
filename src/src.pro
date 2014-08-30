@@ -19,14 +19,16 @@ SOURCES += main.cpp\
     hypervisordialog.cpp \
     domainviewitemdelegate.cpp \
     domainviewmodel.cpp \
-    domainitem.cpp
+    domainitem.cpp \
+    hypervisoritem.cpp
 
 HEADERS  += virtnosiswindow.h \
     hypervisor.h \
     hypervisordialog.h \
     domainviewitemdelegate.h \
     domainviewmodel.h \
-    domainitem.h
+    domainitem.h \
+    hypervisoritem.h
 
 FORMS    += virtnosiswindow.ui \
     hypervisordialog.ui
