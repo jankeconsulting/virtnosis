@@ -8,8 +8,8 @@
 #define VIRTNOSISWINDOW_H
 
 #include <QMainWindow>
-#include "libvirt/libvirt.h"
-#include "libvirt/virterror.h"
+//#include "libvirt/libvirt.h"
+//#include "libvirt/virterror.h"
 #include "hypervisor.h"
 #include "hypervisordialog.h"
 #include "hypervisoritem.h"
@@ -27,7 +27,6 @@ class VirtnosisWindow : public QMainWindow
 public:
     explicit VirtnosisWindow(QWidget *parent = 0);
     ~VirtnosisWindow();
-    void retrieve_domains(Hypervisor *hypervisor);
     void addHypervisor(Hypervisor *hypervisor);
 
 private slots:
