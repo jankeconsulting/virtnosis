@@ -14,7 +14,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui(new Ui::VirtnosisWindow)
 {
     ui->setupUi(this);
-    QStandardItemModel *model = new QStandardItemModel(this);
+    DomainViewModel *model = new DomainViewModel(this);
     ui->domainView->setModel(model);
 }
 
@@ -26,7 +26,7 @@ VirtnosisWindow::~VirtnosisWindow()
 void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
 {
     HypervisorItem *item = new HypervisorItem(hypervisor);
-    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->domainView->model());
+    DomainViewModel *model = qobject_cast<DomainViewModel *>(ui->domainView->model());
     model->appendRow(item);
 }
 

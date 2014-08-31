@@ -8,12 +8,10 @@
 #define VIRTNOSISWINDOW_H
 
 #include <QMainWindow>
-//#include "libvirt/libvirt.h"
-//#include "libvirt/virterror.h"
 #include "hypervisor.h"
 #include "hypervisordialog.h"
 #include "hypervisoritem.h"
-#include <QStandardItemModel>
+#include <domainviewmodel.h>
 #include "domainitem.h"
 
 namespace Ui {
