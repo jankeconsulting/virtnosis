@@ -5,6 +5,7 @@
  */
 
 #include "hypervisor.h"
+#include <QDebug>
 
 
 Hypervisor::Hypervisor(QObject *parent) :
@@ -46,9 +47,4 @@ QString Hypervisor::uri(QString host, QString account, int port, QString protoco
 QString Hypervisor::name()
 {
     return host;
-}
-
-void Hypervisor::start()
-{
-
 }

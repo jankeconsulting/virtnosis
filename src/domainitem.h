@@ -8,18 +8,14 @@
 #define DOMAINITEM_H
 
 #include <QStandardItem>
-#include "hypervisor.h"
 
 class DomainItem : public QStandardItem
 {
-//    Q_OBJECT
+
 public:
     explicit DomainItem(const QString &text);
-    explicit DomainItem(Hypervisor *hypervisor);
 
-signals:
-
-public slots:
+private:
 
 };
 

@@ -23,7 +23,6 @@ public:
 signals:
 
 public slots:
-    void start();
 
 private:
     QString protocol;

@@ -11,8 +11,4 @@ DomainItem::DomainItem(const QString &text) :
 {
 }
 
-DomainItem::DomainItem(Hypervisor *hypervisor):
-    QStandardItem(hypervisor->name())
-{
 
-}

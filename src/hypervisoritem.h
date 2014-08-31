@@ -1,18 +1,27 @@
+/**
+ * Copyright (c) 2014 Ralph Janke. All rights reserved.
+ *
+ * Author: Ralph Janke virtnosis@jankeconsulting.ca
+ */
+
 #ifndef HYPERVISORITEM_H
 #define HYPERVISORITEM_H
 
 #include <QStandardItem>
+#include "hypervisor.h"
+#include "domainitem.h"
+#include "libvirt/libvirt.h"
+#include "libvirt/virterror.h"
 
 class HypervisorItem : public QStandardItem
 {
-    Q_OBJECT
+
 public:
-    explicit HypervisorItem(QObject *parent = 0);
+    explicit HypervisorItem(Hypervisor *hypervisor);
+    void addDomainsFromHypervisor(Hypervisor *hypervisor);
 
-signals:
-
-public slots:
-
+private:
+    Hypervisor *m_hypervisor;
 };
 
 #endif // HYPERVISORITEM_H
