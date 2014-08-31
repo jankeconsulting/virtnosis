@@ -13,6 +13,7 @@
 #include "hypervisoritem.h"
 #include <domainviewmodel.h>
 #include "domainitem.h"
+#include "domainviewitemdelegate.h"
 
 namespace Ui {
 class VirtnosisWindow;

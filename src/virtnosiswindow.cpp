@@ -16,6 +16,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui->setupUi(this);
     DomainViewModel *model = new DomainViewModel(this);
     ui->domainView->setModel(model);
+    DomainViewItemDelegate *delegate = new DomainViewItemDelegate(this);
 }
 
 VirtnosisWindow::~VirtnosisWindow()
