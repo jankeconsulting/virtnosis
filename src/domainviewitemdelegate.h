@@ -7,9 +7,12 @@
 #ifndef DOMAINVIEWITEMDELEGATE_H
 #define DOMAINVIEWITEMDELEGATE_H
 
-#include <QAbstractItemDelegate>
+#include <QStyledItemDelegate>
+#include <QPainter>
+#include <QApplication>
+#include "domainitem.h"
 
-class DomainViewItemDelegate : public QAbstractItemDelegate
+class DomainViewItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
