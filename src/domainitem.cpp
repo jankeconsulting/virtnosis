@@ -6,9 +6,14 @@
 
 #include "domainitem.h"
 
-DomainItem::DomainItem(const QString &text) :
-    QStandardItem(text)
+DomainItem::DomainItem(const QString &text, Hypervisor *hypervisor) :
+    QStandardItem(text),
+    m_hypervisor(hypervisor)
 {
+
 }
 
-
+Hypervisor *DomainItem::hypervisor()
+{
+    return m_hypervisor;
+}

@@ -17,11 +17,7 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 
     qDebug() << "DomainViewItemDelegate::paint: index:" << index;
 
-    /*
-    QStyledItemDelegate::paint(painter,option,index);
-
     painter->save();
-    */
 
     if (option.state & QStyle::State_Selected)
         painter->fillRect(option.rect, option.palette.highlight());
@@ -40,7 +36,7 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 
 //    painter->drawText(domainNameRect, qvariant_cast<QString>(index.data(headerTextRole)));
     painter->drawText(domainNameRect, qvariant_cast<QString>(index.data()));
-    painter->drawText(domainStateRect, qvariant_cast<QString>(index.data(DomainItem::domainStateRole)));
+    painter->drawText(domainStateRect, qvariant_cast<QString>(index.data(DomainViewModel::domainStateRole)));
 
     painter->restore();
 }

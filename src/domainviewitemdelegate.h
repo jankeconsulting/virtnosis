@@ -11,6 +11,7 @@
 #include <QPainter>
 #include <QApplication>
 #include "domainitem.h"
+#include "domainviewmodel.h"
 
 class DomainViewItemDelegate : public QStyledItemDelegate
 {

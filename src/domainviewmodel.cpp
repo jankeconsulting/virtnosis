@@ -14,14 +14,7 @@ DomainViewModel::DomainViewModel(QObject *parent) :
 
 QVariant DomainViewModel::data(const QModelIndex &index, int role) const
 {
-    if(role == DomainItem::domainStateRole) {
-        DomainItem *item = static_cast<DomainItem *>(this->item(index.row(), index.column()));
-
-        qDebug() << "DomainViewModel::data: index = " << index;
-        qDebug() << "DomainViewModel::data: item = " << item;
-        if(item)
-            qDebug() << "DomainViewModel::data: hypervisor = " << item->hypervisor();
-
+    if(role == domainStateRole) {
         return QVariant();
     } else {
         return QStandardItemModel::data(index, role);
