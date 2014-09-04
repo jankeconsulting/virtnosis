@@ -18,6 +18,12 @@ Hypervisor::Hypervisor(QObject *parent) :
     this->path = "system";
 }
 
+Hypervisor::Hypervisor(const Hypervisor& hypervisor) :
+    QObject(hypervisor.parent())
+{
+    Hypervisor(hypervisor.host, hypervisor.account, hypervisor.port, hypervisor.protocol, hypervisor.path, hypervisor.parent());
+}
+
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
     QObject(parent)
 {
@@ -26,6 +32,11 @@ Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, Q
     this->port = port;
     this->protocol = protocol;
     this->path = path;
+}
+
+Hypervisor::~Hypervisor()
+{
+
 }
 
 QString Hypervisor::uri()

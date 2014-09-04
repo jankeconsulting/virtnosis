@@ -10,6 +10,7 @@
 #include <QStandardItem>
 #include "hypervisor.h"
 #include "domainitem.h"
+#include "domainviewmodel.h"
 #include "libvirt/libvirt.h"
 #include "libvirt/virterror.h"
 
@@ -18,10 +19,9 @@ class HypervisorItem : public QStandardItem
 
 public:
     explicit HypervisorItem(Hypervisor *hypervisor);
-    void addDomainsFromHypervisor(Hypervisor *hypervisor);
+    void addDomainsFromHypervisor(Hypervisor *hypervisor);    
 
 private:
-    Hypervisor *m_hypervisor;
 };
 
 #endif // HYPERVISORITEM_H

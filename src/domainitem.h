@@ -14,12 +14,9 @@ class DomainItem : public QStandardItem
 {
 
 public:
-    explicit DomainItem(const QString &text, Hypervisor *hypervisor);
-    Hypervisor *hypervisor();
+    explicit DomainItem(const QString &text);
 
 private:
-    Hypervisor *m_hypervisor;
-
 };
 
 #endif // DOMAINITEM_H
