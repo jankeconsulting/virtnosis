@@ -13,6 +13,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::VirtnosisWindow)
 {
+    qRegisterMetaType<Hypervisor>("Hypervisor");
     ui->setupUi(this);
     DomainViewModel *model = new DomainViewModel(this);
     ui->domainView->setModel(model);

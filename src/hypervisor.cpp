@@ -9,7 +9,8 @@
 
 
 Hypervisor::Hypervisor(QObject *parent) :
-    QObject(parent)
+//    QObject(parent),
+    connection(0)
 {
     this->host = "";
     this->account = "";
@@ -18,14 +19,21 @@ Hypervisor::Hypervisor(QObject *parent) :
     this->path = "system";
 }
 
-Hypervisor::Hypervisor(const Hypervisor& hypervisor) :
-    QObject(hypervisor.parent())
+Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
+//    QObject(),
+    connection(0)
 {
-    Hypervisor(hypervisor.host, hypervisor.account, hypervisor.port, hypervisor.protocol, hypervisor.path, hypervisor.parent());
+//    Hypervisor(hypervisor.host, hypervisor.account, hypervisor.port, hypervisor.protocol, hypervisor.path);
+    this->host = hypervisor.host;
+    this->account = hypervisor.account;
+    this->port = hypervisor.port;
+    this->protocol = hypervisor.protocol;
+    this->path = hypervisor.path;
 }
 
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
-    QObject(parent)
+//    QObject(parent),
+    connection(0)
 {
     this->host = host;
     this->account = user;
@@ -58,4 +66,10 @@ QString Hypervisor::uri(QString host, QString account, int port, QString protoco
 QString Hypervisor::name()
 {
     return host;
+}
+
+void Hypervisor::setupConnection()
+{
+//    if(!connection)
+//      connection = virConnectOpen(this->uri().toLatin1().data());
 }

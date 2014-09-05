@@ -36,9 +36,15 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 
 //    painter->drawText(domainNameRect, qvariant_cast<QString>(index.data(headerTextRole)));
     painter->drawText(domainNameRect, qvariant_cast<QString>(index.data()));
+    //QString state_text = qvariant_cast<QString>(index.data(DomainViewModel::domainStateRole));
+    qDebug() << "DomainViewItemDelegate::paint: before state drawtext:" ;
     painter->drawText(domainStateRect, qvariant_cast<QString>(index.data(DomainViewModel::domainStateRole)));
+    //painter->drawText(domainStateRect, "state");
+    qDebug() << "DomainViewItemDelegate::paint: before restore:" ;
 
     painter->restore();
+    qDebug() << "DomainViewItemDelegate::paint: after restore:" ;
+
 }
 
 QSize DomainViewItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const

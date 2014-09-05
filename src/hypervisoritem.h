@@ -11,8 +11,6 @@
 #include "hypervisor.h"
 #include "domainitem.h"
 #include "domainviewmodel.h"
-#include "libvirt/libvirt.h"
-#include "libvirt/virterror.h"
 
 class HypervisorItem : public QStandardItem
 {

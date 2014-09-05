@@ -35,18 +35,18 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
 
     for (i = 0; i < number_of_domains; i++) {
 
-        qDebug() << "VirtnosisWindow::list_domains: domains[" << i << "] = " << domains[i] << "name = " << virDomainGetName(domains[i]);
+        qDebug() << "VirtnosisWindow::list_domains: domains[" << i << "] = " << domains[i] << " name = " << virDomainGetName(domains[i]) << " state = " << virDomainIsActive(domains[i]);
         domain_item = new DomainItem(virDomainGetName(domains[i]));
         this->appendRow(domain_item);
         QVariant test;
         QModelIndex index = this->child(this->rowCount()-1, 0)->index();
         test.setValue(*hypervisor);
         QAbstractItemModel *model = this->model();
-        qDebug() << "VirtnosisWindow::list_domains: item= " << domain_item << ", " << domain_item->model();
-        qDebug() << "VirtnosisWindow::list_domains: model = " << model;
-        qDebug() << "VirtnosisWindow::list_domains: index = " << index;
 
+        model->setData(index, virDomainIsActive(domains[i]), DomainViewModel::domainStateRole);
         model->setData(index, test, DomainViewModel::domainHypervisorRole);
+        qDebug() << "VirtnosisWindow::list_domains:  = " << number_of_domains;
+
 
         virDomainFree(domains[i]);
     }

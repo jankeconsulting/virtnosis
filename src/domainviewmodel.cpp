@@ -14,10 +14,5 @@ DomainViewModel::DomainViewModel(QObject *parent) :
 
 QVariant DomainViewModel::data(const QModelIndex &index, int role) const
 {
-    if(role == domainStateRole) {
-        return QVariant();
-    } else {
-        return QStandardItemModel::data(index, role);
-    }
-
+    return QStandardItemModel::data(index, role);
 }

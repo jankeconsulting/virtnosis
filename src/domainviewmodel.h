@@ -9,6 +9,8 @@
 
 #include <QStandardItemModel>
 #include "domainitem.h"
+#include "hypervisor.h"
+#include <QVariant>
 
 class DomainViewModel : public QStandardItemModel
 {
