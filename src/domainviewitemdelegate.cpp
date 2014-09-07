@@ -24,6 +24,9 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 
     QFont font = QApplication::font();
     QFontMetrics fm(font);
+    QFont stateFont = QApplication::font();
+    font.setBold(true);
+    stateFont.setItalic(true);
 
     QRect domainNameRect = option.rect;
     QRect domainStateRect = option.rect;
@@ -34,17 +37,14 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 
     domainStateRect.setTop(domainNameRect.bottom()+2);
 
+    painter->setFont(font);
 //    painter->drawText(domainNameRect, qvariant_cast<QString>(index.data(headerTextRole)));
     painter->drawText(domainNameRect, qvariant_cast<QString>(index.data()));
-    //QString state_text = qvariant_cast<QString>(index.data(DomainViewModel::domainStateRole));
-    qDebug() << "DomainViewItemDelegate::paint: before state drawtext:" ;
+
+    painter->setFont(stateFont);
     painter->drawText(domainStateRect, stateText(index.data(DomainViewModel::domainStateRole)));
-    //painter->drawText(domainStateRect, "state");
-    qDebug() << "DomainViewItemDelegate::paint: before restore:" ;
 
     painter->restore();
-    qDebug() << "DomainViewItemDelegate::paint: after restore:" ;
-
 }
 
 QSize DomainViewItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
