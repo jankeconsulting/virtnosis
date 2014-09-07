@@ -38,7 +38,7 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     painter->drawText(domainNameRect, qvariant_cast<QString>(index.data()));
     //QString state_text = qvariant_cast<QString>(index.data(DomainViewModel::domainStateRole));
     qDebug() << "DomainViewItemDelegate::paint: before state drawtext:" ;
-    painter->drawText(domainStateRect, qvariant_cast<QString>(index.data(DomainViewModel::domainStateRole)));
+    painter->drawText(domainStateRect, stateText(index.data(DomainViewModel::domainStateRole)));
     //painter->drawText(domainStateRect, "state");
     qDebug() << "DomainViewItemDelegate::paint: before restore:" ;
 
@@ -56,4 +56,15 @@ QSize DomainViewItemDelegate::sizeHint(const QStyleOptionViewItem &option, const
     QFontMetrics fm(font);
 
     return(QSize(100, fm.height()*2 + 8 ));
+}
+
+QString DomainViewItemDelegate::stateText(const QVariant state) const
+{
+    if(state.toString() == "") return ""; // for Hypervisor row
+    switch(state.toInt()) {
+        case 1: return QString("Running");
+        case 0: return QString("Shutdown");
+    }
+
+    return "Error";
 }

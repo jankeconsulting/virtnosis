@@ -29,6 +29,8 @@ signals:
 
 public slots:
 
+private:
+    QString stateText(const QVariant state) const;
 };
 
 #endif // DOMAINVIEWITEMDELEGATE_H
