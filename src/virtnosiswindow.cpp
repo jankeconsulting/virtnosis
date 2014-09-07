@@ -19,6 +19,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui->domainView->setModel(model);
     DomainViewItemDelegate *delegate = new DomainViewItemDelegate(this);
     ui->domainView->setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
+    ui->domainView->setAlternatingRowColors(true);
 }
 
 VirtnosisWindow::~VirtnosisWindow()
