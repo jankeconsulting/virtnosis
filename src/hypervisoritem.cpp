@@ -25,7 +25,7 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
                          VIR_CONNECT_LIST_DOMAINS_PERSISTENT;
     */
 
-    virConnectPtr connection = virConnectOpen(hypervisor->uri().toLatin1().data());
+    virConnectPtr connection = hypervisor->connection();
 
     qDebug() << "VirtnosisWindow::list_domains: connection = " << connection;
 

@@ -9,8 +9,8 @@
 
 
 Hypervisor::Hypervisor(QObject *parent) :
-//    QObject(parent),
-    connection(0)
+    QObject(parent),
+    m_connection(0)
 {
     this->host = "";
     this->account = "";
@@ -20,10 +20,10 @@ Hypervisor::Hypervisor(QObject *parent) :
 }
 
 Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
-//    QObject(),
-    connection(0)
+    QObject(),
+    m_connection(0)
 {
-//    Hypervisor(hypervisor.host, hypervisor.account, hypervisor.port, hypervisor.protocol, hypervisor.path);
+    setParent(hypervisor.parent());
     this->host = hypervisor.host;
     this->account = hypervisor.account;
     this->port = hypervisor.port;
@@ -32,8 +32,8 @@ Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
 }
 
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
-//    QObject(parent),
-    connection(0)
+    QObject(parent),
+    m_connection(0)
 {
     this->host = host;
     this->account = user;
@@ -68,8 +68,11 @@ QString Hypervisor::name()
     return host;
 }
 
-void Hypervisor::setupConnection()
+virConnectPtr Hypervisor::connection()
 {
-//    if(!connection)
-//      connection = virConnectOpen(this->uri().toLatin1().data());
+//    TODO: check connection and re-establish if broken
+//    TODO: error handling if connection fails
+    if(!m_connection)
+      m_connection = virConnectOpen(this->uri().toLatin1().data());
+    return m_connection;
 }

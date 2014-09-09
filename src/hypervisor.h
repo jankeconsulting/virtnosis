@@ -7,14 +7,16 @@
 #ifndef HYPERVISOR_H
 #define HYPERVISOR_H
 
+#include <QObject>
 #include <QMetaType>
 #include <QString>
 #include "libvirt/libvirt.h"
 #include "libvirt/virterror.h"
 
 
-class Hypervisor
+class Hypervisor : public QObject
 {
+    Q_OBJECT
 
 public:
     explicit Hypervisor(QObject *parent = 0);
@@ -26,6 +28,7 @@ public:
     QString uri();
     static QString uri(QString host, QString account, int port, QString protocol = "qemu+ssh", QString path = "system");
     QString name();
+    virConnectPtr connection();
 
 private:
     QString protocol;
@@ -35,8 +38,7 @@ private:
     QString path;
     int status;
 
-    virConnectPtr connection;
-    void setupConnection();
+    virConnectPtr m_connection;
 
 };
 

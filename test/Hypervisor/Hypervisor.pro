@@ -21,6 +21,6 @@ HEADERS += ../../src/hypervisor.h
 SOURCES += tst_hypervisortest.cpp \
              ../../src/hypervisor.cpp
 
-
-
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
+
+unix|win32: LIBS += -lvirt
