@@ -17,6 +17,8 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
     virDomainPtr *domains;
     int i;
     DomainItem *domain_item;
+    int state = 0;
+    int reason = 0;
 
     /*
     unsigned int flags = VIR_CONNECT_LIST_DOMAINS_RUNNING |
@@ -43,7 +45,8 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
         test.setValue(*hypervisor);
         QAbstractItemModel *model = this->model();
 
-        model->setData(index, virDomainIsActive(domains[i]), DomainViewModel::domainStateRole);
+        if(virDomainGetState(domains[i], &state, &reason, 0) != -1)
+            model->setData(index, state, DomainViewModel::domainStateRole);
         model->setData(index, test, DomainViewModel::domainHypervisorRole);
         qDebug() << "VirtnosisWindow::list_domains:  = " << number_of_domains;
 
