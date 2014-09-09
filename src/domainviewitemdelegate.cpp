@@ -14,9 +14,6 @@ DomainViewItemDelegate::DomainViewItemDelegate(QObject *parent) :
 
 void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-
-    qDebug() << "DomainViewItemDelegate::paint: index:" << index;
-
     painter->save();
 
     if (option.state & QStyle::State_Selected)
