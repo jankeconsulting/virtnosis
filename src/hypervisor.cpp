@@ -29,6 +29,7 @@ Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
     this->port = hypervisor.port;
     this->protocol = hypervisor.protocol;
     this->path = hypervisor.path;
+    this->m_connection = hypervisor.m_connection;
 }
 
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
@@ -40,11 +41,12 @@ Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, Q
     this->port = port;
     this->protocol = protocol;
     this->path = path;
+    connection();
 }
 
 Hypervisor::~Hypervisor()
 {
-
+    virConnectClose(m_connection);
 }
 
 QString Hypervisor::uri()
