@@ -10,6 +10,7 @@
 #include <QStandardItemModel>
 #include "domainitem.h"
 #include "hypervisor.h"
+#include "domain.h"
 #include <QVariant>
 
 class DomainViewModel : public QStandardItemModel
@@ -25,6 +26,7 @@ public:
                    domainStateRole = Qt::UserRole + 101,
                    domainIconRole = Qt::UserRole + 102,
                    domainHypervisorRole = Qt::UserRole + 103,
+                   domainDomainRole = Qt::UserRole + 104,
                   };
 
 signals:

@@ -14,5 +14,8 @@ DomainViewModel::DomainViewModel(QObject *parent) :
 
 QVariant DomainViewModel::data(const QModelIndex &index, int role) const
 {
+    if(role == domainStateRole) {
+        Domain item = qvariant_cast<Domain>(QStandardItemModel::data(index, domainDomainRole));
+    }
     return QStandardItemModel::data(index, role);
 }
