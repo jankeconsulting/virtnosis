@@ -59,14 +59,14 @@ QString DomainViewItemDelegate::stateText(const QVariant state) const
 {
     if(state.toString() == "") return ""; // for Hypervisor row
     switch(state.toInt()) {
-        case 0: return QString("No State");
-        case 1: return QString("Running");
-        case 2: return QString("Blocked");
-        case 3: return QString("Paused");
-        case 4: return QString("Shutdown");
-        case 5: return QString("Shutoff");
-        case 6: return QString("Crashed");
-        case 7: return QString("Power Management Suspended");
+        case VIR_DOMAIN_NOSTATE: return QString("No State");
+        case VIR_DOMAIN_RUNNING: return QString("Running");
+        case VIR_DOMAIN_BLOCKED: return QString("Blocked");
+        case VIR_DOMAIN_PAUSED: return QString("Paused");
+        case VIR_DOMAIN_SHUTDOWN: return QString("Shutdown");
+        case VIR_DOMAIN_SHUTOFF: return QString("Shutoff");
+        case VIR_DOMAIN_CRASHED: return QString("Crashed");
+        case VIR_DOMAIN_PMSUSPENDED: return QString("Power Management Suspended");
     }
     return "Error";
 }
