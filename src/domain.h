@@ -19,6 +19,9 @@ public:
     explicit Domain(QObject *parent = 0);
     explicit Domain(virDomainPtr domain, QObject *parent = 0);
     Domain(const Domain &domain);
+    ~Domain();
+
+    int state();
 
 signals:
 

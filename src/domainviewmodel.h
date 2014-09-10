@@ -22,12 +22,17 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
     enum datarole {
-                   domainNameRole = Qt::UserRole + 100,
-                   domainStateRole = Qt::UserRole + 101,
-                   domainIconRole = Qt::UserRole + 102,
-                   domainHypervisorRole = Qt::UserRole + 103,
-                   domainDomainRole = Qt::UserRole + 104,
-                  };
+        domainTypeRole = Qt::UserRole + 100,
+        domainStateRole = Qt::UserRole + 101,
+        domainIconRole = Qt::UserRole + 102,
+        domainHypervisorRole = Qt::UserRole + 103,
+        domainDomainRole = Qt::UserRole + 104,
+    };
+
+    enum datatype {
+        typeHypervisor,
+        typeDomain,
+    };
 
 signals:
 
