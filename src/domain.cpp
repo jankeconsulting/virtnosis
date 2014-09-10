@@ -18,6 +18,7 @@ Domain::Domain(virDomainPtr domain, QObject *parent) :
     QObject(parent),
     m_domain(domain)
 {
+    virDomainRef(domain);
     qDebug() << "Domain::Domain: create Domain with m_domain = " << m_domain;
 }
 
@@ -27,12 +28,14 @@ Domain::Domain(const Domain &domain) :
 {
     setParent(domain.parent());
     this->m_domain = domain.m_domain;
+    virDomainRef(m_domain);
 }
 
 Domain::~Domain()
 {
     virDomainFree(m_domain);
 }
+
 int Domain::state()
 {
     int state;

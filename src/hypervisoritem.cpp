@@ -54,6 +54,7 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
         model->setData(index, DomainViewModel::typeDomain, DomainViewModel::domainTypeRole);
         qDebug() << "VirtnosisWindow::list_domains:  = " << number_of_domains;
 
+        virDomainFree(domains[i]);
     }
 
     free(domains);
