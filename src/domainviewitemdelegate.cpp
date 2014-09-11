@@ -71,7 +71,7 @@ QString DomainViewItemDelegate::stateText(const QVariant state) const
         case VIR_DOMAIN_CRASHED: return QString(tr("Crashed"));
         case VIR_DOMAIN_PMSUSPENDED: return QString(tr("Power Management Suspended"));
     }
-    return "Error";
+    return QString(tr("Error"));
 }
 
 QString DomainViewItemDelegate::connectionText(const QVariant state) const
