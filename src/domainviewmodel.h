@@ -27,6 +27,7 @@ public:
         domainIconRole = Qt::UserRole + 102,
         domainHypervisorRole = Qt::UserRole + 103,
         domainDomainRole = Qt::UserRole + 104,
+        hypervisorConnectedRole = Qt::UserRole + 105,
     };
 
     enum datatype {

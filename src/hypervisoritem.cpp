@@ -17,13 +17,6 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
     virDomainPtr *domains;
     int i;
     DomainItem *domain_item;
-    int state = 0;
-    int reason = 0;
-
-    /*
-    unsigned int flags = VIR_CONNECT_LIST_DOMAINS_RUNNING |
-                         VIR_CONNECT_LIST_DOMAINS_PERSISTENT;
-    */
 
     virConnectPtr connection = hypervisor->connection();
 

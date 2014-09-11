@@ -29,6 +29,7 @@ public:
     static QString uri(QString host, QString account, int port, QString protocol = "qemu+ssh", QString path = "system");
     QString name();
     virConnectPtr connection();
+    int alive();
 
 private:
     QString protocol;

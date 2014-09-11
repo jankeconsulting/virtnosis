@@ -30,6 +30,7 @@ Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
     this->protocol = hypervisor.protocol;
     this->path = hypervisor.path;
     this->m_connection = hypervisor.m_connection;
+    qDebug() << "Hypervisor::Hypervisor (Hypervisor): m_connection = " << m_connection;
 }
 
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
@@ -42,11 +43,12 @@ Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, Q
     this->protocol = protocol;
     this->path = path;
     connection();
+    qDebug() << "Hypervisor::Hypervisor (...): m_connection = " << m_connection;
 }
 
 Hypervisor::~Hypervisor()
 {
-    virConnectClose(m_connection);
+//    virConnectClose(m_connection);
 }
 
 QString Hypervisor::uri()
@@ -77,4 +79,10 @@ virConnectPtr Hypervisor::connection()
     if(!m_connection)
       m_connection = virConnectOpen(this->uri().toLatin1().data());
     return m_connection;
+}
+
+int Hypervisor::alive()
+{
+    qDebug() << "Hypervisor::alive: m_connection = " << m_connection;
+    return virConnectIsAlive(m_connection);
 }

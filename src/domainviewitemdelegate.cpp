@@ -35,11 +35,14 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     domainStateRect.setTop(domainNameRect.bottom()+2);
 
     painter->setFont(font);
-//    painter->drawText(domainNameRect, qvariant_cast<QString>(index.data(headerTextRole)));
     painter->drawText(domainNameRect, qvariant_cast<QString>(index.data()));
 
     painter->setFont(stateFont);
-    painter->drawText(domainStateRect, stateText(index.data(DomainViewModel::domainStateRole)));
+    if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeDomain) {
+        painter->drawText(domainStateRect, stateText(index.data(DomainViewModel::domainStateRole)));
+    } else if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
+        painter->drawText(domainStateRect, connectionText(index.data(DomainViewModel::hypervisorConnectedRole)));
+    }
 
     painter->restore();
 }
@@ -69,4 +72,13 @@ QString DomainViewItemDelegate::stateText(const QVariant state) const
         case VIR_DOMAIN_PMSUSPENDED: return QString(tr("Power Management Suspended"));
     }
     return "Error";
+}
+
+QString DomainViewItemDelegate::connectionText(const QVariant state) const
+{
+    switch(state.toInt()) {
+        case 1: return QString(tr("Connected"));
+        case 0: return QString(tr("Not Connected"));
+    }
+    return QString(tr("Error"));
 }
