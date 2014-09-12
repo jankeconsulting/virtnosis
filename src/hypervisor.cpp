@@ -16,7 +16,6 @@ Hypervisor::Hypervisor(QObject *parent) :
     this->port = 22;
     this->protocol = "qemu+ssh";
     this->path = "system";
-    qDebug() << "Hypervisor::Hypervisor (): m_connection = " << m_connection;
 }
 
 Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
@@ -30,7 +29,6 @@ Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
     this->protocol = hypervisor.protocol;
     this->path = hypervisor.path;
     this->m_connection = hypervisor.m_connection;
-    qDebug() << "Hypervisor::Hypervisor (Hypervisor): m_connection = " << m_connection;
 }
 
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
@@ -43,7 +41,6 @@ Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, Q
     this->protocol = protocol;
     this->path = path;
     connection();
-    qDebug() << "Hypervisor::Hypervisor (...): m_connection = " << m_connection;
 }
 
 Hypervisor::~Hypervisor()
@@ -74,17 +71,13 @@ QString Hypervisor::name()
 
 virConnectPtr Hypervisor::connection()
 {
-//    TODO: check connection and re-establish if broken
 //    TODO: error handling if connection fails
-    qDebug() << "Hypervisor::connection: m_connection = " << m_connection;
     if(alive() < 1)
       m_connection = virConnectOpen(this->uri().toLatin1().data());
-      qDebug() << "Hypervisor::connection: open new connection m_connection = " << m_connection;
     return m_connection;
 }
 
 int Hypervisor::alive()
 {
-    qDebug() << "Hypervisor::alive: m_connection = " << m_connection;
     return virConnectIsAlive(m_connection);
 }

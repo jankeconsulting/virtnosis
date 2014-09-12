@@ -36,3 +36,6 @@ FORMS    += virtnosiswindow.ui \
     hypervisordialog.ui
 
 unix|win32: LIBS += -lvirt
+
+RESOURCES += \
+    virtnosis.qrc

@@ -34,15 +34,22 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 
     domainStateRect.setTop(domainNameRect.bottom()+2);
 
-    painter->setFont(font);
-    painter->drawText(domainNameRect, qvariant_cast<QString>(index.data()));
-
     painter->setFont(stateFont);
     if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeDomain) {
+        QIcon icon = stateIcon(index.data(DomainViewModel::domainStateRole));
+        QSize iconsize = icon.actualSize(option.decorationSize);
+        domainIconRect.setRight(iconsize.width()+30);
+        domainIconRect.setTop(domainIconRect.top()+5);
+        painter->drawPixmap(QPoint(domainIconRect.left(),domainIconRect.top()),icon.pixmap(iconsize.width(),iconsize.height()));
+        domainStateRect.setLeft(domainStateRect.left()+iconsize.width()+5);
+        domainNameRect.setLeft(domainNameRect.left()+iconsize.width()+5);
         painter->drawText(domainStateRect, stateText(index.data(DomainViewModel::domainStateRole)));
     } else if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
         painter->drawText(domainStateRect, connectionText(index.data(DomainViewModel::hypervisorConnectedRole)));
     }
+
+    painter->setFont(font);
+    painter->drawText(domainNameRect, qvariant_cast<QString>(index.data()));
 
     painter->restore();
 }
@@ -55,12 +62,11 @@ QSize DomainViewItemDelegate::sizeHint(const QStyleOptionViewItem &option, const
     QFont font = QApplication::font();
     QFontMetrics fm(font);
 
-    return(QSize(100, fm.height()*2 + 8 ));
+    return(QSize(32, fm.height()*2 + 8 ));
 }
 
 QString DomainViewItemDelegate::stateText(const QVariant state) const
 {
-    if(state.toString() == "") return ""; // for Hypervisor row
     switch(state.toInt()) {
         case VIR_DOMAIN_NOSTATE: return QString(tr("No State"));
         case VIR_DOMAIN_RUNNING: return QString(tr("Running"));
@@ -72,6 +78,22 @@ QString DomainViewItemDelegate::stateText(const QVariant state) const
         case VIR_DOMAIN_PMSUSPENDED: return QString(tr("Power Management Suspended"));
     }
     return QString(tr("Error"));
+}
+
+QIcon DomainViewItemDelegate::stateIcon(const QVariant state) const
+{
+    switch(state.toInt()) {
+        case VIR_DOMAIN_NOSTATE: return QIcon();
+        case VIR_DOMAIN_RUNNING: return QIcon("://icons/hicolor/32x32/status/state_running.png");
+        case VIR_DOMAIN_BLOCKED: return QIcon();
+        case VIR_DOMAIN_PAUSED: return QIcon("://icons/hicolor/32x32/status/state_paused.png");
+        case VIR_DOMAIN_SHUTDOWN: return QIcon();
+        case VIR_DOMAIN_SHUTOFF: return QIcon("://icons/hicolor/32x32/status/state_shutoff.png");
+        case VIR_DOMAIN_CRASHED: return QIcon();
+        case VIR_DOMAIN_PMSUSPENDED: return QIcon();
+    }
+    return QIcon();
+
 }
 
 QString DomainViewItemDelegate::connectionText(const QVariant state) const
