@@ -24,7 +24,8 @@ QVariant DomainViewModel::data(const QModelIndex &index, int role) const
     }
     if(role == hypervisorConnectedRole) {
         if(qvariant_cast<int>(QStandardItemModel::data(index, domainTypeRole)) == typeHypervisor) {
-            Hypervisor hypervisor = qvariant_cast<Hypervisor>(QStandardItemModel::data(index, hypervisorConnectedRole));
+            qDebug() << "DomainViewModel::data: index = " << index;
+            Hypervisor hypervisor = qvariant_cast<Hypervisor>(QStandardItemModel::data(index, domainHypervisorRole));
             return QVariant(hypervisor.alive());
         } else {
             return QVariant();

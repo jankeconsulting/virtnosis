@@ -7,7 +7,6 @@
 #include "hypervisor.h"
 #include <QDebug>
 
-
 Hypervisor::Hypervisor(QObject *parent) :
     QObject(parent),
     m_connection(0)
@@ -17,6 +16,7 @@ Hypervisor::Hypervisor(QObject *parent) :
     this->port = 22;
     this->protocol = "qemu+ssh";
     this->path = "system";
+    qDebug() << "Hypervisor::Hypervisor (): m_connection = " << m_connection;
 }
 
 Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
@@ -76,8 +76,10 @@ virConnectPtr Hypervisor::connection()
 {
 //    TODO: check connection and re-establish if broken
 //    TODO: error handling if connection fails
-    if(!m_connection)
+    qDebug() << "Hypervisor::connection: m_connection = " << m_connection;
+    if(alive() < 1)
       m_connection = virConnectOpen(this->uri().toLatin1().data());
+      qDebug() << "Hypervisor::connection: open new connection m_connection = " << m_connection;
     return m_connection;
 }
 

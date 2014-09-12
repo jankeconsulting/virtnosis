@@ -35,12 +35,14 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     HypervisorItem *item = new HypervisorItem(hypervisor);
     DomainViewModel *model = qobject_cast<DomainViewModel *>(ui->domainView->model());
     model->appendRow(item);
-    item->addDomainsFromHypervisor(hypervisor);
 
     QModelIndex index = model->index(model->rowCount()-1, 0);
+    qDebug() << "VirtnosisWindow::addHypervisor: index = " << index;
     test.setValue(*hypervisor);
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);
+
+    item->addDomainsFromHypervisor(hypervisor);
 }
 
 void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
