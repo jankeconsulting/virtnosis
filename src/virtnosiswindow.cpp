@@ -37,7 +37,6 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     model->appendRow(item);
 
     QModelIndex index = model->index(model->rowCount()-1, 0);
-    qDebug() << "VirtnosisWindow::addHypervisor: index = " << index;
     test.setValue(*hypervisor);
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);

@@ -41,8 +41,6 @@ int Domain::state()
     int state;
     int reason;
 
-    qDebug() << "Domain::state: this" << this;
-    qDebug() << "Domain::state: m_domain" << m_domain;
     if(virDomainGetState(m_domain, &state, &reason, 0) != -1)
         return state;
 
