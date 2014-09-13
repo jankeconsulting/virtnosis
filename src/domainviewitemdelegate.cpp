@@ -38,11 +38,12 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeDomain) {
         QIcon icon = stateIcon(index.data(DomainViewModel::domainStateRole));
         QSize iconsize = icon.actualSize(option.decorationSize);
+        qDebug()<< "DomainViewItemDelegate::paint: iconsize = " << iconsize;
         domainIconRect.setRight(iconsize.width()+30);
         domainIconRect.setTop(domainIconRect.top()+5);
-        painter->drawPixmap(QPoint(domainIconRect.left(),domainIconRect.top()),icon.pixmap(iconsize.width(),iconsize.height()));
-        domainStateRect.setLeft(domainStateRect.left()+iconsize.width()+5);
-        domainNameRect.setLeft(domainNameRect.left()+iconsize.width()+5);
+        painter->drawPixmap(QPoint(domainIconRect.left(),domainIconRect.top()),icon.pixmap(iconsize.width()*2,iconsize.height()*2));
+        domainStateRect.setLeft(domainStateRect.left()+iconsize.width()*2+5);
+        domainNameRect.setLeft(domainNameRect.left()+iconsize.width()*2+5);
         painter->drawText(domainStateRect, stateText(index.data(DomainViewModel::domainStateRole)));
     } else if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
         painter->drawText(domainStateRect, connectionText(index.data(DomainViewModel::hypervisorConnectedRole)));
