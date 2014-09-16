@@ -48,3 +48,23 @@ void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
     HypervisorDialog *dialog = new HypervisorDialog(this);
     dialog->show();
 }
+
+void VirtnosisWindow::on_action_Start_triggered()
+{
+
+}
+
+void VirtnosisWindow::on_action_Reboot_triggered()
+{
+
+}
+
+void VirtnosisWindow::on_actionShut_off_triggered()
+{
+
+}
+
+void VirtnosisWindow::enableVirtualMachineActions()
+{
+
+}

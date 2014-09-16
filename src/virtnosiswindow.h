@@ -30,9 +30,14 @@ public:
 
 private slots:
     void on_menuHypervisorActionNew_triggered();
+    void on_action_Start_triggered();
+    void on_action_Reboot_triggered();
+    void on_actionShut_off_triggered();
 
 private:
     Ui::VirtnosisWindow *ui;
+
+    void enableVirtualMachineActions();
 };
 
 #endif // VIRTNOSISWINDOW_H
