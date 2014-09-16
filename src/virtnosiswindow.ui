@@ -88,10 +88,16 @@
    <property name="text">
     <string>E&amp;xit</string>
    </property>
+   <property name="toolTip">
+    <string>Exit Virtnosis</string>
+   </property>
   </action>
   <action name="menuHypervisorActionNew">
    <property name="text">
     <string>&amp;New</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Connection to New Hypervisor</string>
    </property>
   </action>
   <action name="action_Start">
@@ -101,10 +107,8 @@
    <property name="text">
     <string>&amp;Start</string>
    </property>
-  </action>
-  <action name="actionS_top">
-   <property name="text">
-    <string>&amp;Reboot</string>
+   <property name="toolTip">
+    <string>Start Virtual Machine</string>
    </property>
   </action>
   <action name="action_Reboot">
@@ -114,6 +118,9 @@
    <property name="text">
     <string>&amp;Reboot</string>
    </property>
+   <property name="toolTip">
+    <string>Reboot Virtual Machine</string>
+   </property>
   </action>
   <action name="actionShut_off">
    <property name="enabled">
@@ -121,6 +128,9 @@
    </property>
    <property name="text">
     <string>Shut&amp;off</string>
+   </property>
+   <property name="toolTip">
+    <string>Shutoff Virtual Machine</string>
    </property>
   </action>
  </widget>
