@@ -46,3 +46,12 @@ int Domain::state()
 
     return -1;
 }
+
+bool Domain::isActive()
+{
+    if(state() == VIR_DOMAIN_RUNNING) {
+        return true;
+    } else {
+        return false;
+    }
+}

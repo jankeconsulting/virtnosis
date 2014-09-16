@@ -34,10 +34,12 @@ private slots:
     void on_action_Reboot_triggered();
     void on_actionShut_off_triggered();
 
+    void selectionChanged(const QModelIndex &current, const QModelIndex &previous);
+
 private:
     Ui::VirtnosisWindow *ui;
 
-    void enableVirtualMachineActions();
+    void enableVirtualMachineActions(const QModelIndex &index);
 };
 
 #endif // VIRTNOSISWINDOW_H

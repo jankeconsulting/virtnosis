@@ -20,6 +20,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui->domainView->setModel(model);
     DomainViewItemDelegate *delegate = new DomainViewItemDelegate(this);
     ui->domainView->setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
+    connect(ui->domainView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
 }
 
 VirtnosisWindow::~VirtnosisWindow()
@@ -64,7 +65,28 @@ void VirtnosisWindow::on_actionShut_off_triggered()
 
 }
 
-void VirtnosisWindow::enableVirtualMachineActions()
+void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
 {
+//    DomainViewModel *model = qobject_cast<DomainViewModel *>(index.model());
+    if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
+        ui->action_Start->setDisabled(true);
+        ui->action_Reboot->setDisabled(true);
+        ui->actionShut_off->setDisabled(true);
+    } else {
+        Domain domain = qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
+        if(domain.isActive()) {
+            ui->action_Start->setDisabled(true);
+            ui->action_Reboot->setDisabled(true);
+            ui->actionShut_off->setEnabled(true);
+        } else {
+            ui->action_Start->setEnabled(true);
+            ui->action_Reboot->setEnabled(true);
+            ui->actionShut_off->setDisabled(true);
+        }
+    }
+}
 
+void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)
+{
+    enableVirtualMachineActions(current);
 }

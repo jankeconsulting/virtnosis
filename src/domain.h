@@ -22,6 +22,7 @@ public:
     ~Domain();
 
     int state();
+    bool isActive();
 
 signals:
 
