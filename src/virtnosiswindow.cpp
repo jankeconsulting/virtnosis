@@ -62,27 +62,32 @@ void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
 
 void VirtnosisWindow::on_menuVmActionStart_triggered()
 {
-
+    Domain domain = selectedDomain();
+    domain.start();
 }
 
 void VirtnosisWindow::on_menuVmActionReboot_triggered()
 {
-
+    Domain domain = selectedDomain();
+    domain.reboot();
 }
 
 void VirtnosisWindow::on_menuVmActionShutoff_triggered()
 {
-
+    Domain domain = selectedDomain();
+    domain.shutdown();
 }
 
 void VirtnosisWindow::on_menuVmActionPause_triggered()
 {
-
+    Domain domain = selectedDomain();
+    domain.pause();
 }
 
 void VirtnosisWindow::on_menuVmActionResume_triggered()
 {
-
+    Domain domain = selectedDomain();
+    domain.resume();
 }
 
 void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
@@ -96,14 +101,22 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
     if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
     } else {
         Domain domain = qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
-        if(domain.isActive()) {
+        if(domain.isRunning()) {
             ui->menuVmActionShutoff->setEnabled(true);
             ui->menuVmActionPause->setEnabled(true);
             ui->menuVmActionReboot->setEnabled(true);
+        } else if (domain.isPaused()) {
+            ui->menuVmActionResume->setEnabled(true);
         } else {
             ui->menuVmActionStart->setEnabled(true);
         }
     }
+}
+
+Domain VirtnosisWindow::selectedDomain()
+{
+    QModelIndex index = ui->domainView->selectionModel()->currentIndex();
+    return qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
 }
 
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)

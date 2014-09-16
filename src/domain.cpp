@@ -47,11 +47,52 @@ int Domain::state()
     return -1;
 }
 
-bool Domain::isActive()
+bool Domain::isRunning()
 {
     if(state() == VIR_DOMAIN_RUNNING) {
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
+
+bool Domain::isPaused()
+{
+    if(state() == VIR_DOMAIN_PAUSED) {
+        return true;
+    }
+
+    return false;
+}
+
+bool Domain::start()
+{
+//    TODO: check if it can be started
+    return (virDomainCreate(m_domain) == 0);
+}
+
+bool Domain::reboot()
+{
+//    TODO: check if it can be rebooted
+    return (virDomainReboot(m_domain, 0) == 0);
+}
+
+bool Domain::shutdown()
+{
+//    TODO: check if it can be stopped
+    return (virDomainShutdown(m_domain) == 0);
+}
+
+bool Domain::pause()
+{
+//    TODO: check if it can be stopped
+    return (virDomainSuspend(m_domain) == 0);
+}
+
+bool Domain::resume()
+{
+//    TODO: check if it can be stopped
+    return (virDomainResume(m_domain) == 0);
+}
+
+

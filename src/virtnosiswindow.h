@@ -44,6 +44,7 @@ private:
     Ui::VirtnosisWindow *ui;
 
     void enableVirtualMachineActions(const QModelIndex &index);
+    Domain selectedDomain();
 };
 
 #endif // VIRTNOSISWINDOW_H

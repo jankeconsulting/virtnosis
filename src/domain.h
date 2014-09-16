@@ -22,7 +22,13 @@ public:
     ~Domain();
 
     int state();
-    bool isActive();
+    bool isRunning();
+    bool isPaused();
+    bool start();
+    bool reboot();
+    bool shutdown();
+    bool pause();
+    bool resume();
 
 signals:
 
