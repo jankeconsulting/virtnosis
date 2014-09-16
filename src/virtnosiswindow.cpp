@@ -50,38 +50,58 @@ void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
     dialog->show();
 }
 
-void VirtnosisWindow::on_action_Start_triggered()
+void VirtnosisWindow::on_menuHypervisorActionConnect_triggered()
 {
 
 }
 
-void VirtnosisWindow::on_action_Reboot_triggered()
+void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
 {
 
 }
 
-void VirtnosisWindow::on_actionShut_off_triggered()
+void VirtnosisWindow::on_menuVmActionStart_triggered()
+{
+
+}
+
+void VirtnosisWindow::on_menuVmActionReboot_triggered()
+{
+
+}
+
+void VirtnosisWindow::on_menuVmActionShutoff_triggered()
+{
+
+}
+
+void VirtnosisWindow::on_menuVmActionPause_triggered()
+{
+
+}
+
+void VirtnosisWindow::on_menuVmActionResume_triggered()
 {
 
 }
 
 void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
 {
-//    DomainViewModel *model = qobject_cast<DomainViewModel *>(index.model());
+    ui->menuVmActionStart->setDisabled(true);
+    ui->menuVmActionReboot->setDisabled(true);
+    ui->menuVmActionShutoff->setDisabled(true);
+    ui->menuVmActionPause->setDisabled(true);
+    ui->menuVmActionResume->setDisabled(true);
+
     if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
-        ui->action_Start->setDisabled(true);
-        ui->action_Reboot->setDisabled(true);
-        ui->actionShut_off->setDisabled(true);
     } else {
         Domain domain = qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
         if(domain.isActive()) {
-            ui->action_Start->setDisabled(true);
-            ui->action_Reboot->setDisabled(true);
-            ui->actionShut_off->setEnabled(true);
+            ui->menuVmActionShutoff->setEnabled(true);
+            ui->menuVmActionPause->setEnabled(true);
+            ui->menuVmActionReboot->setEnabled(true);
         } else {
-            ui->action_Start->setEnabled(true);
-            ui->action_Reboot->setEnabled(true);
-            ui->actionShut_off->setDisabled(true);
+            ui->menuVmActionStart->setEnabled(true);
         }
     }
 }
@@ -90,3 +110,8 @@ void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelI
 {
     enableVirtualMachineActions(current);
 }
+
+
+
+
+

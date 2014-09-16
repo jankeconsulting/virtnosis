@@ -30,9 +30,13 @@ public:
 
 private slots:
     void on_menuHypervisorActionNew_triggered();
-    void on_action_Start_triggered();
-    void on_action_Reboot_triggered();
-    void on_actionShut_off_triggered();
+    void on_menuHypervisorActionConnect_triggered();
+    void on_menuHypervisorActionDisconnect_triggered();
+    void on_menuVmActionStart_triggered();
+    void on_menuVmActionReboot_triggered();
+    void on_menuVmActionShutoff_triggered();
+    void on_menuVmActionPause_triggered();
+    void on_menuVmActionResume_triggered();
 
     void selectionChanged(const QModelIndex &current, const QModelIndex &previous);
 

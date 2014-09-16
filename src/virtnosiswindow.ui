@@ -44,21 +44,25 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionE_xit"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHypervisor">
     <property name="title">
      <string>Hypervisor</string>
     </property>
     <addaction name="menuHypervisorActionNew"/>
+    <addaction name="menuHypervisorActionConnect"/>
+    <addaction name="menuHypervisorActionDisconnect"/>
    </widget>
    <widget class="QMenu" name="menuVirtualMachine">
     <property name="title">
      <string>Virtual Machine </string>
     </property>
-    <addaction name="action_Start"/>
-    <addaction name="action_Reboot"/>
-    <addaction name="actionShut_off"/>
+    <addaction name="menuVmActionStart"/>
+    <addaction name="menuVmActionReboot"/>
+    <addaction name="menuVmActionShutoff"/>
+    <addaction name="menuVmActionPause"/>
+    <addaction name="menuVmActionResume"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -77,6 +81,11 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="menuVmActionStart"/>
+   <addaction name="menuVmActionReboot"/>
+   <addaction name="menuVmActionShutoff"/>
+   <addaction name="menuVmActionPause"/>
+   <addaction name="menuVmActionResume"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionList">
@@ -84,7 +93,7 @@
     <string>List</string>
    </property>
   </action>
-  <action name="actionE_xit">
+  <action name="actionExit">
    <property name="text">
     <string>E&amp;xit</string>
    </property>
@@ -100,9 +109,13 @@
     <string>Open Connection to New Hypervisor</string>
    </property>
   </action>
-  <action name="action_Start">
+  <action name="menuVmActionStart">
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="virtnosis.qrc">
+     <normaloff>:/icons/hicolor/32x32/status/state_running.png</normaloff>:/icons/hicolor/32x32/status/state_running.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Start</string>
@@ -111,7 +124,7 @@
     <string>Start Virtual Machine</string>
    </property>
   </action>
-  <action name="action_Reboot">
+  <action name="menuVmActionReboot">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -122,9 +135,13 @@
     <string>Reboot Virtual Machine</string>
    </property>
   </action>
-  <action name="actionShut_off">
+  <action name="menuVmActionShutoff">
    <property name="enabled">
     <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="virtnosis.qrc">
+     <normaloff>:/icons/hicolor/32x32/status/state_shutoff.png</normaloff>:/icons/hicolor/32x32/status/state_shutoff.png</iconset>
    </property>
    <property name="text">
     <string>Shut&amp;off</string>
@@ -133,12 +150,50 @@
     <string>Shutoff Virtual Machine</string>
    </property>
   </action>
+  <action name="menuVmActionPause">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="virtnosis.qrc">
+     <normaloff>:/icons/hicolor/32x32/status/state_paused.png</normaloff>:/icons/hicolor/32x32/status/state_paused.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Pause</string>
+   </property>
+   <property name="toolTip">
+    <string>Pause Virtual Machine</string>
+   </property>
+  </action>
+  <action name="menuVmActionResume">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>R&amp;esume</string>
+   </property>
+   <property name="toolTip">
+    <string>Resume Virtual Machine</string>
+   </property>
+  </action>
+  <action name="menuHypervisorActionConnect">
+   <property name="text">
+    <string>&amp;Connect</string>
+   </property>
+  </action>
+  <action name="menuHypervisorActionDisconnect">
+   <property name="text">
+    <string>&amp;Disconnect</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="virtnosis.qrc"/>
+ </resources>
  <connections>
   <connection>
-   <sender>actionE_xit</sender>
+   <sender>actionExit</sender>
    <signal>triggered()</signal>
    <receiver>VirtnosisWindow</receiver>
    <slot>close()</slot>
