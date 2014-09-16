@@ -56,6 +56,9 @@
     <property name="title">
      <string>Virtual Machine </string>
     </property>
+    <addaction name="action_Start"/>
+    <addaction name="action_Reboot"/>
+    <addaction name="actionShut_off"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -89,6 +92,35 @@
   <action name="menuHypervisorActionNew">
    <property name="text">
     <string>&amp;New</string>
+   </property>
+  </action>
+  <action name="action_Start">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Start</string>
+   </property>
+  </action>
+  <action name="actionS_top">
+   <property name="text">
+    <string>&amp;Reboot</string>
+   </property>
+  </action>
+  <action name="action_Reboot">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Reboot</string>
+   </property>
+  </action>
+  <action name="actionShut_off">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Shut&amp;off</string>
    </property>
   </action>
  </widget>
