@@ -55,7 +55,6 @@ void HypervisorDialog::updateUri()
 void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
 {
     Hypervisor *hypervisor = new Hypervisor(host(), account(), port());
-    qDebug() << "HypervisorDialog::on_hypervisorDialogbuttonBox_accepted: hypervisor->uri = " << hypervisor->uri();
     VirtnosisWindow *widget = qobject_cast<VirtnosisWindow *>(parent());
     widget->addHypervisor(hypervisor);
 }
