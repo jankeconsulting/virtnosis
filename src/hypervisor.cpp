@@ -77,6 +77,11 @@ virConnectPtr Hypervisor::connection()
     return m_connection;
 }
 
+void Hypervisor::disconnect()
+{
+    virConnectClose(m_connection);
+}
+
 int Hypervisor::alive()
 {
     return virConnectIsAlive(m_connection);
