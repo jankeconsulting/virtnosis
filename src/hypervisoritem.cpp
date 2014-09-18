@@ -21,8 +21,6 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
     while (i.hasNext()){
 
         Domain *domain = i.next();
-        qDebug() << "HypervisorItem::addDomainsFromHypervisor: domain = " << domain;
-        qDebug() << "HypervisorItem::addDomainsFromHypervisor: domain->name() = " << domain->name();
         domain_item = new DomainItem(domain->name());
         this->appendRow(domain_item);
         QVariant hypervisor_varobj;

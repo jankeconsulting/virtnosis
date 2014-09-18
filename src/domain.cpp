@@ -45,6 +45,7 @@ int Domain::state()
     int state;
     int reason;
 
+    qDebug() << "Domain::state: m_domain" << m_domain;
     if(virDomainGetState(m_domain, &state, &reason, 0) != -1)
         return state;
 
@@ -98,5 +99,6 @@ bool Domain::resume()
 //    TODO: check if it can be resumed
     return (virDomainResume(m_domain) == 0);
 }
+
 
 

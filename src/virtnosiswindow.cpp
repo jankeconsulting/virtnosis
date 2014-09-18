@@ -41,8 +41,7 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     test.setValue(*hypervisor);
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);
-
-    item->addDomainsFromHypervisor(hypervisor);
+    model->connectHypervisor(index);
 }
 
 void VirtnosisWindow::on_menuHypervisorActionNew_triggered()

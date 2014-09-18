@@ -103,7 +103,7 @@ QList<Domain *> Hypervisor::domains()
     }
 
     for (i = 0; i < number_of_domains; i++) {
-        domain = new Domain(domains[i], this);
+        domain = new Domain(domains[i]);
         list.append(domain);
         virDomainFree(domains[i]);
     }
