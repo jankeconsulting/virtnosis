@@ -9,7 +9,6 @@
 
 #include <QStandardItem>
 #include "hypervisor.h"
-#include "domainitem.h"
 #include "domainviewmodel.h"
 
 class HypervisorItem : public QStandardItem
@@ -18,7 +17,7 @@ class HypervisorItem : public QStandardItem
 public:
     explicit HypervisorItem(Hypervisor *hypervisor);
     void addDomainsFromHypervisor(Hypervisor *hypervisor);    
-    void removeDomainsFromItem(Hypervisor *hypervisor);
+    void removeDomainsFromItem();
 
 private:
 };
