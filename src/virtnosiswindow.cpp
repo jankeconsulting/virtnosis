@@ -34,6 +34,7 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
 
     HypervisorItem *item = new HypervisorItem(hypervisor);
     DomainViewModel *model = qobject_cast<DomainViewModel *>(ui->domainView->model());
+
     model->appendRow(item);
 
     QModelIndex index = model->index(model->rowCount()-1, 0);
@@ -52,12 +53,17 @@ void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 
 void VirtnosisWindow::on_menuHypervisorActionConnect_triggered()
 {
-
+    Hypervisor hypervisor = selectedHypervisor();
+    hypervisor.connection();
+//    TODO: get all domains to view
 }
 
 void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
 {
-
+    Hypervisor hypervisor = selectedHypervisor();
+    hypervisor.disconnect();
+//    TODO: remove all domains from view
+    QStandardItem *item = selectedItem();
 }
 
 void VirtnosisWindow::on_menuVmActionStart_triggered()
@@ -115,12 +121,31 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
 
 Domain VirtnosisWindow::selectedDomain()
 {
-    QModelIndex index = ui->domainView->selectionModel()->currentIndex();
+    QModelIndex index = ui->domainView->currentIndex();
     return qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
+}
+
+Hypervisor VirtnosisWindow::selectedHypervisor()
+{
+    QModelIndex index = ui->domainView->currentIndex();
+    return qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
+}
+
+QStandardItem *VirtnosisWindow::selectedItem()
+{
+    QModelIndex index = ui->domainView->currentIndex();
+    //    return ui->domainView->selectionModel()->
+}
+
+void VirtnosisWindow::selectedDataChanged()
+{
+    QModelIndex index = ui->domainView->currentIndex();
+    ui->domainView->dataChanged(index, index);
 }
 
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
+    Q_UNUSED(previous);
     enableVirtualMachineActions(current);
 }
 

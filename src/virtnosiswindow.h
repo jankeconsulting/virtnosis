@@ -45,6 +45,9 @@ private:
 
     void enableVirtualMachineActions(const QModelIndex &index);
     Domain selectedDomain();
+    Hypervisor selectedHypervisor();
+    QStandardItem *selectedItem();
+    void selectedDataChanged();
 };
 
 #endif // VIRTNOSISWINDOW_H
