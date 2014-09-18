@@ -37,7 +37,7 @@ Domain::~Domain()
 
 QString Domain::name()
 {
-    virDomainGetName(m_domain);
+    return virDomainGetName(m_domain);
 }
 
 int Domain::state()
