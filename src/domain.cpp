@@ -85,13 +85,13 @@ bool Domain::shutdown()
 
 bool Domain::pause()
 {
-//    TODO: check if it can be stopped
+//    TODO: check if it can be paused
     return (virDomainSuspend(m_domain) == 0);
 }
 
 bool Domain::resume()
 {
-//    TODO: check if it can be stopped
+//    TODO: check if it can be resumed
     return (virDomainResume(m_domain) == 0);
 }
 
