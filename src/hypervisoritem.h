@@ -17,7 +17,7 @@ class HypervisorItem : public QStandardItem
 public:
     explicit HypervisorItem(Hypervisor *hypervisor);
     void addDomainsFromHypervisor(Hypervisor *hypervisor);    
-    void removeDomainsFromItem();
+    void removeDomainsFromItem(Hypervisor *hypervisor);
 
 private:
 };

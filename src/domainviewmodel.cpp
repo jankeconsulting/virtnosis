@@ -32,3 +32,32 @@ QVariant DomainViewModel::data(const QModelIndex &index, int role) const
     }
     return QStandardItemModel::data(index, role);
 }
+
+void DomainViewModel::connectHypervisor(const QModelIndex &index)
+{
+    if(qvariant_cast<int>(QStandardItemModel::data(index, domainTypeRole)) == typeHypervisor) {
+        HypervisorItem *item = static_cast<HypervisorItem *>(itemFromIndex(index));
+        Hypervisor hypervisor = qvariant_cast<Hypervisor>(QStandardItemModel::data(index, domainHypervisorRole));
+        item->addDomainsFromHypervisor(&hypervisor);
+    }
+
+}
+
+void DomainViewModel::disconnectHypervisor(const QModelIndex &index)
+{
+    if(qvariant_cast<int>(QStandardItemModel::data(index, domainTypeRole)) == typeHypervisor) {
+        HypervisorItem *item = static_cast<HypervisorItem *>(itemFromIndex(index));
+        Hypervisor hypervisor = qvariant_cast<Hypervisor>(QStandardItemModel::data(index, domainHypervisorRole));
+        item->removeDomainsFromItem(&hypervisor);
+    }
+}
+
+Hypervisor DomainViewModel::hypervisor(const QModelIndex &index)
+{
+
+}
+
+Domain DomainViewModel::domain(const QModelIndex &index)
+{
+
+}

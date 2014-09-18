@@ -9,8 +9,8 @@
 
 #include <QStandardItemModel>
 #include "domainitem.h"
-#include "hypervisor.h"
-#include "domain.h"
+#include "hypervisoritem.h"
+#include "domainitem.h"
 #include <QVariant>
 
 class DomainViewModel : public QStandardItemModel
@@ -20,6 +20,8 @@ public:
     explicit DomainViewModel(QObject *parent = 0);
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    void connectHypervisor(const QModelIndex &index);
+    void disconnectHypervisor(const QModelIndex &index);
 
     enum datarole {
         domainTypeRole = Qt::UserRole + 100,
@@ -37,6 +39,10 @@ public:
 signals:
 
 public slots:
+
+private:
+    Hypervisor hypervisor(const QModelIndex &index);
+    Domain domain(const QModelIndex &index);
 
 };
 

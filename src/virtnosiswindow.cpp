@@ -53,17 +53,12 @@ void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 
 void VirtnosisWindow::on_menuHypervisorActionConnect_triggered()
 {
-    Hypervisor hypervisor = selectedHypervisor();
-    hypervisor.connection();
-//    TODO: get all domains to view
+    model()->connectHypervisor(currentIndex());
 }
 
 void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
 {
-    Hypervisor hypervisor = selectedHypervisor();
-    hypervisor.disconnect();
-//    TODO: remove all domains from view
-    QStandardItem *item = selectedItem();
+    model()->disconnectHypervisor(currentIndex());
 }
 
 void VirtnosisWindow::on_menuVmActionStart_triggered()
@@ -128,19 +123,37 @@ Domain VirtnosisWindow::selectedDomain()
 Hypervisor VirtnosisWindow::selectedHypervisor()
 {
     QModelIndex index = ui->domainView->currentIndex();
+    qDebug() << "VirtnosisWindow::selectedHypervisor: index = " << index;
     return qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
 }
 
-QStandardItem *VirtnosisWindow::selectedItem()
+HypervisorItem *VirtnosisWindow::selectedItem()
 {
+//    TODO: Check if index is on hypervisor
     QModelIndex index = ui->domainView->currentIndex();
-    //    return ui->domainView->selectionModel()->
+    if (!index.isValid())
+        return 0;
+    if(!(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor))
+        return 0;
+    Hypervisor hypervisor = qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
+    //return static_cast<HypervisorItem*>(hypervisor.item());
+    return 0;
 }
 
 void VirtnosisWindow::selectedDataChanged()
 {
     QModelIndex index = ui->domainView->currentIndex();
     ui->domainView->dataChanged(index, index);
+}
+
+DomainViewModel *VirtnosisWindow::model()
+{
+    return qobject_cast<DomainViewModel *>(ui->domainView->model());
+}
+
+QModelIndex VirtnosisWindow::currentIndex()
+{
+    return ui->domainView->currentIndex();
 }
 
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)
