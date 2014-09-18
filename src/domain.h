@@ -21,6 +21,7 @@ public:
     Domain(const Domain &domain);
     ~Domain();
 
+    QString name();
     int state();
     bool isRunning();
     bool isPaused();
