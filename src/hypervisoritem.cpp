@@ -52,3 +52,8 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
 
     free(domains);
 }
+
+void HypervisorItem::removeDomainsFromItem(Hypervisor *hypervisor)
+{
+    this->removeRows(0, this->rowCount());
+}
