@@ -38,7 +38,6 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeDomain) {
         QIcon icon = stateIcon(index.data(DomainViewModel::domainStateRole));
         QSize iconsize = icon.actualSize(option.decorationSize);
-        qDebug()<< "DomainViewItemDelegate::paint: iconsize = " << iconsize;
         domainIconRect.setRight(iconsize.width()+30);
         domainIconRect.setTop(domainIconRect.top()+5);
         painter->drawPixmap(QPoint(domainIconRect.left(),domainIconRect.top()),icon.pixmap(iconsize.width()*2,iconsize.height()*2));
