@@ -43,6 +43,8 @@ public slots:
 private:
     Hypervisor hypervisor(const QModelIndex &index);
     Domain domain(const QModelIndex &index);
+    bool indexIsHypervisor(const QModelIndex &index) const;
+    bool indexIsDomain(const QModelIndex &index) const;
 
 };
 
