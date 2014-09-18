@@ -25,6 +25,7 @@ QVariant DomainViewModel::data(const QModelIndex &index, int role) const
     if(role == hypervisorConnectedRole) {
         if(qvariant_cast<int>(QStandardItemModel::data(index, domainTypeRole)) == typeHypervisor) {
             Hypervisor hypervisor = qvariant_cast<Hypervisor>(QStandardItemModel::data(index, domainHypervisorRole));
+            qDebug() << "DomainViewModel::data: hypervisor.alive()" << hypervisor.alive();
             return QVariant(hypervisor.alive());
         } else {
             return QVariant();
@@ -39,8 +40,11 @@ void DomainViewModel::connectHypervisor(const QModelIndex &index)
         HypervisorItem *item = static_cast<HypervisorItem *>(itemFromIndex(index));
         Hypervisor hypervisor = qvariant_cast<Hypervisor>(QStandardItemModel::data(index, domainHypervisorRole));
         item->addDomainsFromHypervisor(&hypervisor);
+        QVariant var;
+        var.setValue(hypervisor);
+        setData(index, var, domainHypervisorRole);
+        dataChanged(index, index, QVector<int>(hypervisorConnectedRole));
     }
-
 }
 
 void DomainViewModel::disconnectHypervisor(const QModelIndex &index)
@@ -49,6 +53,10 @@ void DomainViewModel::disconnectHypervisor(const QModelIndex &index)
         HypervisorItem *item = static_cast<HypervisorItem *>(itemFromIndex(index));
         Hypervisor hypervisor = qvariant_cast<Hypervisor>(QStandardItemModel::data(index, domainHypervisorRole));
         item->removeDomainsFromItem(&hypervisor);
+        QVariant var;
+        var.setValue(hypervisor);
+        setData(index, var, domainHypervisorRole);
+        dataChanged(index, index, QVector<int>(hypervisorConnectedRole));
     }
 }
 

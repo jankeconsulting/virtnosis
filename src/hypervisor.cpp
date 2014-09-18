@@ -80,11 +80,14 @@ virConnectPtr Hypervisor::connection()
 void Hypervisor::disconnect()
 {
     virConnectClose(m_connection);
+    m_connection = 0;
 }
 
 int Hypervisor::alive()
 {
-    return virConnectIsAlive(m_connection);
+    if(m_connection)
+        return virConnectIsAlive(m_connection);
+    return 0;
 }
 
 QList<Domain *> Hypervisor::domains()

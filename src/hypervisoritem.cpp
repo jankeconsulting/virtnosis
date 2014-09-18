@@ -16,6 +16,7 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
 {
     DomainItem *domain_item;
 
+    hypervisor->connection();
     QList<Domain *> list = hypervisor->domains();
     QListIterator<Domain *> i(list);
     while (i.hasNext()){
@@ -38,6 +39,6 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
 
 void HypervisorItem::removeDomainsFromItem(Hypervisor *hypervisor)
 {
-
     this->removeRows(0, this->rowCount());
+    hypervisor->disconnect();
 }
