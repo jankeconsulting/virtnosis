@@ -116,13 +116,13 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
 
 Domain VirtnosisWindow::selectedDomain()
 {
-    QModelIndex index = ui->domainView->currentIndex();
+    QModelIndex index = currentIndex();
     return qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
 }
 
 Hypervisor VirtnosisWindow::selectedHypervisor()
 {
-    QModelIndex index = ui->domainView->currentIndex();
+    QModelIndex index = currentIndex();
     qDebug() << "VirtnosisWindow::selectedHypervisor: index = " << index;
     return qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
 }
@@ -130,7 +130,7 @@ Hypervisor VirtnosisWindow::selectedHypervisor()
 HypervisorItem *VirtnosisWindow::selectedItem()
 {
 //    TODO: Check if index is on hypervisor
-    QModelIndex index = ui->domainView->currentIndex();
+    QModelIndex index = currentIndex();
     if (!index.isValid())
         return 0;
     if(!(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor))
@@ -142,7 +142,7 @@ HypervisorItem *VirtnosisWindow::selectedItem()
 
 void VirtnosisWindow::selectedDataChanged()
 {
-    QModelIndex index = ui->domainView->currentIndex();
+    QModelIndex index = currentIndex();
     ui->domainView->dataChanged(index, index);
 }
 
