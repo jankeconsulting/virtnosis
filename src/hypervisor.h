@@ -12,7 +12,7 @@
 #include <QString>
 #include "libvirt/libvirt.h"
 #include "libvirt/virterror.h"
-
+#include "domain.h"
 
 class Hypervisor : public QObject
 {
@@ -31,6 +31,8 @@ public:
     virConnectPtr connection();
     void disconnect();
     int alive();
+    QList<Domain *> domains();
+
 
 private:
     QString protocol;
@@ -41,7 +43,6 @@ private:
     int status;
 
     virConnectPtr m_connection;
-
 };
 
 Q_DECLARE_METATYPE(Hypervisor)

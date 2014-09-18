@@ -86,3 +86,26 @@ int Hypervisor::alive()
 {
     return virConnectIsAlive(m_connection);
 }
+
+QList<Domain *> Hypervisor::domains()
+{
+    virDomainPtr *domains;
+    Domain *domain;
+    int number_of_domains;
+    int i;
+    QList<Domain *> list = QList<Domain *>();
+
+//    TODO: use different function for older hypervisors?
+    number_of_domains = virConnectListAllDomains(m_connection, &domains, 0);
+
+    if (number_of_domains < 1) {
+        return list;
+    }
+
+    for (i = 0; i < number_of_domains; i++) {
+        domain = new Domain(domains[i], this);
+        list.append(domain);
+    }
+
+    return list;
+}

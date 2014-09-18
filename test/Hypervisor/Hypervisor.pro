@@ -16,10 +16,12 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
-HEADERS += ../../src/hypervisor.h
+HEADERS += ../../src/hypervisor.h \
+             ../../src/domain.h
 
 SOURCES += tst_hypervisortest.cpp \
-             ../../src/hypervisor.cpp
+             ../../src/hypervisor.cpp \
+             ../../src/domain.cpp
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
