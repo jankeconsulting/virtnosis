@@ -45,7 +45,7 @@ Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, Q
 
 Hypervisor::~Hypervisor()
 {
-    //    virConnectClose(m_connection);
+//    virConnectClose(m_connection);
 }
 
 void Hypervisor::write(QDataStream &out) const
