@@ -10,7 +10,6 @@
 #include <QStandardItemModel>
 #include "domainitem.h"
 #include "hypervisoritem.h"
-#include "domainitem.h"
 #include <QVariant>
 
 class DomainViewModel : public QStandardItemModel
@@ -41,8 +40,8 @@ signals:
 public slots:
 
 private:
-    Hypervisor hypervisor(const QModelIndex &index);
-    Domain domain(const QModelIndex &index);
+    Hypervisor hypervisor(const QModelIndex &index) const;
+    Domain domain(const QModelIndex &index) const;
     bool indexIsHypervisor(const QModelIndex &index) const;
     bool indexIsDomain(const QModelIndex &index) const;
 
