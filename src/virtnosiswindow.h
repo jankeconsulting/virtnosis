@@ -8,6 +8,7 @@
 #define VIRTNOSISWINDOW_H
 
 #include <QMainWindow>
+#include <QSettings>
 #include "hypervisor.h"
 #include "hypervisordialog.h"
 #include "hypervisoritem.h"
@@ -42,6 +43,7 @@ private slots:
 
 private:
     Ui::VirtnosisWindow *ui;
+    QSettings m_settings;
 
     void enableVirtualMachineActions(const QModelIndex &index);
     Domain selectedDomain();
@@ -50,6 +52,8 @@ private:
     void selectedDataChanged();
     DomainViewModel *model();
     QModelIndex currentIndex();
+    void writeHypervisorSettings(Hypervisor *hypervisor, int index);
+    void readHypervisorSettings();
 };
 
 #endif // VIRTNOSISWINDOW_H

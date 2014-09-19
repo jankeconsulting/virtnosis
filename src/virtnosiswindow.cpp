@@ -11,9 +11,11 @@
 
 VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::VirtnosisWindow)
+    ui(new Ui::VirtnosisWindow),
+    m_settings("Janke Consulting", "Virtnosis")
 {
     qRegisterMetaType<Hypervisor>("Hypervisor");
+    qRegisterMetaTypeStreamOperators<Hypervisor>("Hypervisor");
     qRegisterMetaType<Domain>("Domain");
     ui->setupUi(this);
     DomainViewModel *model = new DomainViewModel(this);
@@ -22,6 +24,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui->domainView->setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
     connect(ui->domainView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
     connect(ui->domainView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
+    readHypervisorSettings();
 }
 
 VirtnosisWindow::~VirtnosisWindow()
@@ -39,6 +42,8 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     model->appendRow(item);
 
     QModelIndex index = model->index(model->rowCount()-1, 0);
+    writeHypervisorSettings(hypervisor, index.row());
+
     test.setValue(*hypervisor);
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);
@@ -162,6 +167,32 @@ DomainViewModel *VirtnosisWindow::model()
 QModelIndex VirtnosisWindow::currentIndex()
 {
     return ui->domainView->currentIndex();
+}
+
+void VirtnosisWindow::writeHypervisorSettings(Hypervisor *hypervisor, int index)
+{
+    m_settings.beginGroup("Hypervisor");
+    m_settings.beginWriteArray("hypervisors");
+    m_settings.setArrayIndex(index);
+    QVariant var_hypervisor;
+    var_hypervisor.setValue(*hypervisor);
+    m_settings.setValue("hypervisor", var_hypervisor);
+    m_settings.endArray();
+    m_settings.endGroup();
+}
+
+void VirtnosisWindow::readHypervisorSettings()
+{
+    m_settings.beginGroup("Hypervisor");
+    int size = m_settings.beginReadArray("hypervisors");
+    for (int i = 0; i < size; ++i) {
+         m_settings.setArrayIndex(i);
+         Hypervisor hypervisor = qvariant_cast<Hypervisor>(m_settings.value("hypervisor"));
+         qDebug() << "VirtnosisWindow::readHypervisorSettings: " << hypervisor.uri();
+         addHypervisor(&hypervisor);
+    }
+    m_settings.endArray();
+    m_settings.endGroup();
 }
 
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)

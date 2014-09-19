@@ -23,7 +23,8 @@ public:
     Hypervisor(const Hypervisor& hypervisor);
     explicit Hypervisor(QString host, QString user, int port = 22, QString protocol = "qemu+ssh", QString path = "system", QObject *parent = 0);
     ~Hypervisor();
-
+    void write(QDataStream &out) const;
+    void read(QDataStream &in);
 
     QString uri();
     static QString uri(QString host, QString account, int port, QString protocol = "qemu+ssh", QString path = "system");
@@ -46,5 +47,10 @@ private:
 };
 
 Q_DECLARE_METATYPE(Hypervisor)
+
+#ifndef QT_NO_DATASTREAM
+QDataStream &operator<<(QDataStream &out, const Hypervisor &hypervisor);
+QDataStream &operator>>(QDataStream &in, Hypervisor &hypervisor);
+#endif
 
 #endif // HYPERVISOR_H

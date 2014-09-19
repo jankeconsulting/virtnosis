@@ -45,7 +45,17 @@ Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, Q
 
 Hypervisor::~Hypervisor()
 {
-//    virConnectClose(m_connection);
+    //    virConnectClose(m_connection);
+}
+
+void Hypervisor::write(QDataStream &out) const
+{
+    out << protocol << account << host << port << path;
+}
+
+void Hypervisor::read(QDataStream &in)
+{
+    in >> protocol >> account >> host >> port >> path;
 }
 
 QString Hypervisor::uri()
@@ -113,4 +123,18 @@ QList<Domain *> Hypervisor::domains()
 
     free(domains);
     return list;
+}
+
+
+QDataStream &operator<<(QDataStream &out, const Hypervisor &hypervisor)
+{
+    hypervisor.write(out);
+    return out;
+}
+
+
+QDataStream &operator>>(QDataStream &in, Hypervisor &hypervisor)
+{
+    hypervisor.read(in);
+    return in;
 }
