@@ -39,10 +39,7 @@ void DomainViewModel::connectHypervisor(const QModelIndex &index)
         HypervisorItem *item = static_cast<HypervisorItem *>(itemFromIndex(index));
         Hypervisor hypervisorobj = hypervisor(index);
         item->addDomainsFromHypervisor(&hypervisorobj);
-        QVariant var;
-        var.setValue(hypervisorobj);
-        setData(index, var, domainHypervisorRole);
-        dataChanged(index, index, QVector<int>(hypervisorConnectedRole));
+        setHypervisor(index, &hypervisorobj);
     }
 }
 
@@ -52,16 +49,21 @@ void DomainViewModel::disconnectHypervisor(const QModelIndex &index)
         HypervisorItem *item = static_cast<HypervisorItem *>(itemFromIndex(index));
         Hypervisor hypervisorobj = hypervisor(index);
         item->removeDomainsFromItem(&hypervisorobj);
-        QVariant var;
-        var.setValue(hypervisorobj);
-        setData(index, var, domainHypervisorRole);
-        dataChanged(index, index, QVector<int>(hypervisorConnectedRole));
+        setHypervisor(index, &hypervisorobj);
     }
 }
 
 Hypervisor DomainViewModel::hypervisor(const QModelIndex &index) const
 {
     return qvariant_cast<Hypervisor>(QStandardItemModel::data(index, domainHypervisorRole));
+}
+
+void DomainViewModel::setHypervisor(const QModelIndex &index, Hypervisor *hypervisor)
+{
+    QVariant var;
+    var.setValue(*hypervisor);
+    setData(index, var, domainHypervisorRole);
+    dataChanged(index, index, QVector<int>(hypervisorConnectedRole));
 }
 
 Domain DomainViewModel::domain(const QModelIndex &index) const
