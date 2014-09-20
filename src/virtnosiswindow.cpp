@@ -18,6 +18,8 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     qRegisterMetaTypeStreamOperators<Hypervisor>("Hypervisor");
     qRegisterMetaType<Domain>("Domain");
     ui->setupUi(this);
+    setWindowTitle(QString(tr("Virtnosis - Virtual Manchine Manager")));
+
     DomainViewModel *model = new DomainViewModel(this);
     ui->domainView->setModel(model);
     DomainViewItemDelegate *delegate = new DomainViewItemDelegate(this);
