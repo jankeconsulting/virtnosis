@@ -5,5 +5,9 @@
         <file>icons/hicolor/32x32/status/state_running.png</file>
         <file>icons/hicolor/32x32/status/action_reboot.png</file>
         <file>icons/hicolor/32x32/status/action_resume.png</file>
+        <file>icons/hicolor/32x32/status/connected.png</file>
+        <file>icons/hicolor/32x32/status/disconnected.png</file>
+        <file>icons/hicolor/32x32/status/action_new_connection.png</file>
+        <file>icons/hicolor/32x32/status/action_remove_connection.png</file>
     </qresource>
 </RCC>

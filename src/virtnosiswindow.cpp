@@ -107,9 +107,11 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
     ui->menuVmActionResume->setDisabled(true);
     ui->menuHypervisorActionConnect->setDisabled(true);
     ui->menuHypervisorActionDisconnect->setDisabled(true);
+    ui->menuiHypervisorActionRemove->setDisabled(true);
 
     if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
         Hypervisor hypervisor = qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
+        ui->menuiHypervisorActionRemove->setEnabled(true);
         if(hypervisor.alive()) {
             ui->menuHypervisorActionDisconnect->setEnabled(true);
         } else {
