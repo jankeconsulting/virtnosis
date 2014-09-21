@@ -3,5 +3,7 @@
         <file>icons/hicolor/32x32/status/state_paused.png</file>
         <file>icons/hicolor/32x32/status/state_shutoff.png</file>
         <file>icons/hicolor/32x32/status/state_running.png</file>
+        <file>icons/hicolor/32x32/status/action_reboot.png</file>
+        <file>icons/hicolor/32x32/status/action_resume.png</file>
     </qresource>
 </RCC>
