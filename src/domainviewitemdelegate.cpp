@@ -45,6 +45,13 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
         domainNameRect.setLeft(domainNameRect.left()+iconsize.width()*2+5);
         painter->drawText(domainStateRect, stateText(index.data(DomainViewModel::domainStateRole)));
     } else if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
+        QIcon icon = connectionIcon(index.data(DomainViewModel::hypervisorConnectedRole));
+        QSize iconsize = icon.actualSize(option.decorationSize);
+        domainIconRect.setRight(iconsize.width()+30);
+        domainIconRect.setTop(domainIconRect.top()+5);
+        painter->drawPixmap(QPoint(domainIconRect.left(),domainIconRect.top()),icon.pixmap(iconsize.width()*2,iconsize.height()*2));
+        domainStateRect.setLeft(domainStateRect.left()+iconsize.width()*2+5);
+        domainNameRect.setLeft(domainNameRect.left()+iconsize.width()*2+5);
         painter->drawText(domainStateRect, connectionText(index.data(DomainViewModel::hypervisorConnectedRole)));
     }
 
@@ -103,4 +110,13 @@ QString DomainViewItemDelegate::connectionText(const QVariant state) const
         case 0: return QString(tr("Not Connected"));
     }
     return QString(tr("Error"));
+}
+
+QIcon DomainViewItemDelegate::connectionIcon(const QVariant state) const
+{
+    switch(state.toInt()) {
+        case 1: return QIcon("://icons/hicolor/32x32/status/connected.png");
+        case 0: return QIcon("://icons/hicolor/32x32/status/disconnected.png");
+    }
+    return QIcon();
 }
