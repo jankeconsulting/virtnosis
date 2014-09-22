@@ -41,6 +41,8 @@ private slots:
 
     void selectionChanged(const QModelIndex &current, const QModelIndex &previous);
 
+    void on_menuiHypervisorActionRemove_triggered();
+
 private:
     Ui::VirtnosisWindow *ui;
     QSettings m_settings;

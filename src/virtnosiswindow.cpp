@@ -68,6 +68,11 @@ void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
     model()->disconnectHypervisor(currentIndex());
 }
 
+void VirtnosisWindow::on_menuiHypervisorActionRemove_triggered()
+{
+
+}
+
 void VirtnosisWindow::on_menuVmActionStart_triggered()
 {
     Domain domain = selectedDomain();
@@ -204,8 +209,3 @@ void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelI
     Q_UNUSED(previous);
     enableVirtualMachineActions(current);
 }
-
-
-
-
-
