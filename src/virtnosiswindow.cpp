@@ -44,12 +44,13 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     model->appendRow(item);
 
     QModelIndex index = model->index(model->rowCount()-1, 0);
-    writeHypervisorSettings();
 
     test.setValue(*hypervisor);
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);
     model->connectHypervisor(index);
+
+    writeHypervisorSettings();
 }
 
 void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
@@ -183,9 +184,11 @@ void VirtnosisWindow::writeHypervisorSettings()
 {
     m_settings.beginGroup("Hypervisor");
     m_settings.beginWriteArray("hypervisors");
-    for(int i; i<ui->domainView->model()->rowCount(); ++i) {
+    qDebug() << "VirtnosisWindow::writeHypervisorSettings" << model()->rowCount();
+    for(int i=0; i<(ui->domainView->model()->rowCount()); i++) {
         m_settings.setArrayIndex(i);
         QVariant var_hypervisor;
+        qDebug() << "VirtnosisWindow::writeHypervisorSettings" << model()->hypervisor(i).uri();
         var_hypervisor.setValue(model()->hypervisor(i));
         m_settings.setValue("hypervisor", var_hypervisor);
     }
