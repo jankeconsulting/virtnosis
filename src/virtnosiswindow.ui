@@ -53,7 +53,7 @@
     <addaction name="menuHypervisorActionNew"/>
     <addaction name="menuHypervisorActionConnect"/>
     <addaction name="menuHypervisorActionDisconnect"/>
-    <addaction name="menuiHypervisorActionRemove"/>
+    <addaction name="menuHypervisorActionRemove"/>
    </widget>
    <widget class="QMenu" name="menuVirtualMachine">
     <property name="title">
@@ -102,7 +102,7 @@
    <addaction name="menuHypervisorActionNew"/>
    <addaction name="menuHypervisorActionConnect"/>
    <addaction name="menuHypervisorActionDisconnect"/>
-   <addaction name="menuiHypervisorActionRemove"/>
+   <addaction name="menuHypervisorActionRemove"/>
   </widget>
   <action name="actionList">
    <property name="text">
@@ -222,7 +222,7 @@
     <string>&amp;Disconnect</string>
    </property>
   </action>
-  <action name="menuiHypervisorActionRemove">
+  <action name="menuHypervisorActionRemove">
    <property name="icon">
     <iconset resource="virtnosis.qrc">
      <normaloff>:/icons/hicolor/32x32/status/action_remove_connection.png</normaloff>:/icons/hicolor/32x32/status/action_remove_connection.png</iconset>

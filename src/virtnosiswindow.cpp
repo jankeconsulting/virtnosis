@@ -44,7 +44,7 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     model->appendRow(item);
 
     QModelIndex index = model->index(model->rowCount()-1, 0);
-    writeHypervisorSettings(hypervisor, index.row());
+    writeHypervisorSettings();
 
     test.setValue(*hypervisor);
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
@@ -68,9 +68,10 @@ void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
     model()->disconnectHypervisor(currentIndex());
 }
 
-void VirtnosisWindow::on_menuiHypervisorActionRemove_triggered()
+void VirtnosisWindow::on_menuHypervisorActionRemove_triggered()
 {
-
+    model()->removeRow(currentIndex().row());
+    writeHypervisorSettings();
 }
 
 void VirtnosisWindow::on_menuVmActionStart_triggered()
@@ -112,11 +113,11 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
     ui->menuVmActionResume->setDisabled(true);
     ui->menuHypervisorActionConnect->setDisabled(true);
     ui->menuHypervisorActionDisconnect->setDisabled(true);
-    ui->menuiHypervisorActionRemove->setDisabled(true);
+    ui->menuHypervisorActionRemove->setDisabled(true);
 
     if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
         Hypervisor hypervisor = qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
-        ui->menuiHypervisorActionRemove->setEnabled(true);
+        ui->menuHypervisorActionRemove->setEnabled(true);
         if(hypervisor.alive()) {
             ui->menuHypervisorActionDisconnect->setEnabled(true);
         } else {
@@ -178,7 +179,7 @@ QModelIndex VirtnosisWindow::currentIndex()
     return ui->domainView->currentIndex();
 }
 
-void VirtnosisWindow::writeHypervisorSettings(Hypervisor *hypervisor, int index)
+void VirtnosisWindow::writeHypervisorSettings()
 {
     m_settings.beginGroup("Hypervisor");
     m_settings.beginWriteArray("hypervisors");

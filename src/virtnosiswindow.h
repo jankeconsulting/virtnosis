@@ -33,6 +33,7 @@ private slots:
     void on_menuHypervisorActionNew_triggered();
     void on_menuHypervisorActionConnect_triggered();
     void on_menuHypervisorActionDisconnect_triggered();
+    void on_menuHypervisorActionRemove_triggered();
     void on_menuVmActionStart_triggered();
     void on_menuVmActionReboot_triggered();
     void on_menuVmActionShutoff_triggered();
@@ -41,7 +42,6 @@ private slots:
 
     void selectionChanged(const QModelIndex &current, const QModelIndex &previous);
 
-    void on_menuiHypervisorActionRemove_triggered();
 
 private:
     Ui::VirtnosisWindow *ui;
@@ -54,7 +54,7 @@ private:
     void selectedDataChanged();
     DomainViewModel *model();
     QModelIndex currentIndex();
-    void writeHypervisorSettings(Hypervisor *hypervisor, int index);
+    void writeHypervisorSettings();
     void readHypervisorSettings();
 };
 
