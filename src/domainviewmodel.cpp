@@ -58,6 +58,11 @@ Hypervisor DomainViewModel::hypervisor(const QModelIndex &index) const
     return qvariant_cast<Hypervisor>(QStandardItemModel::data(index, domainHypervisorRole));
 }
 
+Hypervisor DomainViewModel::hypervisor(const int row) const
+{
+    return qvariant_cast<Hypervisor>(QStandardItemModel::data(index(row, 0), domainHypervisorRole));
+}
+
 void DomainViewModel::setHypervisor(const QModelIndex &index, Hypervisor *hypervisor)
 {
     QVariant var;

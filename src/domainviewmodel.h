@@ -21,6 +21,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     void connectHypervisor(const QModelIndex &index);
     void disconnectHypervisor(const QModelIndex &index);
+    Hypervisor hypervisor(const int row) const;
 
     enum datarole {
         domainTypeRole = Qt::UserRole + 100,
