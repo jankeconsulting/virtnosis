@@ -32,7 +32,8 @@ Domain::Domain(const Domain &domain) :
 
 Domain::~Domain()
 {
-    virDomainFree(m_domain);
+    if(m_domain)
+        virDomainFree(m_domain);
 }
 
 QString Domain::name()
@@ -45,8 +46,9 @@ int Domain::state()
     int state;
     int reason;
 
-    if(virDomainGetState(m_domain, &state, &reason, 0) != -1)
-        return state;
+    if(m_domain)
+        if(virDomainGetState(m_domain, &state, &reason, 0) != -1)
+            return state;
 
     return -1;
 }
