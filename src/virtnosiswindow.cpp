@@ -184,11 +184,9 @@ void VirtnosisWindow::writeHypervisorSettings()
 {
     m_settings.beginGroup("Hypervisor");
     m_settings.beginWriteArray("hypervisors");
-    qDebug() << "VirtnosisWindow::writeHypervisorSettings" << model()->rowCount();
     for(int i=0; i<(ui->domainView->model()->rowCount()); i++) {
         m_settings.setArrayIndex(i);
         QVariant var_hypervisor;
-        qDebug() << "VirtnosisWindow::writeHypervisorSettings" << model()->hypervisor(i).uri();
         var_hypervisor.setValue(model()->hypervisor(i));
         m_settings.setValue("hypervisor", var_hypervisor);
     }
@@ -203,7 +201,6 @@ void VirtnosisWindow::readHypervisorSettings()
     for (int i = 0; i < size; ++i) {
          m_settings.setArrayIndex(i);
          Hypervisor hypervisor = qvariant_cast<Hypervisor>(m_settings.value("hypervisor"));
-         qDebug() << "VirtnosisWindow::readHypervisorSettings: " << hypervisor.uri();
          addHypervisor(&hypervisor);
     }
     m_settings.endArray();
