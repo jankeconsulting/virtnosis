@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     domainviewmodel.cpp \
     domainitem.cpp \
     hypervisoritem.cpp \
-    domain.cpp
+    domain.cpp \
+    aboutdialog.cpp
 
 HEADERS  += virtnosiswindow.h \
     hypervisor.h \
@@ -30,10 +31,12 @@ HEADERS  += virtnosiswindow.h \
     domainviewmodel.h \
     domainitem.h \
     hypervisoritem.h \
-    domain.h
+    domain.h \
+    aboutdialog.h
 
 FORMS    += virtnosiswindow.ui \
-    hypervisordialog.ui
+    hypervisordialog.ui \
+    aboutdialog.ui
 
 unix|win32: LIBS += -lvirt
 
