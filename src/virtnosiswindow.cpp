@@ -12,7 +12,7 @@
 VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::VirtnosisWindow),
-    m_settings("Janke Consulting", "Virtnosis")
+    m_settings()
 {
     qRegisterMetaType<Hypervisor>("Hypervisor");
     qRegisterMetaTypeStreamOperators<Hypervisor>("Hypervisor");
