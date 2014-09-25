@@ -8,6 +8,7 @@
 #define VIRTNOSISWINDOW_H
 
 #include <QMainWindow>
+#include <QApplication>
 #include <QSettings>
 #include "hypervisor.h"
 #include "hypervisordialog.h"
@@ -15,6 +16,11 @@
 #include <domainviewmodel.h>
 #include "domainitem.h"
 #include "domainviewitemdelegate.h"
+#include "aboutdialog.h"
+
+#ifndef VIRTNOSIS_REVISION
+#define VIRTNOSIS_REVISION "1.0.0"
+#endif
 
 namespace Ui {
 class VirtnosisWindow;
@@ -43,9 +49,14 @@ private slots:
     void selectionChanged(const QModelIndex &current, const QModelIndex &previous);
 
 
+    void on_actionAbout_triggered();
+
+    void on_actionAboutQt_triggered();
+
 private:
     Ui::VirtnosisWindow *ui;
     QSettings m_settings;
+    AboutDialog *about;
 
     void enableVirtualMachineActions(const QModelIndex &index);
     Domain selectedDomain();

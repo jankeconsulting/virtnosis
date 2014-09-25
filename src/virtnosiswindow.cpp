@@ -19,6 +19,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     qRegisterMetaType<Domain>("Domain");
     ui->setupUi(this);
     setWindowTitle(QString(tr("Virtnosis - Virtual Manchine Manager")));
+    about = new AboutDialog(this, VIRTNOSIS_REVISION);
 
     DomainViewModel *model = new DomainViewModel(this);
     ui->domainView->setModel(model);
@@ -31,6 +32,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
 
 VirtnosisWindow::~VirtnosisWindow()
 {
+    delete about;
     delete ui;
 }
 
@@ -211,4 +213,14 @@ void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelI
 {
     Q_UNUSED(previous);
     enableVirtualMachineActions(current);
+}
+
+void VirtnosisWindow::on_actionAbout_triggered()
+{
+    about->show();
+}
+
+void VirtnosisWindow::on_actionAboutQt_triggered()
+{
+    qApp->aboutQt();
 }
