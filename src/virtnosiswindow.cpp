@@ -27,7 +27,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui->domainView->setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
     connect(ui->domainView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
     connect(ui->domainView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
-    readHypervisorSettings();
+    readSettings();
 }
 
 VirtnosisWindow::~VirtnosisWindow()
@@ -182,6 +182,22 @@ QModelIndex VirtnosisWindow::currentIndex()
     return ui->domainView->currentIndex();
 }
 
+void VirtnosisWindow::readSettings()
+{
+    m_settings.beginGroup("VirtnosisWindow");
+    QByteArray state = m_settings.value("state", QByteArray()).toByteArray();
+    restoreState(state);
+    m_settings.endGroup();
+    readHypervisorSettings();
+}
+
+void VirtnosisWindow::writeSettings()
+{
+    m_settings.beginGroup("VirtnosisWindow");
+    m_settings.setValue("state", saveState());
+    m_settings.endGroup();
+}
+
 void VirtnosisWindow::writeHypervisorSettings()
 {
     m_settings.beginGroup("Hypervisor");
@@ -193,9 +209,6 @@ void VirtnosisWindow::writeHypervisorSettings()
         m_settings.setValue("hypervisor", var_hypervisor);
     }
     m_settings.endArray();
-    m_settings.endGroup();
-    m_settings.beginGroup("VirtnosisWindow");
-    m_settings.setValue("state", saveState());
     m_settings.endGroup();
 }
 
@@ -209,10 +222,6 @@ void VirtnosisWindow::readHypervisorSettings()
          addHypervisor(&hypervisor);
     }
     m_settings.endArray();
-    m_settings.endGroup();
-    m_settings.beginGroup("VirtnosisWindow");
-    QByteArray state = m_settings.value("state", QByteArray()).toByteArray();
-    restoreState(state);
     m_settings.endGroup();
 }
 
@@ -234,5 +243,5 @@ void VirtnosisWindow::on_actionAboutQt_triggered()
 
 void VirtnosisWindow::on_actionExit_triggered()
 {
-    writeHypervisorSettings();
+    writeSettings();
 }

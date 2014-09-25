@@ -63,6 +63,8 @@ private:
     void selectedDataChanged();
     DomainViewModel *model();
     QModelIndex currentIndex();
+    void readSettings();
+    void writeSettings();
     void writeHypervisorSettings();
     void readHypervisorSettings();
 };
