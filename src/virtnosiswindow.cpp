@@ -194,6 +194,9 @@ void VirtnosisWindow::writeHypervisorSettings()
     }
     m_settings.endArray();
     m_settings.endGroup();
+    m_settings.beginGroup("VirtnosisWindow");
+    m_settings.setValue("state", saveState());
+    m_settings.endGroup();
 }
 
 void VirtnosisWindow::readHypervisorSettings()
@@ -206,6 +209,10 @@ void VirtnosisWindow::readHypervisorSettings()
          addHypervisor(&hypervisor);
     }
     m_settings.endArray();
+    m_settings.endGroup();
+    m_settings.beginGroup("VirtnosisWindow");
+    QByteArray state = m_settings.value("state", QByteArray()).toByteArray();
+    restoreState(state);
     m_settings.endGroup();
 }
 
@@ -223,4 +230,9 @@ void VirtnosisWindow::on_actionAbout_triggered()
 void VirtnosisWindow::on_actionAboutQt_triggered()
 {
     qApp->aboutQt();
+}
+
+void VirtnosisWindow::on_actionExit_triggered()
+{
+    writeHypervisorSettings();
 }
