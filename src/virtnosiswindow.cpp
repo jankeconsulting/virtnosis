@@ -55,6 +55,15 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     writeHypervisorSettings();
 }
 
+void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
+{
+    QMenu menu(this);
+    menu.addAction(ui->menuHypervisorActionConnect);
+    menu.addAction(ui->menuHypervisorActionDisconnect);
+    menu.addAction(ui->menuHypervisorActionRemove);
+    menu.exec(event->globalPos());
+}
+
 void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 {
     HypervisorDialog *dialog = new HypervisorDialog(this);
@@ -151,19 +160,6 @@ Hypervisor VirtnosisWindow::selectedHypervisor()
     QModelIndex index = currentIndex();
     qDebug() << "VirtnosisWindow::selectedHypervisor: index = " << index;
     return qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
-}
-
-HypervisorItem *VirtnosisWindow::selectedItem()
-{
-//    TODO: Check if index is on hypervisor
-    QModelIndex index = currentIndex();
-    if (!index.isValid())
-        return 0;
-    if(!(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor))
-        return 0;
-    Hypervisor hypervisor = qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
-    //return static_cast<HypervisorItem*>(hypervisor.item());
-    return 0;
 }
 
 void VirtnosisWindow::selectedDataChanged()

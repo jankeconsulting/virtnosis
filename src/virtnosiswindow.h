@@ -10,6 +10,7 @@
 #include <QMainWindow>
 #include <QApplication>
 #include <QSettings>
+#include <QContextMenuEvent>
 #include "hypervisor.h"
 #include "hypervisordialog.h"
 #include "hypervisoritem.h"
@@ -35,6 +36,9 @@ public:
     ~VirtnosisWindow();
     void addHypervisor(Hypervisor *hypervisor);
 
+protected:
+    void contextMenuEvent(QContextMenuEvent *event);
+
 private slots:
     void on_menuHypervisorActionNew_triggered();
     void on_menuHypervisorActionConnect_triggered();
@@ -59,7 +63,6 @@ private:
     void enableVirtualMachineActions(const QModelIndex &index);
     Domain selectedDomain();
     Hypervisor selectedHypervisor();
-    HypervisorItem *selectedItem();
     void selectedDataChanged();
     DomainViewModel *model();
     QModelIndex currentIndex();
