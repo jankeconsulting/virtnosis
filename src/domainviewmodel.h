@@ -22,6 +22,8 @@ public:
     void connectHypervisor(const QModelIndex &index);
     void disconnectHypervisor(const QModelIndex &index);
     Hypervisor hypervisor(const int row) const;
+    bool indexIsHypervisor(const QModelIndex &index) const;
+    bool indexIsDomain(const QModelIndex &index) const;
 
     enum datarole {
         domainTypeRole = Qt::UserRole + 100,
@@ -44,9 +46,6 @@ private:
     Hypervisor hypervisor(const QModelIndex &index) const;
     void setHypervisor(const QModelIndex &index, Hypervisor *hypervisor);
     Domain domain(const QModelIndex &index) const;
-    bool indexIsHypervisor(const QModelIndex &index) const;
-    bool indexIsDomain(const QModelIndex &index) const;
-
 };
 
 #endif // DOMAINVIEWMODEL_H

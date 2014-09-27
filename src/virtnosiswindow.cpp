@@ -58,10 +58,20 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
 void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
-    menu.addAction(ui->menuHypervisorActionConnect);
-    menu.addAction(ui->menuHypervisorActionDisconnect);
-    menu.addAction(ui->menuHypervisorActionRemove);
-    menu.exec(event->globalPos());
+    if(model()->indexIsHypervisor(currentIndex())) {
+        menu.addAction(ui->menuHypervisorActionConnect);
+        menu.addAction(ui->menuHypervisorActionDisconnect);
+        menu.addAction(ui->menuHypervisorActionRemove);
+        menu.exec(event->globalPos());
+    }
+    if(model()->indexIsDomain(currentIndex())) {
+        menu.addAction(ui->menuVmActionStart);
+        menu.addAction(ui->menuVmActionReboot);
+        menu.addAction(ui->menuVmActionShutoff);
+        menu.addAction(ui->menuVmActionPause);
+        menu.addAction(ui->menuVmActionResume);
+        menu.exec(event->globalPos());
+    }
 }
 
 void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
