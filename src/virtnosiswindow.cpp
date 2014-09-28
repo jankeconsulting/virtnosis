@@ -168,7 +168,6 @@ Domain VirtnosisWindow::selectedDomain()
 Hypervisor VirtnosisWindow::selectedHypervisor()
 {
     QModelIndex index = currentIndex();
-    qDebug() << "VirtnosisWindow::selectedHypervisor: index = " << index;
     return qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
 }
 
