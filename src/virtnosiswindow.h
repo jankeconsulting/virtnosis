@@ -36,8 +36,13 @@ public:
     ~VirtnosisWindow();
     void addHypervisor(Hypervisor *hypervisor);
 
+public slots:
+    void dataChanged();
+
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
+
+signals:
 
 private slots:
     void on_menuHypervisorActionNew_triggered();
@@ -52,7 +57,6 @@ private slots:
     void selectionChanged(const QModelIndex &current, const QModelIndex &previous);
     void on_actionAbout_triggered();
     void on_actionAboutQt_triggered();
-
     void on_actionExit_triggered();
 
 private:

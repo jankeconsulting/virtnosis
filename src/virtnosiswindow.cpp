@@ -26,7 +26,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     DomainViewItemDelegate *delegate = new DomainViewItemDelegate(this);
     ui->domainView->setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
     connect(ui->domainView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
-    connect(ui->domainView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
+    connect(ui->domainView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));    
     readSettings();
 }
 
@@ -53,6 +53,11 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     model->connectHypervisor(index);
 
     writeHypervisorSettings();
+}
+
+void VirtnosisWindow::dataChanged()
+{
+    selectionChanged(currentIndex(), currentIndex());
 }
 
 void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
@@ -100,30 +105,35 @@ void VirtnosisWindow::on_menuVmActionStart_triggered()
 {
     Domain domain = selectedDomain();
     domain.start();
+    dataChanged();
 }
 
 void VirtnosisWindow::on_menuVmActionReboot_triggered()
 {
     Domain domain = selectedDomain();
     domain.reboot();
+    dataChanged();
 }
 
 void VirtnosisWindow::on_menuVmActionShutoff_triggered()
 {
     Domain domain = selectedDomain();
     domain.shutdown();
+    dataChanged();
 }
 
 void VirtnosisWindow::on_menuVmActionPause_triggered()
 {
     Domain domain = selectedDomain();
     domain.pause();
+    dataChanged();
 }
 
 void VirtnosisWindow::on_menuVmActionResume_triggered()
 {
     Domain domain = selectedDomain();
     domain.resume();
+    dataChanged();
 }
 
 void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
