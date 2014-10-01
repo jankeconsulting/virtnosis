@@ -1,0 +1,26 @@
+Source: virtnosis
+Section: admin
+Priority: optional
+Maintainer: Ralph Janke <virtnosis@jankeconsulting.ca>
+Build-Depends: debhelper (>= 8.0.0),
+ dpkg-dev (>= 1.16.1~),
+ qt5-default,
+ qt5-qmake,
+ libvirt-dev
+Standards-Version: 3.9.4
+Homepage: http://www.jankeconsulting.ca 
+#Vcs-Git: git://git.debian.org/collab-maint/virtnosis.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/virtnosis.git;a=summary
+
+Package: virtnosis
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ libvirt0
+Description: Virtnosis - libvirt manager
+ Virtnosis is a manager for virtual machines running on hyperviors based on
+ libvirt. It is based on the Qt GUI framework and written in c++ hence
+ replacing virt-manager where Qt is preferred over GTK. 
+ . 
+ It presents a summeray view of any configured hypervisors and associated 
+ domains (virtual machines) and allows the domains being paused, resumed,
+ rebooted, stopped and started among other possible actions.

@@ -45,3 +45,7 @@ unix|win32: LIBS += -lvirt
 
 RESOURCES += \
     virtnosis.qrc
+
+virtnosis_install.files = virtnosis
+virtnosis_install.path = /usr/bin/
+INSTALLS += virtnosis_install
