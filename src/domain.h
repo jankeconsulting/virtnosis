@@ -3,6 +3,11 @@
  *
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
+/**
+ * Copyright (c) 2014 Ralph Janke. All rights reserved.
+ *
+ * Author: Ralph Janke virtnosis@jankeconsulting.ca
+ */
 
 #ifndef DOMAIN_H
 #define DOMAIN_H
