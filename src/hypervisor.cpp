@@ -84,6 +84,9 @@ virConnectPtr Hypervisor::connection()
 //    TODO: error handling if connection fails
     if(alive() < 1)
       m_connection = virConnectOpen(this->uri().toLatin1().data());
+//#ifdef DEBUG
+    qDebug() << "Hyperviisor::connection: version = " << version();
+//#endif
     return m_connection;
 }
 
@@ -125,6 +128,15 @@ QList<Domain *> Hypervisor::domains()
     return list;
 }
 
+ulong Hypervisor::version()
+{
+    ulong hvVer;
+    int error = virConnectGetVersion(m_connection, &hvVer);
+    if (error)
+        return -1;
+
+    return hvVer;
+}
 
 QDataStream &operator<<(QDataStream &out, const Hypervisor &hypervisor)
 {
