@@ -86,7 +86,7 @@ virConnectPtr Hypervisor::connection()
       m_connection = virConnectOpen(this->uri().toLatin1().data());
 #ifdef DEBUG
     qDebug() << "Hypervisor::connection: version = " << version();
-    qDebug() << "Hypervisor::connection: capabilities = " << capabilities();
+    qDebug() << "Hypervisor::connection: libVersion = " << libVersion();
 #endif
     return m_connection;
 }
@@ -137,6 +137,16 @@ ulong Hypervisor::version()
         return -1;
 
     return hvVer;
+}
+
+ulong Hypervisor::libVersion()
+{
+    ulong libVer;
+    int error = virConnectGetLibVersion(m_connection, &libVer);
+    if (error)
+        return -1;
+
+    return libVer;
 }
 
 QString Hypervisor::capabilities()

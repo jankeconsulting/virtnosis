@@ -46,6 +46,7 @@ private:
     virConnectPtr m_connection;
 
     ulong version();
+    ulong libVersion();
     QString capabilities();
 };
 
