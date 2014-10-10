@@ -46,6 +46,7 @@ private:
     virConnectPtr m_connection;
 
     ulong version();
+    QString capabilities();
 };
 
 Q_DECLARE_METATYPE(Hypervisor)

@@ -85,7 +85,8 @@ virConnectPtr Hypervisor::connection()
     if(alive() < 1)
       m_connection = virConnectOpen(this->uri().toLatin1().data());
 #ifdef DEBUG
-    qDebug() << "Hyperviisor::connection: version = " << version();
+    qDebug() << "Hypervisor::connection: version = " << version();
+    qDebug() << "Hypervisor::connection: capabilities = " << capabilities();
 #endif
     return m_connection;
 }
@@ -136,6 +137,17 @@ ulong Hypervisor::version()
         return -1;
 
     return hvVer;
+}
+
+QString Hypervisor::capabilities()
+{
+    if(alive()) {
+        char *str = virConnectGetCapabilities(m_connection);
+        QString result = QString(str);
+        free(str);
+        return result;
+    }
+    return QString("");
 }
 
 QDataStream &operator<<(QDataStream &out, const Hypervisor &hypervisor)
