@@ -49,3 +49,11 @@ RESOURCES += \
 virtnosis_install.files = virtnosis
 virtnosis_install.path = /usr/bin/
 INSTALLS += virtnosis_install
+
+CONFIG(release, debug|release) {
+  DEFINES -= DEBUG
+}
+
+CONFIG(debug, debug|release) {
+  DEFINES += DEBUG
+}

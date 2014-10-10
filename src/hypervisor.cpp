@@ -84,9 +84,9 @@ virConnectPtr Hypervisor::connection()
 //    TODO: error handling if connection fails
     if(alive() < 1)
       m_connection = virConnectOpen(this->uri().toLatin1().data());
-//#ifdef DEBUG
+#ifdef DEBUG
     qDebug() << "Hyperviisor::connection: version = " << version();
-//#endif
+#endif
     return m_connection;
 }
 
