@@ -142,6 +142,20 @@ QList<Domain *> Hypervisor::domains()
             list.append(domain);
             free(names[i]);
         }
+
+        number_of_domains = virConnectNumOfDomains(m_connection);
+        int domain_ids[number_of_domains];
+        number_of_domains = virConnectListDomains(m_connection, domain_ids, number_of_domains);
+
+        if (number_of_domains < 1) {
+            return list;
+        }
+
+        for (i = 0; i < number_of_domains; i++) {
+            domain = new Domain(virDomainLookupByID(m_connection, domain_ids[i]), version);
+            list.append(domain);
+        }
+
     }
 
     return list;
