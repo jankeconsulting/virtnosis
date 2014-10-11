@@ -22,7 +22,7 @@ class Domain : public QObject
     Q_OBJECT
 public:
     explicit Domain(QObject *parent = 0);
-    explicit Domain(virDomainPtr domain, QObject *parent = 0);
+    explicit Domain(virDomainPtr domain, ulong version, QObject *parent = 0);
     Domain(const Domain &domain);
     ~Domain();
 
@@ -42,6 +42,7 @@ public slots:
 
 private:
     virDomainPtr m_domain;
+    ulong m_libVersion;
 
 };
 

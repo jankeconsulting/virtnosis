@@ -14,19 +14,22 @@ Domain::Domain(QObject *parent) :
 
 }
 
-Domain::Domain(virDomainPtr domain, QObject *parent) :
+Domain::Domain(virDomainPtr domain, ulong version, QObject *parent) :
     QObject(parent),
-    m_domain(domain)
+    m_domain(domain),
+    m_libVersion(version)
 {
     virDomainRef(domain);
 }
 
 Domain::Domain(const Domain &domain) :
     QObject(),
-    m_domain(0)
+    m_domain(0),
+    m_libVersion(0)
 {
     setParent(domain.parent());
     this->m_domain = domain.m_domain;
+    this->m_libVersion = domain.m_libVersion;
     virDomainRef(m_domain);
 }
 
@@ -46,9 +49,12 @@ int Domain::state()
     int state;
     int reason;
 
-    if(m_domain)
-        if(virDomainGetState(m_domain, &state, &reason, 0) != -1)
+    if(m_domain) {
+        qDebug() << "Domain::state version = " << m_libVersion;
+        if(virDomainGetState(m_domain, &state, &reason, 0) != -1) {
             return state;
+        }
+    }
 
     return -1;
 }

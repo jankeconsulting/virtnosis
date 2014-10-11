@@ -111,9 +111,10 @@ QList<Domain *> Hypervisor::domains()
     int number_of_domains;
     int i;
     QList<Domain *> list = QList<Domain *>();
+    ulong version = libVersion();
 
 //    TODO: use different function for older hypervisors?
-    if(libVersion() > 8000) {
+    if(version > 8000) {
         number_of_domains = virConnectListAllDomains(m_connection, &domains, 0);
 
         if (number_of_domains < 1) {
@@ -121,7 +122,7 @@ QList<Domain *> Hypervisor::domains()
         }
 
         for (i = 0; i < number_of_domains; i++) {
-            domain = new Domain(domains[i]);
+            domain = new Domain(domains[i], version);
             list.append(domain);
             virDomainFree(domains[i]);
         }
@@ -137,7 +138,7 @@ QList<Domain *> Hypervisor::domains()
         }
 
         for (i = 0; i < number_of_domains; i++) {
-            domain = new Domain(virDomainLookupByName(m_connection, names[i]));
+            domain = new Domain(virDomainLookupByName(m_connection, names[i]), version);
             list.append(domain);
             free(names[i]);
         }
