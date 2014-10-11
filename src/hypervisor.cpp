@@ -129,20 +129,6 @@ QList<Domain *> Hypervisor::domains()
 
         free(domains);
     } else {
-        number_of_domains = virConnectNumOfDefinedDomains(m_connection);
-        char *names[number_of_domains];
-        number_of_domains = virConnectListDefinedDomains(m_connection, names, number_of_domains);
-
-        if (number_of_domains < 1) {
-            return list;
-        }
-
-        for (i = 0; i < number_of_domains; i++) {
-            domain = new Domain(virDomainLookupByName(m_connection, names[i]), version);
-            list.append(domain);
-            free(names[i]);
-        }
-
         number_of_domains = virConnectNumOfDomains(m_connection);
         int domain_ids[number_of_domains];
         number_of_domains = virConnectListDomains(m_connection, domain_ids, number_of_domains);
@@ -156,6 +142,19 @@ QList<Domain *> Hypervisor::domains()
             list.append(domain);
         }
 
+        number_of_domains = virConnectNumOfDefinedDomains(m_connection);
+        char *names[number_of_domains];
+        number_of_domains = virConnectListDefinedDomains(m_connection, names, number_of_domains);
+
+        if (number_of_domains < 1) {
+            return list;
+        }
+
+        for (i = 0; i < number_of_domains; i++) {
+            domain = new Domain(virDomainLookupByName(m_connection, names[i]), version);
+            list.append(domain);
+            free(names[i]);
+        }
     }
 
     return list;
