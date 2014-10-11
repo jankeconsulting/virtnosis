@@ -129,10 +129,8 @@ QList<Domain *> Hypervisor::domains()
         free(domains);
     } else {
         number_of_domains = virConnectNumOfDefinedDomains(m_connection);
-        qDebug() << "Hypervisor::domains number of domains = " << number_of_domains;
         char *names[number_of_domains];
         number_of_domains = virConnectListDefinedDomains(m_connection, names, number_of_domains);
-        qDebug() << "Hypervisor::domains number of domains = " << number_of_domains;
 
         if (number_of_domains < 1) {
             return list;
@@ -143,8 +141,6 @@ QList<Domain *> Hypervisor::domains()
             list.append(domain);
             free(names[i]);
         }
-
-//        free(domains);
     }
 
     return list;
