@@ -50,9 +50,15 @@ int Domain::state()
     int reason;
 
     if(m_domain) {
-        qDebug() << "Domain::state version = " << m_libVersion;
-        if(virDomainGetState(m_domain, &state, &reason, 0) != -1) {
-            return state;
+        if(m_libVersion > 8000) {
+            if(virDomainGetState(m_domain, &state, &reason, 0) != -1) {
+                return state;
+            }
+        } else {
+            virDomainInfo info;
+            if(virDomainGetInfo(m_domain, &info) != -1) {
+                return info.state;
+            }
         }
     }
 
