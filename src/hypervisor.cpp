@@ -9,7 +9,8 @@
 
 Hypervisor::Hypervisor(QObject *parent) :
     QObject(parent),
-    m_connection(0)
+    m_connection(0),
+    m_libVersion(0)
 {
     this->host = "";
     this->account = "";
@@ -20,7 +21,8 @@ Hypervisor::Hypervisor(QObject *parent) :
 
 Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
     QObject(),
-    m_connection(0)
+    m_connection(0),
+    m_libVersion(0)
 {
     setParent(hypervisor.parent());
     this->host = hypervisor.host;
@@ -33,7 +35,8 @@ Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
 
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
     QObject(parent),
-    m_connection(0)
+    m_connection(0),
+    m_libVersion(0)
 {
     this->host = host;
     this->account = user;
@@ -172,6 +175,8 @@ ulong Hypervisor::version()
 
 ulong Hypervisor::libVersion()
 {
+    if(m_libVersion) return m_libVersion;
+
     ulong libVer;
     int error = virConnectGetLibVersion(m_connection, &libVer);
     if (error)

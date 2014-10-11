@@ -44,6 +44,7 @@ private:
     int status;
 
     virConnectPtr m_connection;
+    ulong m_libVersion;
 
     ulong version();
     ulong libVersion();
