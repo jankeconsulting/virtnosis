@@ -113,19 +113,40 @@ QList<Domain *> Hypervisor::domains()
     QList<Domain *> list = QList<Domain *>();
 
 //    TODO: use different function for older hypervisors?
-    number_of_domains = virConnectListAllDomains(m_connection, &domains, 0);
+    if(libVersion() > 8000) {
+        number_of_domains = virConnectListAllDomains(m_connection, &domains, 0);
 
-    if (number_of_domains < 1) {
-        return list;
+        if (number_of_domains < 1) {
+            return list;
+        }
+
+        for (i = 0; i < number_of_domains; i++) {
+            domain = new Domain(domains[i]);
+            list.append(domain);
+            virDomainFree(domains[i]);
+        }
+
+        free(domains);
+    } else {
+        number_of_domains = virConnectNumOfDefinedDomains(m_connection);
+        qDebug() << "Hypervisor::domains number of domains = " << number_of_domains;
+        char *names[number_of_domains];
+        number_of_domains = virConnectListDefinedDomains(m_connection, names, number_of_domains);
+        qDebug() << "Hypervisor::domains number of domains = " << number_of_domains;
+
+        if (number_of_domains < 1) {
+            return list;
+        }
+
+        for (i = 0; i < number_of_domains; i++) {
+            domain = new Domain(virDomainLookupByName(m_connection, names[i]));
+            list.append(domain);
+            free(names[i]);
+        }
+
+//        free(domains);
     }
 
-    for (i = 0; i < number_of_domains; i++) {
-        domain = new Domain(domains[i]);
-        list.append(domain);
-        virDomainFree(domains[i]);
-    }
-
-    free(domains);
     return list;
 }
 
