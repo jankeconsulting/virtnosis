@@ -52,7 +52,8 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);
     if(hypervisor->autoConnect()) {
-        QtConcurrent::run(model, &DomainViewModel::connectHypervisor, index);
+//        TODO: Create some kind of progress  report via future .. Maybe in status bar
+        QFuture<void> future =  QtConcurrent::run(model, &DomainViewModel::connectHypervisor, index);
     }
 }
 
