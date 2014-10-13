@@ -17,6 +17,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     qRegisterMetaType<Hypervisor>("Hypervisor");
     qRegisterMetaTypeStreamOperators<Hypervisor>("Hypervisor");
     qRegisterMetaType<Domain>("Domain");
+    qRegisterMetaType<QVector<int> >("QVector<int>");
     ui->setupUi(this);
     setWindowTitle(QString(tr("Virtnosis - Virtual Manchine Manager")));
     about = new AboutDialog(this, VIRTNOSIS_REVISION);
