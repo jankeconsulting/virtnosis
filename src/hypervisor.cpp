@@ -10,7 +10,8 @@
 Hypervisor::Hypervisor(QObject *parent) :
     QObject(parent),
     m_connection(0),
-    m_libVersion(0)
+    m_libVersion(0),
+    auto_connect(false)
 {
     this->host = "";
     this->account = "";
@@ -22,7 +23,8 @@ Hypervisor::Hypervisor(QObject *parent) :
 Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
     QObject(),
     m_connection(0),
-    m_libVersion(0)
+    m_libVersion(0),
+    auto_connect(false)
 {
     setParent(hypervisor.parent());
     this->host = hypervisor.host;
@@ -31,6 +33,7 @@ Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
     this->protocol = hypervisor.protocol;
     this->path = hypervisor.path;
     this->m_connection = hypervisor.m_connection;
+    this->auto_connect = hypervisor.auto_connect;
 }
 
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
@@ -91,7 +94,7 @@ virConnectPtr Hypervisor::connection()
     qDebug() << "Hypervisor::connection: version = " << version();
     qDebug() << "Hypervisor::connection: libVersion = " << libVersion();
 #endif
-    auto_connect = true;
+//    auto_connect = true;
     return m_connection;
 }
 
@@ -172,7 +175,7 @@ void Hypervisor::setAutoConnect(bool enable)
 
 bool Hypervisor::autoConnect()
 {
-    return (auto_connect == 1);
+    return auto_connect;
 }
 
 ulong Hypervisor::version()

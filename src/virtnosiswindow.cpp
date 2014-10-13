@@ -213,6 +213,7 @@ void VirtnosisWindow::writeSettings()
     m_settings.beginGroup("VirtnosisWindow");
     m_settings.setValue("state", saveState());
     m_settings.endGroup();
+    writeHypervisorSettings();
 }
 
 void VirtnosisWindow::writeHypervisorSettings()

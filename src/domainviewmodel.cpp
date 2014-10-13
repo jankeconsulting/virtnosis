@@ -38,6 +38,7 @@ void DomainViewModel::connectHypervisor(const QModelIndex &index)
     if(indexIsHypervisor(index)) {
         HypervisorItem *item = static_cast<HypervisorItem *>(itemFromIndex(index));
         Hypervisor hypervisorobj = hypervisor(index);
+        hypervisorobj.setAutoConnect(true);
         item->addDomainsFromHypervisor(&hypervisorobj);
         setHypervisor(index, &hypervisorobj);
     }
