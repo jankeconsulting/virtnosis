@@ -50,7 +50,9 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     test.setValue(*hypervisor);
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);
-    model->connectHypervisor(index);
+    if(hypervisor->autoConnect()) {
+        model->connectHypervisor(index);
+    }
 
     writeHypervisorSettings();
 }

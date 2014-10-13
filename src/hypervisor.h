@@ -33,6 +33,8 @@ public:
     void disconnect();
     int alive();
     QList<Domain *> domains();
+    void setAutoConnect(bool enable);
+    bool autoConnect();
 
 
 private:
@@ -42,6 +44,7 @@ private:
     int port;
     QString path;
     int status;
+    bool auto_connect;
 
     virConnectPtr m_connection;
     ulong m_libVersion;

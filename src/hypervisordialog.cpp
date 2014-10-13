@@ -56,6 +56,7 @@ void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
 {
     Hypervisor *hypervisor = new Hypervisor(host(), account(), port());
     VirtnosisWindow *widget = qobject_cast<VirtnosisWindow *>(parent());
+    hypervisor->setAutoConnect(true);
     widget->addHypervisor(hypervisor);
 }
 

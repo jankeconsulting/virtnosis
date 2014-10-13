@@ -53,12 +53,12 @@ Hypervisor::~Hypervisor()
 
 void Hypervisor::write(QDataStream &out) const
 {
-    out << protocol << account << host << port << path;
+    out << protocol << account << host << port << path << auto_connect;
 }
 
 void Hypervisor::read(QDataStream &in)
 {
-    in >> protocol >> account >> host >> port >> path;
+    in >> protocol >> account >> host >> port >> path >> auto_connect;
 }
 
 QString Hypervisor::uri()
@@ -91,6 +91,7 @@ virConnectPtr Hypervisor::connection()
     qDebug() << "Hypervisor::connection: version = " << version();
     qDebug() << "Hypervisor::connection: libVersion = " << libVersion();
 #endif
+    auto_connect = true;
     return m_connection;
 }
 
@@ -98,6 +99,7 @@ void Hypervisor::disconnect()
 {
     virConnectClose(m_connection);
     m_connection = 0;
+    auto_connect = false;
 }
 
 int Hypervisor::alive()
@@ -161,6 +163,16 @@ QList<Domain *> Hypervisor::domains()
     }
 
     return list;
+}
+
+void Hypervisor::setAutoConnect(bool enable)
+{
+    auto_connect = enable;
+}
+
+bool Hypervisor::autoConnect()
+{
+    return (auto_connect == 1);
 }
 
 ulong Hypervisor::version()
