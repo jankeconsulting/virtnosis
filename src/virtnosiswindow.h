@@ -11,6 +11,7 @@
 #include <QApplication>
 #include <QSettings>
 #include <QContextMenuEvent>
+#include <QtConcurrent/QtConcurrent>
 #include "hypervisor.h"
 #include "hypervisordialog.h"
 #include "hypervisoritem.h"

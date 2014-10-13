@@ -51,7 +51,7 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);
     if(hypervisor->autoConnect()) {
-        model->connectHypervisor(index);
+        QtConcurrent::run(model, &DomainViewModel::connectHypervisor, index);
     }
 }
 
