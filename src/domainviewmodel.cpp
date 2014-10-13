@@ -41,6 +41,7 @@ void DomainViewModel::connectHypervisor(const QModelIndex &index)
         hypervisorobj.setAutoConnect(true);
         item->addDomainsFromHypervisor(&hypervisorobj);
         setHypervisor(index, &hypervisorobj);
+        dataChanged(index, index, QVector<int>(Qt::DisplayRole, hypervisorConnectedRole));
     }
 }
 
