@@ -53,8 +53,6 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     if(hypervisor->autoConnect()) {
         model->connectHypervisor(index);
     }
-
-    writeHypervisorSettings();
 }
 
 void VirtnosisWindow::dataChanged()
