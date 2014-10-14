@@ -10,6 +10,7 @@
 #include <QMainWindow>
 #include <QApplication>
 #include <QSettings>
+#include <QLabel>
 #include <QContextMenuEvent>
 #include <QtConcurrent/QtConcurrent>
 #include "hypervisor.h"
@@ -39,6 +40,7 @@ public:
 
 public slots:
     void dataChanged();
+    void setStatusMessage(QString text);
 
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
@@ -60,10 +62,16 @@ private slots:
     void on_actionExit_triggered();
     void selectionChanged(const QModelIndex &current, const QModelIndex &previous);
 
+    void handleConnectingStarted();
+    void handleConnectingFinished();
+
 private:
     Ui::VirtnosisWindow *ui;
     QSettings m_settings;
     AboutDialog *about;
+    QLabel *statusMessage;
+    QFuture<void> connectingThreat;
+    QFutureWatcher<void> connectingThreatWatcher;
 
     void enableVirtualMachineActions(const QModelIndex &index);
     Domain selectedDomain();
@@ -75,6 +83,7 @@ private:
     void writeSettings();
     void writeHypervisorSettings();
     void readHypervisorSettings();
+    void createStatusBar();
 };
 
 #endif // VIRTNOSISWINDOW_H

@@ -21,13 +21,16 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(QString(tr("Virtnosis - Virtual Manchine Manager")));
     about = new AboutDialog(this, VIRTNOSIS_REVISION);
+    createStatusBar();
 
     DomainViewModel *model = new DomainViewModel(this);
     ui->domainView->setModel(model);
     DomainViewItemDelegate *delegate = new DomainViewItemDelegate(this);
     ui->domainView->setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
     connect(ui->domainView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
-    connect(ui->domainView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));    
+    connect(ui->domainView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
+    connect(&connectingThreatWatcher, SIGNAL(started()), this, SLOT(handleConnectingStarted()));
+    connect(&connectingThreatWatcher, SIGNAL(finished()), this, SLOT(handleConnectingFinished()));
     readSettings();
 }
 
@@ -52,14 +55,19 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);
     if(hypervisor->autoConnect()) {
-//        TODO: Create some kind of progress  report via future .. Maybe in status bar
-        QFuture<void> future =  QtConcurrent::run(model, &DomainViewModel::connectHypervisor, index);
+        connectingThreat =  QtConcurrent::run(model, &DomainViewModel::connectHypervisor, index);
+        connectingThreatWatcher.setFuture(connectingThreat);
     }
 }
 
 void VirtnosisWindow::dataChanged()
 {
     selectionChanged(currentIndex(), currentIndex());
+}
+
+void VirtnosisWindow::setStatusMessage(QString text)
+{
+    statusMessage->setText(text);
 }
 
 void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
@@ -243,10 +251,26 @@ void VirtnosisWindow::readHypervisorSettings()
     m_settings.endGroup();
 }
 
+void VirtnosisWindow::createStatusBar()
+{
+    statusMessage = new QLabel();
+    statusBar()->addPermanentWidget(statusMessage);
+}
+
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     Q_UNUSED(previous);
     enableVirtualMachineActions(current);
+}
+
+void VirtnosisWindow::handleConnectingStarted()
+{
+    setStatusMessage(tr("Connecting to Hypervisor..."));
+}
+
+void VirtnosisWindow::handleConnectingFinished()
+{
+    setStatusMessage(tr("Connected to Hypervisor!"));
 }
 
 void VirtnosisWindow::on_actionAbout_triggered()
