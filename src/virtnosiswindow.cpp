@@ -97,7 +97,8 @@ void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 
 void VirtnosisWindow::on_menuHypervisorActionConnect_triggered()
 {
-    model()->connectHypervisor(currentIndex());
+    connectingThreat =  QtConcurrent::run(model(), &DomainViewModel::connectHypervisor, currentIndex());
+    connectingThreatWatcher.setFuture(connectingThreat);
 }
 
 void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
