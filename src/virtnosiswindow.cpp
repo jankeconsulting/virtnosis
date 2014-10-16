@@ -97,8 +97,7 @@ void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 
 void VirtnosisWindow::on_menuHypervisorActionConnect_triggered()
 {
-    connectingThreat =  QtConcurrent::run(model(), &DomainViewModel::connectHypervisor, currentIndex());
-    connectingThreatWatcher.setFuture(connectingThreat);
+    connectHypervisor(currentIndex());
 }
 
 void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
@@ -256,6 +255,12 @@ void VirtnosisWindow::createStatusBar()
 {
     statusMessage = new QLabel();
     statusBar()->addPermanentWidget(statusMessage);
+}
+
+void VirtnosisWindow::connectHypervisor(QModelIndex index)
+{
+    connectingThreat = QtConcurrent::run(model(), &DomainViewModel::connectHypervisor, index);
+    connectingThreatWatcher.setFuture(connectingThreat);
 }
 
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)

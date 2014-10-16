@@ -84,6 +84,7 @@ private:
     void writeHypervisorSettings();
     void readHypervisorSettings();
     void createStatusBar();
+    void connectHypervisor(QModelIndex index);
 };
 
 #endif // VIRTNOSISWINDOW_H
