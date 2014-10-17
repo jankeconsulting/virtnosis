@@ -94,8 +94,7 @@ virConnectPtr Hypervisor::connection()
     qDebug() << "Hypervisor::connection: version = " << version();
     qDebug() << "Hypervisor::connection: libVersion = " << libVersion();
 #endif
-//    auto_connect = true;
-    return m_connection;
+   return m_connection;
 }
 
 void Hypervisor::disconnect()
