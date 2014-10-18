@@ -25,6 +25,10 @@
 #define VIRTNOSIS_REVISION "1.0.0"
 #endif
 
+#ifndef VIRTNOSIS_DEFAULT_CHANGE_TIME
+#define VIRTNOSIS_DEFAULT_CHANGE_TIME 30
+#endif
+
 namespace Ui {
 class VirtnosisWindow;
 }
