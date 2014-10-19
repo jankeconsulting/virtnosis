@@ -262,6 +262,16 @@ void VirtnosisWindow::connectHypervisor(QModelIndex index)
     connectingThreatWatcher.setFuture(connectingThreat);
 }
 
+void VirtnosisWindow::checkDomainStateChange(QModelIndex index, int state)
+{
+    QThread::sleep(VIRTNOSIS_DEFAULT_CHANGE_TIME*1000);
+    if(model()->data(index, DomainViewModel::domainStateRole) != state) {
+        QMessageBox dialog;
+        dialog.setText(tr("Domain did not change to requested state"));
+        dialog.exec();
+    }
+}
+
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     Q_UNUSED(previous);

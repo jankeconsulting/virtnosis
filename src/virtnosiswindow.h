@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QContextMenuEvent>
 #include <QtConcurrent/QtConcurrent>
+#include <QMessageBox>
 #include "hypervisor.h"
 #include "hypervisordialog.h"
 #include "hypervisoritem.h"
@@ -89,6 +90,7 @@ private:
     void readHypervisorSettings();
     void createStatusBar();
     void connectHypervisor(QModelIndex index);
+    void checkDomainStateChange(QModelIndex index, int state);
 };
 
 #endif // VIRTNOSISWINDOW_H
