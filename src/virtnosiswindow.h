@@ -75,8 +75,8 @@ private:
     QSettings m_settings;
     AboutDialog *about;
     QLabel *statusMessage;
-    QFuture<void> connectingThreat;
-    QFutureWatcher<void> connectingThreatWatcher;
+    QFuture<void> connectingThread;
+    QFutureWatcher<void> connectingThreadWatcher;
 
     void enableVirtualMachineActions(const QModelIndex &index);
     Domain selectedDomain();

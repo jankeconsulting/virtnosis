@@ -29,8 +29,8 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui->domainView->setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
     connect(ui->domainView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
     connect(ui->domainView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
-    connect(&connectingThreatWatcher, SIGNAL(started()), this, SLOT(handleConnectingStarted()));
-    connect(&connectingThreatWatcher, SIGNAL(finished()), this, SLOT(handleConnectingFinished()));
+    connect(&connectingThreadWatcher, SIGNAL(started()), this, SLOT(handleConnectingStarted()));
+    connect(&connectingThreadWatcher, SIGNAL(finished()), this, SLOT(handleConnectingFinished()));
     readSettings();
 }
 
@@ -258,8 +258,8 @@ void VirtnosisWindow::createStatusBar()
 
 void VirtnosisWindow::connectHypervisor(QModelIndex index)
 {
-    connectingThreat = QtConcurrent::run(model(), &DomainViewModel::connectHypervisor, index);
-    connectingThreatWatcher.setFuture(connectingThreat);
+    connectingThread = QtConcurrent::run(model(), &DomainViewModel::connectHypervisor, index);
+    connectingThreadWatcher.setFuture(connectingThread);
 }
 
 void VirtnosisWindow::checkDomainStateChange(QModelIndex index, int state)
