@@ -301,4 +301,7 @@ void VirtnosisWindow::on_actionAboutQt_triggered()
 void VirtnosisWindow::on_actionExit_triggered()
 {
     writeSettings();
+    while(!connectingThreadWatcher.isFinished()) {
+        QThread::sleep(1000);
+    }
 }
