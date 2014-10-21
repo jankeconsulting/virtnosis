@@ -129,6 +129,8 @@ void VirtnosisWindow::on_menuVmActionShutoff_triggered()
     Domain domain = selectedDomain();
     domain.shutdown();
     dataChanged();
+    checkDomainStateChangeTread = QtConcurrent::run(this, &VirtnosisWindow::checkDomainStateChange, currentIndex(), VIR_DOMAIN_SHUTOFF);
+    checkDomainStateChangeTreadWatcher.setFuture(checkDomainStateChangeTread);
 }
 
 void VirtnosisWindow::on_menuVmActionPause_triggered()
@@ -302,4 +304,5 @@ void VirtnosisWindow::on_actionExit_triggered()
 {
     writeSettings();
     connectingThreadWatcher.cancel();
+    checkDomainStateChangeTreadWatcher.cancel();
 }

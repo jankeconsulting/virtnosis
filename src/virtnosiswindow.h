@@ -77,6 +77,8 @@ private:
     QLabel *statusMessage;
     QFuture<void> connectingThread;
     QFutureWatcher<void> connectingThreadWatcher;
+    QFuture<void> checkDomainStateChangeTread;
+    QFutureWatcher<void> checkDomainStateChangeTreadWatcher;
 
     void enableVirtualMachineActions(const QModelIndex &index);
     Domain selectedDomain();
