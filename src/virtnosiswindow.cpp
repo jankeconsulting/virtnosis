@@ -200,7 +200,10 @@ void VirtnosisWindow::selectedDataChanged()
 
 DomainViewModel *VirtnosisWindow::model()
 {
-    return qobject_cast<DomainViewModel *>(ui->domainView->model());
+    if(ui->domainView->model()) {
+        return qobject_cast<DomainViewModel *>(ui->domainView->model());
+    }
+    return 0;
 }
 
 QModelIndex VirtnosisWindow::currentIndex()
@@ -266,11 +269,13 @@ void VirtnosisWindow::connectHypervisor(QModelIndex index)
 
 void VirtnosisWindow::checkDomainStateChange(QModelIndex index, int state)
 {
-    QThread::sleep(VIRTNOSIS_DEFAULT_CHANGE_TIME*1000);
-    if(model()->data(index, DomainViewModel::domainStateRole) != state) {
-        QMessageBox dialog;
-        dialog.setText(tr("Domain did not change to requested state"));
-        dialog.exec();
+    if(model()) {
+        QThread::sleep(VIRTNOSIS_DEFAULT_CHANGE_TIME);
+        if(model() && model()->data(index, DomainViewModel::domainStateRole) != state) {
+            QMessageBox dialog;
+            dialog.setText(tr("Domain did not change to requested state"));
+            dialog.exec();
+        }
     }
 }
 
