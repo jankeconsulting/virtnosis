@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014 Ralph Janke. All rights reserved.
+ *
+ * Author: Ralph Janke virtnosis@jankeconsulting.ca
+ */
+
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 
