@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014 Ralph Janke. All rights reserved.
+ *
+ * Author: Ralph Janke virtnosis@jankeconsulting.ca
+ */
+
 #ifndef SETTINGSDIALOG_H
 #define SETTINGSDIALOG_H
 
