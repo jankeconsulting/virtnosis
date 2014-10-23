@@ -21,6 +21,7 @@
 #include "domainitem.h"
 #include "domainviewitemdelegate.h"
 #include "aboutdialog.h"
+#include "settingsdialog.h"
 
 #ifndef VIRTNOSIS_REVISION
 #define VIRTNOSIS_REVISION "1.0.0"
@@ -74,6 +75,7 @@ private:
     Ui::VirtnosisWindow *ui;
     QSettings m_settings;
     AboutDialog *about;
+    SettingsDialog *settingsDialog;
     QLabel *statusMessage;
     QFuture<void> connectingThread;
     QFutureWatcher<void> connectingThreadWatcher;

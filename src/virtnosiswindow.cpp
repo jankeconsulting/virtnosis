@@ -21,6 +21,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle(QString(tr("Virtnosis - Virtual Manchine Manager")));
     about = new AboutDialog(this, VIRTNOSIS_REVISION);
+    settingsDialog = new SettingsDialog();
     createStatusBar();
 
     DomainViewModel *model = new DomainViewModel(this);
