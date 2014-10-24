@@ -65,6 +65,7 @@ private slots:
     void on_menuVmActionResume_triggered();
     void on_actionAbout_triggered();
     void on_actionAboutQt_triggered();
+    void on_actionPreferences_triggered();
     void on_actionExit_triggered();
     void selectionChanged(const QModelIndex &current, const QModelIndex &previous);
 

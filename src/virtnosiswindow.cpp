@@ -312,3 +312,8 @@ void VirtnosisWindow::on_actionExit_triggered()
     connectingThreadWatcher.cancel();
     checkDomainStateChangeTreadWatcher.cancel();
 }
+
+void VirtnosisWindow::on_actionPreferences_triggered()
+{
+    settingsDialog->show();
+}
