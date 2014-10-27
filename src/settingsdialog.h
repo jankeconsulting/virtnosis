@@ -9,6 +9,10 @@
 
 #include <QDialog>
 
+#ifndef VIRTNOSIS_DEFAULT_CHANGE_TIME
+#define VIRTNOSIS_DEFAULT_CHANGE_TIME 30
+#endif
+
 namespace Ui {
 class SettingsDialog;
 }

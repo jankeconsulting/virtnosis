@@ -12,6 +12,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     ui(new Ui::SettingsDialog)
 {
     ui->setupUi(this);
+    ui->checkTimeoutTime->setText(QString(VIRTNOSIS_DEFAULT_CHANGE_TIME));
 }
 
 SettingsDialog::~SettingsDialog()
