@@ -20,3 +20,13 @@ SettingsDialog::~SettingsDialog()
 {
     delete ui;
 }
+
+void SettingsDialog::on_buttonBox_accepted()
+{
+
+}
+
+void SettingsDialog::on_buttonBox_rejected()
+{
+
+}
