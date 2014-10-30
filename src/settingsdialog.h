@@ -25,8 +25,14 @@ public:
     explicit SettingsDialog(QWidget *parent = 0);
     ~SettingsDialog();
 
+private slots:
+    void on_buttonBox_accepted();
+
+    void on_buttonBox_rejected();
+
 private:
     Ui::SettingsDialog *ui;
+    int m_changeTimeout;
 };
 
 #endif // SETTINGSDIALOG_H
