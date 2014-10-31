@@ -22,6 +22,11 @@ SettingsDialog::~SettingsDialog()
     delete ui;
 }
 
+int SettingsDialog::changeTimeout()
+{
+    return m_changeTimeout;
+}
+
 void SettingsDialog::on_buttonBox_accepted()
 {
     m_changeTimeout = ui->checkTimeoutTime->text().toInt();
