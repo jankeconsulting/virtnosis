@@ -25,6 +25,7 @@ public:
     explicit SettingsDialog(QWidget *parent = 0);
     ~SettingsDialog();
     int changeTimeout();
+    void setChangeTimeout(int value);
 
 private slots:
     void on_buttonBox_accepted();

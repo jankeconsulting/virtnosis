@@ -27,6 +27,11 @@ int SettingsDialog::changeTimeout()
     return m_changeTimeout;
 }
 
+void SettingsDialog::setChangeTimeout(int value)
+{
+    m_changeTimeout = value;
+}
+
 void SettingsDialog::on_buttonBox_accepted()
 {
     m_changeTimeout = ui->checkTimeoutTime->text().toInt();
