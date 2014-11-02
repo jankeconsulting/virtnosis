@@ -241,6 +241,11 @@ void VirtnosisWindow::writeHypervisorSettings()
     }
     m_settings.endArray();
     m_settings.endGroup();
+    m_settings.beginGroup("Settings");
+    QVariant var_changeTimeout;
+    var_changeTimeout.setValue(settingsDialog->changeTimeout());
+    m_settings.setValue("changeTimeout", var_changeTimeout);
+    m_settings.endGroup();
 }
 
 void VirtnosisWindow::readHypervisorSettings()
@@ -253,6 +258,9 @@ void VirtnosisWindow::readHypervisorSettings()
          addHypervisor(&hypervisor);
     }
     m_settings.endArray();
+    m_settings.endGroup();
+    m_settings.beginGroup("Settings");
+    settingsDialog->setChangeTimeout(qvariant_cast<int>(m_settings.value("changeTimeout")));
     m_settings.endGroup();
 }
 
