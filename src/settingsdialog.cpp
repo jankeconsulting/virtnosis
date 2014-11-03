@@ -30,6 +30,7 @@ int SettingsDialog::changeTimeout()
 void SettingsDialog::setChangeTimeout(int value)
 {
     m_changeTimeout = value;
+    ui->checkTimeoutTime->setText(QString("%1").arg(m_changeTimeout));
 }
 
 void SettingsDialog::on_buttonBox_accepted()

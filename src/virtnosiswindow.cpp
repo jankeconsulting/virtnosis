@@ -260,7 +260,7 @@ void VirtnosisWindow::readHypervisorSettings()
     m_settings.endArray();
     m_settings.endGroup();
     m_settings.beginGroup("Settings");
-    settingsDialog->setChangeTimeout(qvariant_cast<int>(m_settings.value("changeTimeout")));
+    settingsDialog->setChangeTimeout(qvariant_cast<int>(m_settings.value("changeTimeout", VIRTNOSIS_DEFAULT_CHANGE_TIME)));
     m_settings.endGroup();
 }
 
