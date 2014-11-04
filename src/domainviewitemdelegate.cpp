@@ -14,6 +14,7 @@ DomainViewItemDelegate::DomainViewItemDelegate(QObject *parent) :
 
 void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+//    Todo: Add stats for domains
     painter->save();
 
     if (option.state & QStyle::State_Selected)
