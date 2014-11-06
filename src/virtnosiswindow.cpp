@@ -329,5 +329,13 @@ void VirtnosisWindow::on_actionPreferences_triggered()
 
 void VirtnosisWindow::on_menuVmActionViewer_triggered()
 {
-
+//    TODO: temporarily using virt-viewer. Replace with Qt-based implementation
+    Domain domain = selectedDomain();
+    QString command = QString("virt-viewer -c ");
+//    command.append(domain.hypervisor().uri());
+    command.append(domain.uri());
+    command.append(" ");
+    command.append(domain.name());
+    qDebug() << "VirtnosisWindow::on_menuVmActionViewer_triggered: command = " << command;
+    system(command.toLocal8Bit().data());
 }

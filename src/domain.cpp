@@ -113,5 +113,11 @@ bool Domain::resume()
     return (virDomainResume(m_domain) == 0);
 }
 
+QString Domain::uri()
+{
+    virConnectPtr conn = virDomainGetConnect(m_domain);
+    return QString(virConnectGetURI(conn));
+}
+
 
 

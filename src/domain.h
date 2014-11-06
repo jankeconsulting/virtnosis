@@ -35,6 +35,8 @@ public:
     bool shutdown();
     bool pause();
     bool resume();
+//    TODO: uri is a temporary shortcut - maybe better to be able to get hypervisor
+    QString uri();
 
 signals:
 
