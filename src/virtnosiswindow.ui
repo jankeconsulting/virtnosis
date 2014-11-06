@@ -64,6 +64,7 @@
     <addaction name="menuVmActionShutoff"/>
     <addaction name="menuVmActionPause"/>
     <addaction name="menuVmActionResume"/>
+    <addaction name="menuVmActionViewer"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -253,6 +254,11 @@
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+  </action>
+  <action name="menuVmActionViewer">
+   <property name="text">
+    <string>&amp;Viewer</string>
    </property>
   </action>
  </widget>

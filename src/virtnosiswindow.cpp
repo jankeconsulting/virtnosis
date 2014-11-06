@@ -85,6 +85,7 @@ void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
         menu.addAction(ui->menuVmActionShutoff);
         menu.addAction(ui->menuVmActionPause);
         menu.addAction(ui->menuVmActionResume);
+        menu.addAction(ui->menuVmActionViewer);
         menu.exec(event->globalPos());
     }
 }
@@ -324,4 +325,9 @@ void VirtnosisWindow::on_actionExit_triggered()
 void VirtnosisWindow::on_actionPreferences_triggered()
 {
     settingsDialog->show();
+}
+
+void VirtnosisWindow::on_menuVmActionViewer_triggered()
+{
+
 }

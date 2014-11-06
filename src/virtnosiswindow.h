@@ -68,6 +68,8 @@ private slots:
     void handleConnectingStarted();
     void handleConnectingFinished();
 
+    void on_menuVmActionViewer_triggered();
+
 private:
     Ui::VirtnosisWindow *ui;
     QSettings m_settings;
