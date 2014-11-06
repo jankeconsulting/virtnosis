@@ -16,6 +16,7 @@ Package: virtnosis
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
  libvirt0
+Suggests: virt-viewer
 Description: Virtnosis - libvirt manager
  Virtnosis is a manager for virtual machines running on hyperviors based on
  libvirt. It is based on the Qt GUI framework and written in c++ hence
