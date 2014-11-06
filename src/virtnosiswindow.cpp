@@ -289,6 +289,11 @@ void VirtnosisWindow::checkDomainStateChange(QModelIndex index, int state)
     }
 }
 
+void VirtnosisWindow::displayViewer(QString command)
+{
+    system(command.toLocal8Bit().data());
+}
+
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     Q_UNUSED(previous);
@@ -337,5 +342,5 @@ void VirtnosisWindow::on_menuVmActionViewer_triggered()
     command.append(" ");
     command.append(domain.name());
     qDebug() << "VirtnosisWindow::on_menuVmActionViewer_triggered: command = " << command;
-    system(command.toLocal8Bit().data());
+    QtConcurrent::run(this, &VirtnosisWindow::displayViewer, command);
 }

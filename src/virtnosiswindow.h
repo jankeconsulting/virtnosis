@@ -94,6 +94,7 @@ private:
     void createStatusBar();
     void connectHypervisor(QModelIndex index);
     void checkDomainStateChange(QModelIndex index, int state);
+    void displayViewer(QString command);
 };
 
 #endif // VIRTNOSISWINDOW_H
