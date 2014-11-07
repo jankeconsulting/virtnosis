@@ -33,6 +33,7 @@ public:
     bool start();
     bool reboot();
     bool shutdown();
+    bool destroy();
     bool pause();
     bool resume();
 //    TODO: uri is a temporary shortcut - maybe better to be able to get hypervisor

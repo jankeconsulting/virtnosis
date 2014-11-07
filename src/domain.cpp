@@ -101,6 +101,12 @@ bool Domain::shutdown()
     return (virDomainShutdown(m_domain) == 0);
 }
 
+bool Domain::destroy()
+{
+//    TODO: check if it can be stopped
+    return (virDomainDestroy(m_domain) == 0);
+}
+
 bool Domain::pause()
 {
 //    TODO: check if it can be paused
