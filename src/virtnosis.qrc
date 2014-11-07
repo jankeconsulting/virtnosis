@@ -9,5 +9,6 @@
         <file>icons/hicolor/32x32/status/disconnected.png</file>
         <file>icons/hicolor/32x32/status/action_new_connection.png</file>
         <file>icons/hicolor/32x32/status/action_remove_connection.png</file>
+        <file>icons/hicolor/32x32/status/state_forceshutoff.png</file>
     </qresource>
 </RCC>
