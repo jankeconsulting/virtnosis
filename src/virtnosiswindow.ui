@@ -274,6 +274,9 @@
    <property name="text">
     <string>&amp;Forced Shutoff</string>
    </property>
+   <property name="toolTip">
+    <string>Forced Shutoff Virtual Machine</string>
+   </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
