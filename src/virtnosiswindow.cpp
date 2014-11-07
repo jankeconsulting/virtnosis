@@ -163,6 +163,7 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
     ui->menuVmActionStart->setDisabled(true);
     ui->menuVmActionReboot->setDisabled(true);
     ui->menuVmActionShutoff->setDisabled(true);
+    ui->menuVmActionDestroy->setDisabled(true);
     ui->menuVmActionPause->setDisabled(true);
     ui->menuVmActionResume->setDisabled(true);
     ui->menuHypervisorActionConnect->setDisabled(true);
@@ -181,6 +182,7 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
         Domain domain = qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
         if(domain.isRunning()) {
             ui->menuVmActionShutoff->setEnabled(true);
+            ui->menuVmActionDestroy->setEnabled(true);
             ui->menuVmActionPause->setEnabled(true);
             ui->menuVmActionReboot->setEnabled(true);
         } else if (domain.isPaused()) {
