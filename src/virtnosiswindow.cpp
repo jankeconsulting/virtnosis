@@ -83,6 +83,7 @@ void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
         menu.addAction(ui->menuVmActionStart);
         menu.addAction(ui->menuVmActionReboot);
         menu.addAction(ui->menuVmActionShutoff);
+        menu.addAction(ui->menuVmActionDestroy);
         menu.addAction(ui->menuVmActionPause);
         menu.addAction(ui->menuVmActionResume);
         menu.addAction(ui->menuVmActionViewer);
