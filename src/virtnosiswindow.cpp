@@ -135,6 +135,15 @@ void VirtnosisWindow::on_menuVmActionShutoff_triggered()
     checkDomainStateChangeTreadWatcher.setFuture(checkDomainStateChangeTread);
 }
 
+void VirtnosisWindow::on_menuVmActionDestroy_triggered()
+{
+    Domain domain = selectedDomain();
+    domain.destroy();
+    dataChanged();
+    checkDomainStateChangeTread = QtConcurrent::run(this, &VirtnosisWindow::checkDomainStateChange, currentIndex(), VIR_DOMAIN_SHUTOFF);
+    checkDomainStateChangeTreadWatcher.setFuture(checkDomainStateChangeTread);
+}
+
 void VirtnosisWindow::on_menuVmActionPause_triggered()
 {
     Domain domain = selectedDomain();
@@ -344,3 +353,4 @@ void VirtnosisWindow::on_menuVmActionViewer_triggered()
     qDebug() << "VirtnosisWindow::on_menuVmActionViewer_triggered: command = " << command;
     QtConcurrent::run(this, &VirtnosisWindow::displayViewer, command);
 }
+

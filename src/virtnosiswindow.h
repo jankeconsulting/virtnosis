@@ -70,6 +70,8 @@ private slots:
 
     void on_menuVmActionViewer_triggered();
 
+    void on_menuVmActionDestroy_triggered();
+
 private:
     Ui::VirtnosisWindow *ui;
     QSettings m_settings;

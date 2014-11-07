@@ -62,6 +62,7 @@
     <addaction name="menuVmActionStart"/>
     <addaction name="menuVmActionReboot"/>
     <addaction name="menuVmActionShutoff"/>
+    <addaction name="menuVmActionDestroy"/>
     <addaction name="menuVmActionPause"/>
     <addaction name="menuVmActionResume"/>
     <addaction name="menuVmActionViewer"/>
@@ -259,6 +260,11 @@
   <action name="menuVmActionViewer">
    <property name="text">
     <string>&amp;Viewer</string>
+   </property>
+  </action>
+  <action name="menuVmActionDestroy">
+   <property name="text">
+    <string>&amp;Forced Shutoff</string>
    </property>
   </action>
  </widget>
