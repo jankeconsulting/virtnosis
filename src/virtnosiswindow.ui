@@ -99,6 +99,7 @@
    <addaction name="menuVmActionDestroy"/>
    <addaction name="menuVmActionPause"/>
    <addaction name="menuVmActionResume"/>
+   <addaction name="menuVmActionViewer"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="hypervisorToolBar">
@@ -259,6 +260,10 @@
    </property>
   </action>
   <action name="menuVmActionViewer">
+   <property name="icon">
+    <iconset resource="virtnosis.qrc">
+     <normaloff>:/icons/hicolor/32x32/status/action_viewer.png</normaloff>:/icons/hicolor/32x32/status/action_viewer.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Viewer</string>
    </property>

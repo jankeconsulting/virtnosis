@@ -10,5 +10,6 @@
         <file>icons/hicolor/32x32/status/action_new_connection.png</file>
         <file>icons/hicolor/32x32/status/action_remove_connection.png</file>
         <file>icons/hicolor/32x32/status/state_forceshutoff.png</file>
+        <file>icons/hicolor/32x32/status/action_viewer.png</file>
     </qresource>
 </RCC>
