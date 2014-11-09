@@ -9,6 +9,7 @@
 
 #include <QDebug>
 
+//    TODO: Refactor threading
 VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::VirtnosisWindow),
