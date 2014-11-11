@@ -125,6 +125,21 @@ bool Domain::info()
     return (virDomainGetInfo(m_domain, info) == 0);
 }
 
+int Domain::cpu_count()
+{
+    return 1;
+}
+
+bool Domain::cpustats()
+{
+    unsigned int nparams = cpu_count();
+    virTypedParameterPtr params = static_cast<virTypedParameterPtr>(calloc(nparams, sizeof(virTypedParameter)));
+    int start_cpu = 0;
+    unsigned int ncpus = cpu_count();
+    unsigned int flags = 0;
+    return (virDomainGetCPUStats(m_domain, params, nparams, start_cpu, ncpus, flags) == 0);
+}
+
 QString Domain::uri()
 {
     virConnectPtr conn = virDomainGetConnect(m_domain);

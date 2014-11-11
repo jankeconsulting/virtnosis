@@ -37,6 +37,9 @@ public:
     bool pause();
     bool resume();
     bool info();
+    int cpu_count();
+    bool cpustats();
+
 //    TODO: uri is a temporary shortcut - maybe better to be able to get hypervisor
     QString uri();
 
