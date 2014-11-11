@@ -121,12 +121,15 @@ bool Domain::resume()
 
 bool Domain::info()
 {
-    virDomainInfoPtr info;
-    return (virDomainGetInfo(m_domain, info) == 0);
+    int error = virDomainGetInfo(m_domain, m_info);
+    return (error = 0);
 }
 
 int Domain::cpu_count()
 {
+    if(info()) {
+        return (m_info->nrVirtCpu);
+    }
     return 1;
 }
 

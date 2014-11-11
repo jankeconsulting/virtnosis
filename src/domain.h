@@ -50,6 +50,7 @@ public slots:
 private:
     virDomainPtr m_domain;
     ulong m_libVersion;
+    virDomainInfoPtr m_info;
 
 };
 
