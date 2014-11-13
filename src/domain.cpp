@@ -133,6 +133,14 @@ int Domain::cpu_count()
     return 1;
 }
 
+long Domain::memory()
+{
+    if(info()) {
+        return (m_info->memory);
+    }
+    return 0;
+}
+
 bool Domain::cpustats()
 {
     unsigned int nparams = cpu_count();

@@ -38,6 +38,7 @@ public:
     bool resume();
     bool info();
     int cpu_count();
+    long memory();
     bool cpustats();
 
 //    TODO: uri is a temporary shortcut - maybe better to be able to get hypervisor
