@@ -7,11 +7,21 @@
 #include "domainviewmodel.h"
 #include <QDebug>
 
+/**
+ * @brief DomainViewModel::DomainViewModel
+ * @param parent
+ */
 DomainViewModel::DomainViewModel(QObject *parent) :
     QStandardItemModel(parent)
 {
 }
 
+/**
+ * @brief DomainViewModel::data
+ * @param index
+ * @param role
+ * @return
+ */
 QVariant DomainViewModel::data(const QModelIndex &index, int role) const
 {
     if(role == domainStateRole) {
@@ -33,6 +43,10 @@ QVariant DomainViewModel::data(const QModelIndex &index, int role) const
     return QStandardItemModel::data(index, role);
 }
 
+/**
+ * @brief DomainViewModel::connectHypervisor
+ * @param index
+ */
 void DomainViewModel::connectHypervisor(const QModelIndex &index)
 {
     if(indexIsHypervisor(index)) {
@@ -45,6 +59,10 @@ void DomainViewModel::connectHypervisor(const QModelIndex &index)
     }
 }
 
+/**
+ * @brief DomainViewModel::disconnectHypervisor
+ * @param index
+ */
 void DomainViewModel::disconnectHypervisor(const QModelIndex &index)
 {
     if(indexIsHypervisor(index)) {
@@ -55,16 +73,31 @@ void DomainViewModel::disconnectHypervisor(const QModelIndex &index)
     }
 }
 
+/**
+ * @brief DomainViewModel::hypervisor
+ * @param index
+ * @return
+ */
 Hypervisor DomainViewModel::hypervisor(const QModelIndex &index) const
 {
     return qvariant_cast<Hypervisor>(QStandardItemModel::data(index, domainHypervisorRole));
 }
 
+/**
+ * @brief DomainViewModel::hypervisor
+ * @param row
+ * @return
+ */
 Hypervisor DomainViewModel::hypervisor(const int row) const
 {
     return qvariant_cast<Hypervisor>(QStandardItemModel::data(index(row, 0), domainHypervisorRole));
 }
 
+/**
+ * @brief DomainViewModel::setHypervisor
+ * @param index
+ * @param hypervisor
+ */
 void DomainViewModel::setHypervisor(const QModelIndex &index, Hypervisor *hypervisor)
 {
     QVariant var;
@@ -73,16 +106,31 @@ void DomainViewModel::setHypervisor(const QModelIndex &index, Hypervisor *hyperv
     dataChanged(index, index, QVector<int>(hypervisorConnectedRole));
 }
 
+/**
+ * @brief DomainViewModel::domain
+ * @param index
+ * @return
+ */
 Domain DomainViewModel::domain(const QModelIndex &index) const
 {
     return qvariant_cast<Domain>(QStandardItemModel::data(index, domainDomainRole));
 }
 
+/**
+ * @brief DomainViewModel::indexIsHypervisor
+ * @param index
+ * @return
+ */
 bool DomainViewModel::indexIsHypervisor(const QModelIndex &index) const
 {
     return (qvariant_cast<int>(QStandardItemModel::data(index, domainTypeRole)) == typeHypervisor);
 }
 
+/**
+ * @brief DomainViewModel::indexIsDomain
+ * @param index
+ * @return
+ */
 bool DomainViewModel::indexIsDomain(const QModelIndex &index) const
 {
     return (qvariant_cast<int>(QStandardItemModel::data(index, domainTypeRole)) == typeDomain);
