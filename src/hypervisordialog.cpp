@@ -9,6 +9,13 @@
 #include "virtnosiswindow.h"
 #include <QDebug>
 
+/**
+ * @brief HypervisorDialog::HypervisorDialog
+ * @param parent
+ * @param host
+ * @param account
+ * @param port
+ */
 HypervisorDialog::HypervisorDialog(QWidget *parent, QString host, QString account, int port) :
     QDialog(parent),
     ui(new Ui::HypervisorDialog)
@@ -26,32 +33,53 @@ HypervisorDialog::HypervisorDialog(QWidget *parent, QString host, QString accoun
 
 }
 
+/**
+ * @brief HypervisorDialog::~HypervisorDialog
+ */
 HypervisorDialog::~HypervisorDialog()
 {
     delete ui;
 }
 
+/**
+ * @brief HypervisorDialog::host
+ * @return
+ */
 QString HypervisorDialog::host()
 {
     return ui->hostField->text();
 }
 
+/**
+ * @brief HypervisorDialog::account
+ * @return
+ */
 QString HypervisorDialog::account()
 {
     return ui->accountField->text();
 }
 
+/**
+ * @brief HypervisorDialog::port
+ * @return
+ */
 int HypervisorDialog::port()
 {
     return ui->portField->text().toInt();
 
 }
 
+/**
+ * @brief HypervisorDialog::updateUri
+ */
 void HypervisorDialog::updateUri()
 {
     ui->uri->setText(Hypervisor::uri(host(), account(), port()));
 }
 
+/**
+ * @brief HypervisorDialog::on_hypervisorDialogbuttonBox_accepted
+ */
 void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
 {
     Hypervisor *hypervisor = new Hypervisor(host(), account(), port());
@@ -60,12 +88,20 @@ void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
     widget->addHypervisor(hypervisor);
 }
 
+/**
+ * @brief HypervisorDialog::on_hostField_textChanged
+ * @param text
+ */
 void HypervisorDialog::on_hostField_textChanged(const QString &text)
 {
     Q_UNUSED(text);
     updateUri();
 }
 
+/**
+ * @brief HypervisorDialog::on_accountField_textChanged
+ * @param text
+ */
 void HypervisorDialog::on_accountField_textChanged(const QString &text)
 {
     Q_UNUSED(text);
@@ -73,6 +109,10 @@ void HypervisorDialog::on_accountField_textChanged(const QString &text)
 }
 
 
+/**
+ * @brief HypervisorDialog::on_portField_textChanged
+ * @param text
+ */
 void HypervisorDialog::on_portField_textChanged(const QString &text)
 {
     Q_UNUSED(text);

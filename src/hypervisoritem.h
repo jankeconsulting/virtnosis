@@ -11,6 +11,9 @@
 #include "hypervisor.h"
 #include "domainviewmodel.h"
 
+/**
+ * @brief The HypervisorItem class
+ */
 class HypervisorItem : public QStandardItem
 {
 

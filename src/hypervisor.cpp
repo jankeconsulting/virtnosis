@@ -7,6 +7,10 @@
 #include "hypervisor.h"
 #include <QDebug>
 
+/**
+ * @brief Hypervisor::Hypervisor
+ * @param parent
+ */
 Hypervisor::Hypervisor(QObject *parent) :
     QObject(parent),
     m_connection(0),
@@ -20,6 +24,10 @@ Hypervisor::Hypervisor(QObject *parent) :
     this->path = "system";
 }
 
+/**
+ * @brief Hypervisor::Hypervisor
+ * @param hypervisor
+ */
 Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
     QObject(),
     m_connection(0),
@@ -36,6 +44,15 @@ Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
     this->auto_connect = hypervisor.auto_connect;
 }
 
+/**
+ * @brief Hypervisor::Hypervisor
+ * @param host
+ * @param user
+ * @param port
+ * @param protocol
+ * @param path
+ * @param parent
+ */
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
     QObject(parent),
     m_connection(0),
@@ -49,26 +66,50 @@ Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, Q
     connection();
 }
 
+/**
+ * @brief Hypervisor::~Hypervisor
+ */
 Hypervisor::~Hypervisor()
 {
 //    virConnectClose(m_connection);
 }
 
+/**
+ * @brief Hypervisor::write
+ * @param out
+ */
 void Hypervisor::write(QDataStream &out) const
 {
     out << protocol << account << host << port << path << auto_connect;
 }
 
+/**
+ * @brief Hypervisor::read
+ * @param in
+ */
 void Hypervisor::read(QDataStream &in)
 {
     in >> protocol >> account >> host >> port >> path >> auto_connect;
 }
 
+/**
+ * @brief Hypervisor::uri
+ * @return
+ */
 QString Hypervisor::uri()
 {
     return uri(host, account, port, protocol, path);
 }
 
+/**
+ * @brief Hypervisor::uri
+ * @param host
+ * @param account
+ * @param port
+ * @param protocol
+ * @param path
+ * @return
+ */
 QString Hypervisor::uri(QString host, QString account, int port, QString protocol, QString path)
 {
     QString result;
@@ -80,11 +121,19 @@ QString Hypervisor::uri(QString host, QString account, int port, QString protoco
     return result;
 }
 
+/**
+ * @brief Hypervisor::name
+ * @return
+ */
 QString Hypervisor::name()
 {
     return host;
 }
 
+/**
+ * @brief Hypervisor::connection
+ * @return
+ */
 virConnectPtr Hypervisor::connection()
 {
 //    TODO: error handling if connection fails
@@ -97,6 +146,9 @@ virConnectPtr Hypervisor::connection()
    return m_connection;
 }
 
+/**
+ * @brief Hypervisor::disconnect
+ */
 void Hypervisor::disconnect()
 {
     virConnectClose(m_connection);
@@ -104,6 +156,10 @@ void Hypervisor::disconnect()
     auto_connect = false;
 }
 
+/**
+ * @brief Hypervisor::alive
+ * @return
+ */
 int Hypervisor::alive()
 {
     if(m_connection)
@@ -111,6 +167,10 @@ int Hypervisor::alive()
     return 0;
 }
 
+/**
+ * @brief Hypervisor::domains
+ * @return
+ */
 QList<Domain *> Hypervisor::domains()
 {
     virDomainPtr *domains;
@@ -166,16 +226,28 @@ QList<Domain *> Hypervisor::domains()
     return list;
 }
 
+/**
+ * @brief Hypervisor::setAutoConnect
+ * @param enable
+ */
 void Hypervisor::setAutoConnect(bool enable)
 {
     auto_connect = enable;
 }
 
+/**
+ * @brief Hypervisor::autoConnect
+ * @return
+ */
 bool Hypervisor::autoConnect()
 {
     return auto_connect;
 }
 
+/**
+ * @brief Hypervisor::version
+ * @return
+ */
 ulong Hypervisor::version()
 {
     ulong hvVer;
@@ -186,6 +258,10 @@ ulong Hypervisor::version()
     return hvVer;
 }
 
+/**
+ * @brief Hypervisor::libVersion
+ * @return
+ */
 ulong Hypervisor::libVersion()
 {
     if(m_libVersion) return m_libVersion;
@@ -198,6 +274,10 @@ ulong Hypervisor::libVersion()
     return libVer;
 }
 
+/**
+ * @brief Hypervisor::capabilities
+ * @return
+ */
 QString Hypervisor::capabilities()
 {
     if(alive()) {
@@ -209,13 +289,24 @@ QString Hypervisor::capabilities()
     return QString("");
 }
 
+/**
+ * @brief operator <<
+ * @param out
+ * @param hypervisor
+ * @return
+ */
 QDataStream &operator<<(QDataStream &out, const Hypervisor &hypervisor)
 {
     hypervisor.write(out);
     return out;
 }
 
-
+/**
+ * @brief operator >>
+ * @param in
+ * @param hypervisor
+ * @return
+ */
 QDataStream &operator>>(QDataStream &in, Hypervisor &hypervisor)
 {
     hypervisor.read(in);

@@ -31,6 +31,9 @@ namespace Ui {
 class VirtnosisWindow;
 }
 
+/**
+ * @brief The VirtnosisWindow class
+ */
 class VirtnosisWindow : public QMainWindow
 {
     Q_OBJECT

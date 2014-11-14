@@ -10,6 +10,9 @@
 #include <QStandardItem>
 #include "hypervisor.h"
 
+/**
+ * @brief The DomainItem class
+ */
 class DomainItem : public QStandardItem
 {
 

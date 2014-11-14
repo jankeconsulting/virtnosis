@@ -12,6 +12,12 @@ DomainViewItemDelegate::DomainViewItemDelegate(QObject *parent) :
 {
 }
 
+/**
+ * @brief DomainViewItemDelegate::paint
+ * @param painter
+ * @param option
+ * @param index
+ */
 void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
 //    Todo: Add stats for domains
@@ -62,6 +68,12 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     painter->restore();
 }
 
+/**
+ * @brief DomainViewItemDelegate::sizeHint
+ * @param option
+ * @param index
+ * @return
+ */
 QSize DomainViewItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     Q_UNUSED(option);
@@ -73,6 +85,11 @@ QSize DomainViewItemDelegate::sizeHint(const QStyleOptionViewItem &option, const
     return(QSize(32, fm.height()*2 + 8 ));
 }
 
+/**
+ * @brief DomainViewItemDelegate::stateText
+ * @param state
+ * @return
+ */
 QString DomainViewItemDelegate::stateText(const QVariant state) const
 {
     switch(state.toInt()) {
@@ -88,6 +105,11 @@ QString DomainViewItemDelegate::stateText(const QVariant state) const
     return QString(tr("Error"));
 }
 
+/**
+ * @brief DomainViewItemDelegate::stateIcon
+ * @param state
+ * @return
+ */
 QIcon DomainViewItemDelegate::stateIcon(const QVariant state) const
 {
     switch(state.toInt()) {
@@ -104,6 +126,11 @@ QIcon DomainViewItemDelegate::stateIcon(const QVariant state) const
 
 }
 
+/**
+ * @brief DomainViewItemDelegate::connectionText
+ * @param state
+ * @return
+ */
 QString DomainViewItemDelegate::connectionText(const QVariant state) const
 {
     switch(state.toInt()) {
@@ -113,6 +140,11 @@ QString DomainViewItemDelegate::connectionText(const QVariant state) const
     return QString(tr("Error"));
 }
 
+/**
+ * @brief DomainViewItemDelegate::connectionIcon
+ * @param state
+ * @return
+ */
 QIcon DomainViewItemDelegate::connectionIcon(const QVariant state) const
 {
     switch(state.toInt()) {

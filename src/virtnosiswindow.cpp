@@ -10,6 +10,10 @@
 #include <QDebug>
 
 //    TODO: Refactor threading
+/**
+ * @brief VirtnosisWindow::VirtnosisWindow
+ * @param parent
+ */
 VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::VirtnosisWindow),
@@ -36,12 +40,19 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     readSettings();
 }
 
+/**
+ * @brief VirtnosisWindow::~VirtnosisWindow
+ */
 VirtnosisWindow::~VirtnosisWindow()
 {
     delete about;
     delete ui;
 }
 
+/**
+ * @brief VirtnosisWindow::addHypervisor
+ * @param hypervisor
+ */
 void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
 {
     QVariant test;
@@ -61,16 +72,27 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     }
 }
 
+/**
+ * @brief VirtnosisWindow::dataChanged
+ */
 void VirtnosisWindow::dataChanged()
 {
     selectionChanged(currentIndex(), currentIndex());
 }
 
+/**
+ * @brief VirtnosisWindow::setStatusMessage
+ * @param text
+ */
 void VirtnosisWindow::setStatusMessage(QString text)
 {
     statusMessage->setText(text);
 }
 
+/**
+ * @brief VirtnosisWindow::contextMenuEvent
+ * @param event
+ */
 void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
@@ -92,28 +114,43 @@ void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
     }
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuHypervisorActionNew_triggered
+ */
 void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 {
     HypervisorDialog *dialog = new HypervisorDialog(this);
     dialog->show();
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuHypervisorActionConnect_triggered
+ */
 void VirtnosisWindow::on_menuHypervisorActionConnect_triggered()
 {
     connectHypervisor(currentIndex());
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered
+ */
 void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
 {
     model()->disconnectHypervisor(currentIndex());
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuHypervisorActionRemove_triggered
+ */
 void VirtnosisWindow::on_menuHypervisorActionRemove_triggered()
 {
     model()->removeRow(currentIndex().row());
     writeHypervisorSettings();
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuVmActionStart_triggered
+ */
 void VirtnosisWindow::on_menuVmActionStart_triggered()
 {
     Domain domain = selectedDomain();
@@ -121,6 +158,9 @@ void VirtnosisWindow::on_menuVmActionStart_triggered()
     dataChanged();
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuVmActionReboot_triggered
+ */
 void VirtnosisWindow::on_menuVmActionReboot_triggered()
 {
     Domain domain = selectedDomain();
@@ -128,6 +168,9 @@ void VirtnosisWindow::on_menuVmActionReboot_triggered()
     dataChanged();
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuVmActionShutoff_triggered
+ */
 void VirtnosisWindow::on_menuVmActionShutoff_triggered()
 {
     Domain domain = selectedDomain();
@@ -137,6 +180,9 @@ void VirtnosisWindow::on_menuVmActionShutoff_triggered()
     checkDomainStateChangeTreadWatcher.setFuture(checkDomainStateChangeTread);
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuVmActionDestroy_triggered
+ */
 void VirtnosisWindow::on_menuVmActionDestroy_triggered()
 {
     Domain domain = selectedDomain();
@@ -146,6 +192,9 @@ void VirtnosisWindow::on_menuVmActionDestroy_triggered()
     checkDomainStateChangeTreadWatcher.setFuture(checkDomainStateChangeTread);
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuVmActionPause_triggered
+ */
 void VirtnosisWindow::on_menuVmActionPause_triggered()
 {
     Domain domain = selectedDomain();
@@ -153,6 +202,9 @@ void VirtnosisWindow::on_menuVmActionPause_triggered()
     dataChanged();
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuVmActionResume_triggered
+ */
 void VirtnosisWindow::on_menuVmActionResume_triggered()
 {
     Domain domain = selectedDomain();
@@ -160,6 +212,10 @@ void VirtnosisWindow::on_menuVmActionResume_triggered()
     dataChanged();
 }
 
+/**
+ * @brief VirtnosisWindow::enableVirtualMachineActions
+ * @param index
+ */
 void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
 {
     ui->menuVmActionStart->setDisabled(true);
@@ -195,24 +251,39 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
     }    
 }
 
+/**
+ * @brief VirtnosisWindow::selectedDomain
+ * @return
+ */
 Domain VirtnosisWindow::selectedDomain()
 {
     QModelIndex index = currentIndex();
     return qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
 }
 
+/**
+ * @brief VirtnosisWindow::selectedHypervisor
+ * @return
+ */
 Hypervisor VirtnosisWindow::selectedHypervisor()
 {
     QModelIndex index = currentIndex();
     return qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
 }
 
+/**
+ * @brief VirtnosisWindow::selectedDataChanged
+ */
 void VirtnosisWindow::selectedDataChanged()
 {
     QModelIndex index = currentIndex();
     ui->domainView->dataChanged(index, index);
 }
 
+/**
+ * @brief VirtnosisWindow::model
+ * @return
+ */
 DomainViewModel *VirtnosisWindow::model()
 {
     if(ui->domainView->model()) {
@@ -221,11 +292,18 @@ DomainViewModel *VirtnosisWindow::model()
     return 0;
 }
 
+/**
+ * @brief VirtnosisWindow::currentIndex
+ * @return
+ */
 QModelIndex VirtnosisWindow::currentIndex()
 {
     return ui->domainView->currentIndex();
 }
 
+/**
+ * @brief VirtnosisWindow::readSettings
+ */
 void VirtnosisWindow::readSettings()
 {
     m_settings.beginGroup("VirtnosisWindow");
@@ -235,6 +313,9 @@ void VirtnosisWindow::readSettings()
     readHypervisorSettings();
 }
 
+/**
+ * @brief VirtnosisWindow::writeSettings
+ */
 void VirtnosisWindow::writeSettings()
 {
     m_settings.beginGroup("VirtnosisWindow");
@@ -243,6 +324,9 @@ void VirtnosisWindow::writeSettings()
     writeHypervisorSettings();
 }
 
+/**
+ * @brief VirtnosisWindow::writeHypervisorSettings
+ */
 void VirtnosisWindow::writeHypervisorSettings()
 {
     m_settings.beginGroup("Hypervisor");
@@ -262,6 +346,9 @@ void VirtnosisWindow::writeHypervisorSettings()
     m_settings.endGroup();
 }
 
+/**
+ * @brief VirtnosisWindow::readHypervisorSettings
+ */
 void VirtnosisWindow::readHypervisorSettings()
 {
     m_settings.beginGroup("Hypervisor");
@@ -278,18 +365,30 @@ void VirtnosisWindow::readHypervisorSettings()
     m_settings.endGroup();
 }
 
+/**
+ * @brief VirtnosisWindow::createStatusBar
+ */
 void VirtnosisWindow::createStatusBar()
 {
     statusMessage = new QLabel();
     statusBar()->addPermanentWidget(statusMessage);
 }
 
+/**
+ * @brief VirtnosisWindow::connectHypervisor
+ * @param index
+ */
 void VirtnosisWindow::connectHypervisor(QModelIndex index)
 {
     connectingThread = QtConcurrent::run(model(), &DomainViewModel::connectHypervisor, index);
     connectingThreadWatcher.setFuture(connectingThread);
 }
 
+/**
+ * @brief VirtnosisWindow::checkDomainStateChange
+ * @param index
+ * @param state
+ */
 void VirtnosisWindow::checkDomainStateChange(QModelIndex index, int state)
 {
     if(model()) {
@@ -302,37 +401,61 @@ void VirtnosisWindow::checkDomainStateChange(QModelIndex index, int state)
     }
 }
 
+/**
+ * @brief VirtnosisWindow::displayViewer
+ * @param command
+ */
 void VirtnosisWindow::displayViewer(QString command)
 {
     system(command.toLocal8Bit().data());
 }
 
+/**
+ * @brief VirtnosisWindow::selectionChanged
+ * @param current
+ * @param previous
+ */
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
     Q_UNUSED(previous);
     enableVirtualMachineActions(current);
 }
 
+/**
+ * @brief VirtnosisWindow::handleConnectingStarted
+ */
 void VirtnosisWindow::handleConnectingStarted()
 {
     setStatusMessage(tr("Connecting to Hypervisor..."));
 }
 
+/**
+ * @brief VirtnosisWindow::handleConnectingFinished
+ */
 void VirtnosisWindow::handleConnectingFinished()
 {
     setStatusMessage(tr("Connected to Hypervisor!"));
 }
 
+/**
+ * @brief VirtnosisWindow::on_actionAbout_triggered
+ */
 void VirtnosisWindow::on_actionAbout_triggered()
 {
     about->show();
 }
 
+/**
+ * @brief VirtnosisWindow::on_actionAboutQt_triggered
+ */
 void VirtnosisWindow::on_actionAboutQt_triggered()
 {
     qApp->aboutQt();
 }
 
+/**
+ * @brief VirtnosisWindow::on_actionExit_triggered
+ */
 void VirtnosisWindow::on_actionExit_triggered()
 {
     writeSettings();
@@ -340,11 +463,17 @@ void VirtnosisWindow::on_actionExit_triggered()
     checkDomainStateChangeTreadWatcher.cancel();
 }
 
+/**
+ * @brief VirtnosisWindow::on_actionPreferences_triggered
+ */
 void VirtnosisWindow::on_actionPreferences_triggered()
 {
     settingsDialog->show();
 }
 
+/**
+ * @brief VirtnosisWindow::on_menuVmActionViewer_triggered
+ */
 void VirtnosisWindow::on_menuVmActionViewer_triggered()
 {
 //    TODO: temporarily using virt-viewer. Replace with Qt-based implementation

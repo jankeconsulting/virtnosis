@@ -13,6 +13,9 @@ namespace Ui {
 class LicenseDialog;
 }
 
+/**
+ * @brief The LicenseDialog class
+ */
 class LicenseDialog : public QDialog
 {
     Q_OBJECT

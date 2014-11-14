@@ -14,6 +14,9 @@
 #include "libvirt/virterror.h"
 #include "domain.h"
 
+/**
+ * @brief The Hypervisor class
+ */
 class Hypervisor : public QObject
 {
     Q_OBJECT

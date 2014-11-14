@@ -3,11 +3,6 @@
  *
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
-/**
- * Copyright (c) 2014 Ralph Janke. All rights reserved.
- *
- * Author: Ralph Janke virtnosis@jankeconsulting.ca
- */
 
 #ifndef DOMAIN_H
 #define DOMAIN_H
@@ -17,6 +12,12 @@
 
 #include <QObject>
 
+/**
+ * @class Domain
+ * @brief The Domain class
+ * The Domain class encapsulates the functionality required from libvrt
+ * concerning domains (virtual machines)
+ */
 class Domain : public QObject
 {
     Q_OBJECT

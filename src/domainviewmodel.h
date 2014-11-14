@@ -12,6 +12,9 @@
 #include "hypervisoritem.h"
 #include <QVariant>
 
+/**
+ * @brief The DomainViewModel class
+ */
 class DomainViewModel : public QStandardItemModel
 {
     Q_OBJECT

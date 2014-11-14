@@ -7,11 +7,19 @@
 #include "hypervisoritem.h"
 #include <QDebug>
 
+/**
+ * @brief HypervisorItem::HypervisorItem
+ * @param hypervisor
+ */
 HypervisorItem::HypervisorItem(Hypervisor *hypervisor) :
     QStandardItem(hypervisor->name())
 {
 }
 
+/**
+ * @brief HypervisorItem::addDomainsFromHypervisor
+ * @param hypervisor
+ */
 void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
 {
     DomainItem *domain_item;
@@ -37,6 +45,10 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
     }
 }
 
+/**
+ * @brief HypervisorItem::removeDomainsFromItem
+ * @param hypervisor
+ */
 void HypervisorItem::removeDomainsFromItem(Hypervisor *hypervisor)
 {
     this->removeRows(0, this->rowCount());

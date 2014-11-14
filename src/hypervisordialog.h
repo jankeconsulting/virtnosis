@@ -15,6 +15,9 @@ namespace Ui {
 class HypervisorDialog;
 }
 
+/**
+ * @brief The HypervisorDialog class
+ */
 class HypervisorDialog : public QDialog
 {
     Q_OBJECT

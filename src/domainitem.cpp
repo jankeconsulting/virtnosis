@@ -6,6 +6,10 @@
 
 #include "domainitem.h"
 
+/**
+ * @brief DomainItem::DomainItem
+ * @param text
+ */
 DomainItem::DomainItem(const QString &text) :
     QStandardItem(text)
 {

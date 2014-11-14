@@ -13,6 +13,9 @@
 #include "domainitem.h"
 #include "domainviewmodel.h"
 
+/**
+ * @brief The DomainViewItemDelegate class
+ */
 class DomainViewItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
