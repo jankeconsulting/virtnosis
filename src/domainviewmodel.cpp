@@ -8,8 +8,8 @@
 #include <QDebug>
 
 /**
- * @brief DomainViewModel::DomainViewModel
- * @param parent
+ * @brief constructs object of the model
+ * @param parent - parent of the object
  */
 DomainViewModel::DomainViewModel(QObject *parent) :
     QStandardItemModel(parent)
@@ -17,10 +17,13 @@ DomainViewModel::DomainViewModel(QObject *parent) :
 }
 
 /**
- * @brief DomainViewModel::data
- * @param index
- * @param role
+ * @brief provides data from the model
+ * @param index - index of item requested
+ * @param role - role of the data requested
  * @return
+ *
+ * Reimplemented method that provides the data according to given role
+ * from the model
  */
 QVariant DomainViewModel::data(const QModelIndex &index, int role) const
 {
@@ -44,8 +47,8 @@ QVariant DomainViewModel::data(const QModelIndex &index, int role) const
 }
 
 /**
- * @brief DomainViewModel::connectHypervisor
- * @param index
+ * @brief connects the given hypervisor
+ * @param index - index of the hypervisor
  */
 void DomainViewModel::connectHypervisor(const QModelIndex &index)
 {
@@ -60,8 +63,8 @@ void DomainViewModel::connectHypervisor(const QModelIndex &index)
 }
 
 /**
- * @brief DomainViewModel::disconnectHypervisor
- * @param index
+ * @brief disconnects the given hypervisor
+ * @param index - index of the hypervisor
  */
 void DomainViewModel::disconnectHypervisor(const QModelIndex &index)
 {
@@ -74,9 +77,9 @@ void DomainViewModel::disconnectHypervisor(const QModelIndex &index)
 }
 
 /**
- * @brief DomainViewModel::hypervisor
- * @param index
- * @return
+ * @brief provides the hypervisor object
+ * @param index - index of the requested hypervisor
+ * @return the hypervisor object of the given index
  */
 Hypervisor DomainViewModel::hypervisor(const QModelIndex &index) const
 {
@@ -84,9 +87,9 @@ Hypervisor DomainViewModel::hypervisor(const QModelIndex &index) const
 }
 
 /**
- * @brief DomainViewModel::hypervisor
- * @param row
- * @return
+ * @brief provides the hypervisor object
+ * @param row - row of the requested hypervisor
+ * @return the hypervisor object in the given row
  */
 Hypervisor DomainViewModel::hypervisor(const int row) const
 {
@@ -94,9 +97,9 @@ Hypervisor DomainViewModel::hypervisor(const int row) const
 }
 
 /**
- * @brief DomainViewModel::setHypervisor
- * @param index
- * @param hypervisor
+ * @brief sets the hypervisor object
+ * @param index - index where the hypervisor is set inside the model
+ * @param hypervisor - hypervisor object
  */
 void DomainViewModel::setHypervisor(const QModelIndex &index, Hypervisor *hypervisor)
 {
@@ -107,9 +110,9 @@ void DomainViewModel::setHypervisor(const QModelIndex &index, Hypervisor *hyperv
 }
 
 /**
- * @brief DomainViewModel::domain
- * @param index
- * @return
+ * @brief provides the domain object
+ * @param index - index of the requested domain
+ * @return the domain of the given index
  */
 Domain DomainViewModel::domain(const QModelIndex &index) const
 {
@@ -117,9 +120,9 @@ Domain DomainViewModel::domain(const QModelIndex &index) const
 }
 
 /**
- * @brief DomainViewModel::indexIsHypervisor
- * @param index
- * @return
+ * @brief indicates if item is a hypervisor
+ * @param index - index of the item
+ * @return true if the item for the given index is a hypervisor, otherwise false
  */
 bool DomainViewModel::indexIsHypervisor(const QModelIndex &index) const
 {
@@ -127,9 +130,9 @@ bool DomainViewModel::indexIsHypervisor(const QModelIndex &index) const
 }
 
 /**
- * @brief DomainViewModel::indexIsDomain
- * @param index
- * @return
+ * @brief indicates if item is a domain
+ * @param index - index of the item
+ * @return true if the item for the given index is a domain, otherwise false
  */
 bool DomainViewModel::indexIsDomain(const QModelIndex &index) const
 {
