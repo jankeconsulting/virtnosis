@@ -14,7 +14,7 @@
 /**
  * @class Domain
  * @brief The Domain class
- * The Domain class encapsulates the functionality required from libvrt
+ * encapsulates the functionality required from libvirt
  * concerning domains (virtual machines)
  */
 class Domain : public QObject
@@ -41,19 +41,20 @@ class Domain : public QObject
     long memory();
     bool cpustats();
 
-// TODO: uri is a temporary shortcut - maybe better to be able to get
-// hypervisor
+// TODO(txwikinger): uri is a temporary shortcut - maybe better to be able to
+// get hypervisor
     QString uri();
 
  signals:
+// No signals at this time
 
  public slots:
+// No public slots at this time
 
  private:
     virDomainPtr m_domain;
     ulong m_libVersion;
     virDomainInfoPtr m_info;
-
 };
 
 Q_DECLARE_METATYPE(Domain)

@@ -8,8 +8,8 @@
 #include <QDebug>
 
 /**
- * @brief Domain::Domain
- * @param parent
+ * @brief constructs a domain object
+ * @param parent - parent object
  *
  * Constructor that creates a domain object. The parameter parent
  * contains the parent object according to the Qt object definition.
@@ -25,11 +25,17 @@ Domain::Domain(QObject *parent) :
 }
 
 /**
- * @brief Domain::Domain
- * @param domain
- * @param version
- * @param parent
+ * @brief constructs a domain object
+ * @param domain - domain pointer in libvirt
+ * @param version - version of libvirt
+ * @param parent - parent object
  *
+ * Constructor that creates a domain object. The parameter parent
+ * contains the parent object according to the Qt object definition.
+ *
+ * This constructor creates a domain object that represents the
+ * domain referenced by the domain pointer given in the parameter
+ * domain.
  *
  */
 Domain::Domain(virDomainPtr domain, ulong version, QObject *parent) :
@@ -41,8 +47,12 @@ Domain::Domain(virDomainPtr domain, ulong version, QObject *parent) :
 }
 
 /**
- * @brief Domain::Domain
- * @param domain
+ * @brief constructs a domain object
+ * @param domain - domain object to be copied
+ *
+ * Constructor that copies an existing domain object into
+ * a new one. This constructor is needed in order to declare
+ * this class a Qt Meta Object.
  */
 Domain::Domain(const Domain &domain) :
     QObject(),
@@ -56,7 +66,11 @@ Domain::Domain(const Domain &domain) :
 }
 
 /**
- * @brief Domain::~Domain
+ * @fn Domain::~Domain
+ * @brief destroys the domain object
+ *
+ * If domain object references a valid domain in libvirt,
+ * the corresponding memory will be freed.
  */
 Domain::~Domain()
 {
@@ -65,8 +79,9 @@ Domain::~Domain()
 }
 
 /**
- * @brief Domain::name
- * @return
+ * @fn Domain::name
+ * @brief provides the name of the domain
+ * @return name of the domain
  */
 QString Domain::name()
 {
@@ -74,8 +89,13 @@ QString Domain::name()
 }
 
 /**
- * @brief Domain::state
- * @return
+ * @brief provides the state of the Domain in form of integer
+ * @return integer representing state of domain
+ *
+ * The return value respresents the integer from the enum virDomainState
+ * (http://libvirt.org/html/libvirt-libvirt-domain.html#virDomainState)
+ *
+ * If the correct state cannot be ascertained, -1 is returned.
  */
 int Domain::state()
 {
@@ -99,8 +119,8 @@ int Domain::state()
 }
 
 /**
- * @brief Domain::isRunning
- * @return
+ * @brief provides indication if domain is running
+ * @return true if domain is running otherwise false.
  */
 bool Domain::isRunning()
 {
@@ -112,8 +132,8 @@ bool Domain::isRunning()
 }
 
 /**
- * @brief Domain::isPaused
- * @return
+ * @brief provides indication if domain is paused
+ * @return true if domain is paused, otherwise false.
  */
 bool Domain::isPaused()
 {
@@ -125,8 +145,8 @@ bool Domain::isPaused()
 }
 
 /**
- * @brief Domain::start
- * @return
+ * @brief starts the domain
+ * @return true if the domain started without error, otherwise false
  */
 bool Domain::start()
 {
@@ -135,8 +155,8 @@ bool Domain::start()
 }
 
 /**
- * @brief Domain::reboot
- * @return
+ * @brief reboots the domain
+ * @return true if the domain was rebooted without error, otherwise false
  */
 bool Domain::reboot()
 {
@@ -145,8 +165,8 @@ bool Domain::reboot()
 }
 
 /**
- * @brief Domain::shutdown
- * @return
+ * @brief shuts down the domain
+ * @return true if the domain was shut down without error, otherwise false
  */
 bool Domain::shutdown()
 {
@@ -155,8 +175,11 @@ bool Domain::shutdown()
 }
 
 /**
- * @brief Domain::destroy
- * @return
+ * @brief forceful shutdown of domain
+ * @return true if the domain was shut down without error, otherwise false
+ *
+ * The domain is sent a sigterm signal followed by a sigkill signal after
+ * timeout period without success
  */
 bool Domain::destroy()
 {
@@ -165,8 +188,8 @@ bool Domain::destroy()
 }
 
 /**
- * @brief Domain::pause
- * @return
+ * @brief pauses the domain
+ * @return if the domain was paused without error, otherwise false
  */
 bool Domain::pause()
 {
@@ -175,8 +198,8 @@ bool Domain::pause()
 }
 
 /**
- * @brief Domain::resume
- * @return
+ * @brief resumes the domain
+ * @return if the domain was resumed without error, otherwise false
  */
 bool Domain::resume()
 {
@@ -185,8 +208,8 @@ bool Domain::resume()
 }
 
 /**
- * @brief Domain::info
- * @return
+ * @brief retrieves information about domain
+ * @return if the information was retrieved without error, otherwise false
  */
 bool Domain::info()
 {
@@ -195,8 +218,8 @@ bool Domain::info()
 }
 
 /**
- * @brief Domain::cpu_count
- * @return
+ * @brief retrieves the number of virtual cpus that the domain can use
+ * @return number of available virtual cpus
  */
 int Domain::cpu_count()
 {
@@ -207,8 +230,8 @@ int Domain::cpu_count()
 }
 
 /**
- * @brief Domain::memory
- * @return
+ * @brief retrieves the available memory for the domain
+ * @return memory in kB
  */
 long Domain::memory()
 {
@@ -219,8 +242,8 @@ long Domain::memory()
 }
 
 /**
- * @brief Domain::cpustats
- * @return
+ * @brief retrieves the cpu usage statistics for the domain
+ * @return true if the cpu statistic was retrieved without error, otherwise false
  */
 bool Domain::cpustats()
 {
@@ -233,8 +256,8 @@ bool Domain::cpustats()
 }
 
 /**
- * @brief Domain::uri
- * @return
+ * @brief provides the uri used to access the domain
+ * @return string containing the uri
  */
 QString Domain::uri()
 {

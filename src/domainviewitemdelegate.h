@@ -39,4 +39,4 @@ public:
     QIcon connectionIcon(const QVariant state) const;
 };
 
-#endif  // DOMAINVIEWITEMDELEGATE_H_
+#endif  // SRC_DOMAINVIEWITEMDELEGATE_H_
