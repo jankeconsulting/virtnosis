@@ -7,8 +7,8 @@
 #include "domainitem.h"
 
 /**
- * @brief DomainItem::DomainItem
- * @param text
+ * @brief constructs domain item
+ * @param text - name for the domain that is displayed
  */
 DomainItem::DomainItem(const QString &text) :
     QStandardItem(text)

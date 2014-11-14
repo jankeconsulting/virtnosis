@@ -7,16 +7,23 @@
 #include "domainviewitemdelegate.h"
 #include <QDebug>
 
+/**
+ * @brief constructs DomainViewItemDelegate object
+ * @param parent - parent object
+ */
 DomainViewItemDelegate::DomainViewItemDelegate(QObject *parent) :
     QStyledItemDelegate(parent)
 {
 }
 
 /**
- * @brief DomainViewItemDelegate::paint
- * @param painter
- * @param option
- * @param index
+ * @brief paints an item in the view
+ * @param painter - pointer to painter used
+ * @param option - style options
+ * @param index - index of the item that is painted
+ *
+ * Reimplemented method that creates the layout for the items displayed
+ * in the view
  */
 void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -69,10 +76,15 @@ void DomainViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 }
 
 /**
- * @brief DomainViewItemDelegate::sizeHint
- * @param option
- * @param index
+ * @brief provides hint for sizing the item in view
+ * @param option - style options
+ * @param index - index of the item which size is needed
  * @return
+ *
+ * Reimplemented methods that helps to choose the right size for
+ * the item display in view
+ *
+ * Currently option and index are not used for the calculation of the item
  */
 QSize DomainViewItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -86,9 +98,9 @@ QSize DomainViewItemDelegate::sizeHint(const QStyleOptionViewItem &option, const
 }
 
 /**
- * @brief DomainViewItemDelegate::stateText
+ * @brief provides textual respresentation of state
  * @param state
- * @return
+ * @return string that contains the state in textual representation
  */
 QString DomainViewItemDelegate::stateText(const QVariant state) const
 {
@@ -106,9 +118,9 @@ QString DomainViewItemDelegate::stateText(const QVariant state) const
 }
 
 /**
- * @brief DomainViewItemDelegate::stateIcon
+ * @brief provides icon that represents the given state
  * @param state
- * @return
+ * @return icon that represents the given state
  */
 QIcon DomainViewItemDelegate::stateIcon(const QVariant state) const
 {
@@ -127,9 +139,9 @@ QIcon DomainViewItemDelegate::stateIcon(const QVariant state) const
 }
 
 /**
- * @brief DomainViewItemDelegate::connectionText
+ * @brief provides the text for the connection state of a hypervisor state
  * @param state
- * @return
+ * @return text that represents the connection state
  */
 QString DomainViewItemDelegate::connectionText(const QVariant state) const
 {
@@ -141,9 +153,9 @@ QString DomainViewItemDelegate::connectionText(const QVariant state) const
 }
 
 /**
- * @brief DomainViewItemDelegate::connectionIcon
+ * @brief provides the icon for the connection state of a hypervisor state
  * @param state
- * @return
+ * @return icon that represents the connection state
  */
 QIcon DomainViewItemDelegate::connectionIcon(const QVariant state) const
 {
