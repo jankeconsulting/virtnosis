@@ -4,8 +4,8 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef VIRTNOSISWINDOW_H
-#define VIRTNOSISWINDOW_H
+#ifndef SRC_VIRTNOSISWINDOW_H_
+#define SRC_VIRTNOSISWINDOW_H_
 
 #include <QMainWindow>
 #include <QApplication>
@@ -38,21 +38,21 @@ class VirtnosisWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
+ public:
     explicit VirtnosisWindow(QWidget *parent = 0);
     ~VirtnosisWindow();
     void addHypervisor(Hypervisor *hypervisor);
 
-public slots:
+ public slots:
     void dataChanged();
     void setStatusMessage(QString text);
 
-protected:
+ protected:
     void contextMenuEvent(QContextMenuEvent *event);
 
-signals:
+ signals:
 
-private slots:
+ private slots:
     void on_menuHypervisorActionNew_triggered();
     void on_menuHypervisorActionConnect_triggered();
     void on_menuHypervisorActionDisconnect_triggered();
@@ -75,7 +75,7 @@ private slots:
 
     void on_menuVmActionDestroy_triggered();
 
-private:
+ private:
     Ui::VirtnosisWindow *ui;
     QSettings m_settings;
     AboutDialog *about;
@@ -102,4 +102,4 @@ private:
     void displayViewer(QString command);
 };
 
-#endif // VIRTNOSISWINDOW_H
+#endif  // SRC_VIRTNOSISWINDOW_H_

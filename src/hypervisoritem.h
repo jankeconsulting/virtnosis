@@ -4,12 +4,12 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef HYPERVISORITEM_H
-#define HYPERVISORITEM_H
+#ifndef SRC_HYPERVISORITEM_H_
+#define SRC_HYPERVISORITEM_H_
 
 #include <QStandardItem>
-#include "hypervisor.h"
-#include "domainviewmodel.h"
+#include "./hypervisor.h"
+#include "./domainviewmodel.h"
 
 /**
  * @brief The HypervisorItem class
@@ -17,12 +17,12 @@
 class HypervisorItem : public QStandardItem
 {
 
-public:
+ public:
     explicit HypervisorItem(Hypervisor *hypervisor);
     void addDomainsFromHypervisor(Hypervisor *hypervisor);    
     void removeDomainsFromItem(Hypervisor *hypervisor);
 
-private:
+ private:
 };
 
-#endif // HYPERVISORITEM_H
+#endif  // SRC_HYPERVISORITEM_H_

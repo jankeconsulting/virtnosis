@@ -4,8 +4,8 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef LICENSEDIALOG_H
-#define LICENSEDIALOG_H
+#ifndef SRC_LICENSEDIALOG_H_
+#define SRC_LICENSEDIALOG_H_
 
 #include <QDialog>
 
@@ -20,12 +20,12 @@ class LicenseDialog : public QDialog
 {
     Q_OBJECT
 
-public:
+ public:
     explicit LicenseDialog(QWidget *parent = 0);
     ~LicenseDialog();
 
-private:
+ private:
     Ui::LicenseDialog *ui;
 };
 
-#endif // LICENSEDIALOG_H
+#endif  // SRC_LICENSEDIALOG_H_

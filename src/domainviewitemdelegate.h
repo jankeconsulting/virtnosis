@@ -4,14 +4,14 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef DOMAINVIEWITEMDELEGATE_H
-#define DOMAINVIEWITEMDELEGATE_H
+#ifndef SRC_DOMAINVIEWITEMDELEGATE_H_
+#define SRC_DOMAINVIEWITEMDELEGATE_H_
 
 #include <QStyledItemDelegate>
 #include <QPainter>
 #include <QApplication>
-#include "domainitem.h"
-#include "domainviewmodel.h"
+#include "./domainitem.h"
+#include "./domainviewmodel.h"
 
 /**
  * @brief The DomainViewItemDelegate class
@@ -28,15 +28,15 @@ public:
     QSize sizeHint(const QStyleOptionViewItem &option,
                    const QModelIndex &index ) const;
 
-signals:
+ signals:
 
-public slots:
+ public slots:
 
-private:
+ private:
     QString stateText(const QVariant state) const;
     QIcon stateIcon(const QVariant state) const;
     QString connectionText(const QVariant state) const;
     QIcon connectionIcon(const QVariant state) const;
 };
 
-#endif // DOMAINVIEWITEMDELEGATE_H
+#endif  // DOMAINVIEWITEMDELEGATE_H_

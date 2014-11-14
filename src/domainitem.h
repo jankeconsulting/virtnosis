@@ -4,22 +4,21 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef DOMAINITEM_H
-#define DOMAINITEM_H
+#ifndef SRC_DOMAINITEM_H_
+#define SRC_DOMAINITEM_H_
 
 #include <QStandardItem>
-#include "hypervisor.h"
+#include "./hypervisor.h"
 
 /**
  * @brief The DomainItem class
  */
 class DomainItem : public QStandardItem
 {
-
-public:
+ public:
     explicit DomainItem(const QString &text);
 
-private:
+ private:
 };
 
-#endif // DOMAINITEM_H
+#endif  // SRC_DOMAINITEM_H_

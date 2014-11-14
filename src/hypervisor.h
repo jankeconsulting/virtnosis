@@ -4,15 +4,15 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef HYPERVISOR_H
-#define HYPERVISOR_H
+#ifndef SRC_HYPERVISOR_H_
+#define SRC_HYPERVISOR_H_
 
 #include <QObject>
 #include <QMetaType>
 #include <QString>
 #include "libvirt/libvirt.h"
 #include "libvirt/virterror.h"
-#include "domain.h"
+#include "./domain.h"
 
 /**
  * @brief The Hypervisor class
@@ -21,7 +21,7 @@ class Hypervisor : public QObject
 {
     Q_OBJECT
 
-public:
+ public:
     explicit Hypervisor(QObject *parent = 0);
     Hypervisor(const Hypervisor& hypervisor);
     explicit Hypervisor(QString host, QString user, int port = 22, QString protocol = "qemu+ssh", QString path = "system", QObject *parent = 0);
@@ -64,4 +64,4 @@ QDataStream &operator<<(QDataStream &out, const Hypervisor &hypervisor);
 QDataStream &operator>>(QDataStream &in, Hypervisor &hypervisor);
 #endif
 
-#endif // HYPERVISOR_H
+#endif  // SRC_HYPERVISOR_H_

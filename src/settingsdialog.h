@@ -4,8 +4,8 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef SETTINGSDIALOG_H
-#define SETTINGSDIALOG_H
+#ifndef SRC_SETTINGSDIALOG_H_
+#define SRC_SETTINGSDIALOG_H_
 
 #include <QDialog>
 
@@ -24,19 +24,19 @@ class SettingsDialog : public QDialog
 {
     Q_OBJECT
 
-public:
+ public:
     explicit SettingsDialog(QWidget *parent = 0);
     ~SettingsDialog();
     int changeTimeout();
     void setChangeTimeout(int value);
 
-private slots:
+ private slots:
     void on_buttonBox_accepted();
     void on_buttonBox_rejected();
 
-private:
+ private:
     Ui::SettingsDialog *ui;
     int m_changeTimeout;
 };
 
-#endif // SETTINGSDIALOG_H
+#endif  // SRC_SETTINGSDIALOG_H_

@@ -4,11 +4,11 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef ABOUTDIALOG_H
-#define ABOUTDIALOG_H
+#ifndef SRC_ABOUTDIALOG_H_
+#define SRC_ABOUTDIALOG_H_
 
 #include <QDialog>
-#include "licensedialog.h"
+#include "./licensedialog.h"
 
 namespace Ui {
 class AboutDialog;
@@ -21,16 +21,16 @@ class AboutDialog : public QDialog
 {
     Q_OBJECT
 
-public:
+ public:
     explicit AboutDialog(QWidget *parent = 0, QString version = "");
     ~AboutDialog();
 
-private slots:
+ private slots:
     void on_licenseButton_clicked();
 
-private:
+ private:
     Ui::AboutDialog *ui;
     LicenseDialog *license;
 };
 
-#endif // ABOUTDIALOG_H
+#endif  // SRC_ABOUTDIALOG_H_

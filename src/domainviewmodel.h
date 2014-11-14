@@ -4,13 +4,13 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef DOMAINVIEWMODEL_H
-#define DOMAINVIEWMODEL_H
+#ifndef SRC_DOMAINVIEWMODEL_H_
+#define SRC_DOMAINVIEWMODEL_H_
 
 #include <QStandardItemModel>
-#include "domainitem.h"
-#include "hypervisoritem.h"
 #include <QVariant>
+#include "./domainitem.h"
+#include "./hypervisoritem.h"
 
 /**
  * @brief The DomainViewModel class
@@ -18,7 +18,7 @@
 class DomainViewModel : public QStandardItemModel
 {
     Q_OBJECT
-public:
+ public:
     explicit DomainViewModel(QObject *parent = 0);
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -41,14 +41,14 @@ public:
         typeDomain,
     };
 
-signals:
+ signals:
 
-public slots:
+ public slots:
 
-private:
+ private:
     Hypervisor hypervisor(const QModelIndex &index) const;
     void setHypervisor(const QModelIndex &index, Hypervisor *hypervisor);
     Domain domain(const QModelIndex &index) const;
 };
 
-#endif // DOMAINVIEWMODEL_H
+#endif  // SRC_DOMAINVIEWMODEL_H_

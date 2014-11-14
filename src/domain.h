@@ -4,13 +4,12 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef DOMAIN_H
-#define DOMAIN_H
-
-#include "libvirt/libvirt.h"
-#include "libvirt/virterror.h"
+#ifndef SRC_DOMAIN_H_
+#define SRC_DOMAIN_H_
 
 #include <QObject>
+#include "libvirt/libvirt.h"
+#include "libvirt/virterror.h"
 
 /**
  * @class Domain
@@ -21,7 +20,7 @@
 class Domain : public QObject
 {
     Q_OBJECT
-public:
+ public:
     explicit Domain(QObject *parent = 0);
     explicit Domain(virDomainPtr domain, ulong version, QObject *parent = 0);
     Domain(const Domain &domain);
@@ -42,14 +41,15 @@ public:
     long memory();
     bool cpustats();
 
-//    TODO: uri is a temporary shortcut - maybe better to be able to get hypervisor
+// TODO: uri is a temporary shortcut - maybe better to be able to get
+// hypervisor
     QString uri();
 
-signals:
+ signals:
 
-public slots:
+ public slots:
 
-private:
+ private:
     virDomainPtr m_domain;
     ulong m_libVersion;
     virDomainInfoPtr m_info;
@@ -58,4 +58,4 @@ private:
 
 Q_DECLARE_METATYPE(Domain)
 
-#endif // DOMAIN_H
+#endif  // SRC_DOMAIN_H_

@@ -4,12 +4,12 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#ifndef HYPERVISORDIALOG_H
-#define HYPERVISORDIALOG_H
+#ifndef SRC_HYPERVISORDIALOG_H_
+#define SRC_HYPERVISORDIALOG_H_
 
 #include <QDialog>
-#include "hypervisor.h"
 #include <QStandardItem>
+#include "hypervisor.h"
 
 namespace Ui {
 class HypervisorDialog;
@@ -22,7 +22,7 @@ class HypervisorDialog : public QDialog
 {
     Q_OBJECT
 
-public:
+ public:
     explicit HypervisorDialog(QWidget *parent = 0, QString host = "", QString account = "", int port = 22);
     ~HypervisorDialog();
 
@@ -31,14 +31,14 @@ public:
     int port();
     void updateUri();
 
-private slots:
+ private slots:
     void on_hypervisorDialogbuttonBox_accepted();
     void on_hostField_textChanged(const QString &text);
     void on_accountField_textChanged(const QString &text);
     void on_portField_textChanged(const QString &text);
 
-private:
+ private:
     Ui::HypervisorDialog *ui;
 };
 
-#endif // HYPERVISORDIALOG_H
+#endif  // SRC_HYPERVISORDIALOG_H_
