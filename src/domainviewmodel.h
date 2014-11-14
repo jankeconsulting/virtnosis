@@ -28,6 +28,9 @@ class DomainViewModel : public QStandardItemModel
     bool indexIsHypervisor(const QModelIndex &index) const;
     bool indexIsDomain(const QModelIndex &index) const;
 
+    /**
+     * @brief contains the possible roles for the item in the model
+     */
     enum datarole {
         domainTypeRole = Qt::UserRole + 100,
         domainStateRole = Qt::UserRole + 101,
@@ -36,6 +39,9 @@ class DomainViewModel : public QStandardItemModel
         hypervisorConnectedRole = Qt::UserRole + 104,
     };
 
+    /**
+     * @brief contains the possible types of the item in the model
+     */
     enum datatype {
         typeHypervisor,
         typeDomain,
