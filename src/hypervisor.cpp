@@ -8,8 +8,10 @@
 #include <QDebug>
 
 /**
- * @brief Hypervisor::Hypervisor
- * @param parent
+ * @brief contructs hypervisor
+ * @param parent - parent object of the hypervisor created
+ *
+ * Constructs an empty hypervisor that cannot be connected
  */
 Hypervisor::Hypervisor(QObject *parent) :
     QObject(parent),
@@ -25,8 +27,12 @@ Hypervisor::Hypervisor(QObject *parent) :
 }
 
 /**
- * @brief Hypervisor::Hypervisor
+ * @brief contructs a hypervisor from another hypervisor object
  * @param hypervisor
+ *
+ * Constructs a hypervisor by copying it from an existing hypervisor object
+ *
+ * This contructor is necessary for declaring this class a Qt meta object
  */
 Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
     QObject(),
@@ -45,13 +51,15 @@ Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
 }
 
 /**
- * @brief Hypervisor::Hypervisor
- * @param host
- * @param user
- * @param port
- * @param protocol
- * @param path
- * @param parent
+ * @brief constructs a hypervisor and connects to it
+ * @param host - host of the hypervisor
+ * @param user - user for the connection
+ * @param port - port for the connection
+ * @param protocol - protocol for the connection
+ * @param path - path to find the hypervisor on the host
+ * @param parent - parent object for the hypervisor object
+ *
+ * Constructs the Hypervisor object from the uri information given in its parts
  */
 Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
     QObject(parent),
@@ -67,16 +75,21 @@ Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, Q
 }
 
 /**
- * @brief Hypervisor::~Hypervisor
+ * @brief destroys the hypervisor object
  */
 Hypervisor::~Hypervisor()
 {
+// TODO(txwikinger): Do to copying, the m_connection needs to be
+// a smart pointer to be only deleted when last reference is this object
 //    virConnectClose(m_connection);
 }
 
 /**
- * @brief Hypervisor::write
- * @param out
+ * @brief writes the hypervisor object into a serialized data stream
+ * @param out - stream to write the data to
+ *
+ * This method is required for hypervisor be able to be used
+ * in the settings.
  */
 void Hypervisor::write(QDataStream &out) const
 {
@@ -84,8 +97,11 @@ void Hypervisor::write(QDataStream &out) const
 }
 
 /**
- * @brief Hypervisor::read
- * @param in
+ * @brief reads the hypervisor object data from a stream
+ * @param in - stream from which the data be read
+ *
+ * This method is required for hypervisor be able to be used
+ * in the settings.
  */
 void Hypervisor::read(QDataStream &in)
 {
@@ -93,8 +109,8 @@ void Hypervisor::read(QDataStream &in)
 }
 
 /**
- * @brief Hypervisor::uri
- * @return
+ * @brief creates the uri string from the object member data
+ * @return uri string
  */
 QString Hypervisor::uri()
 {
@@ -102,13 +118,13 @@ QString Hypervisor::uri()
 }
 
 /**
- * @brief Hypervisor::uri
- * @param host
- * @param account
- * @param port
- * @param protocol
- * @param path
- * @return
+ * @brief creates the uri string from parts given in parameters
+ * @param host - host of the hypervisor
+ * @param account - user for the connection
+ * @param port - port for the connection
+ * @param protocol - protocol for the connection
+ * @param path - path to find the hypervisor on the host
+ * @return uri string
  */
 QString Hypervisor::uri(QString host, QString account, int port, QString protocol, QString path)
 {
@@ -122,8 +138,8 @@ QString Hypervisor::uri(QString host, QString account, int port, QString protoco
 }
 
 /**
- * @brief Hypervisor::name
- * @return
+ * @brief provides the host name of the hypervisor
+ * @return host name
  */
 QString Hypervisor::name()
 {
@@ -131,8 +147,13 @@ QString Hypervisor::name()
 }
 
 /**
- * @brief Hypervisor::connection
- * @return
+ * @brief provides connection pointer
+ * @return connection pointer
+ *
+ * Provides the pointer to libvirt data structure representing
+ * the connection to the hypervisor
+ *
+ * If the connection is not alive, the hypervisor is re-connected
  */
 virConnectPtr Hypervisor::connection()
 {
@@ -147,7 +168,7 @@ virConnectPtr Hypervisor::connection()
 }
 
 /**
- * @brief Hypervisor::disconnect
+ * @brief disconnects the hypervisor
  */
 void Hypervisor::disconnect()
 {
@@ -157,7 +178,7 @@ void Hypervisor::disconnect()
 }
 
 /**
- * @brief Hypervisor::alive
+ * @brief checks if the hypervisor connection is alive
  * @return
  */
 int Hypervisor::alive()
@@ -168,8 +189,11 @@ int Hypervisor::alive()
 }
 
 /**
- * @brief Hypervisor::domains
- * @return
+ * @brief provides the list of domains of the hypervisor
+ * @return list of domains
+ *
+ * Depending on the version of the libvirt library, a different
+ * method is used.
  */
 QList<Domain *> Hypervisor::domains()
 {
@@ -227,8 +251,11 @@ QList<Domain *> Hypervisor::domains()
 }
 
 /**
- * @brief Hypervisor::setAutoConnect
- * @param enable
+ * @brief sets the auto connect flag
+ * @param enable - flag indicating autoconnect
+ *
+ * If the autoconnect flag is set, the hypervisor is automatically
+ * connected after start-up of the application.
  */
 void Hypervisor::setAutoConnect(bool enable)
 {
@@ -236,8 +263,8 @@ void Hypervisor::setAutoConnect(bool enable)
 }
 
 /**
- * @brief Hypervisor::autoConnect
- * @return
+ * @brief provides the autoconnect flag of the hypervisor
+ * @return autoconnect flag
  */
 bool Hypervisor::autoConnect()
 {
@@ -245,8 +272,8 @@ bool Hypervisor::autoConnect()
 }
 
 /**
- * @brief Hypervisor::version
- * @return
+ * @brief provides the version of hypervisor
+ * @return version of hypervisor
  */
 ulong Hypervisor::version()
 {
@@ -259,8 +286,8 @@ ulong Hypervisor::version()
 }
 
 /**
- * @brief Hypervisor::libVersion
- * @return
+ * @brief provides the libvirt library version of hypervisor
+ * @return libvirt version of hypervisor
  */
 ulong Hypervisor::libVersion()
 {
@@ -275,8 +302,8 @@ ulong Hypervisor::libVersion()
 }
 
 /**
- * @brief Hypervisor::capabilities
- * @return
+ * @brief provides capabilities of hypervisor
+ * @return returns capabilities or empty string if not connected
  */
 QString Hypervisor::capabilities()
 {
@@ -290,10 +317,12 @@ QString Hypervisor::capabilities()
 }
 
 /**
- * @brief operator <<
- * @param out
- * @param hypervisor
- * @return
+ * @brief overloading << operator to write hypervisor into stream
+ * @param out - data stream to be written into
+ * @param hypervisor - hypervisor to be written in stream
+ * @return data stream
+ *
+ * This overloading is needed for writing this object into settings
  */
 QDataStream &operator<<(QDataStream &out, const Hypervisor &hypervisor)
 {
@@ -302,10 +331,12 @@ QDataStream &operator<<(QDataStream &out, const Hypervisor &hypervisor)
 }
 
 /**
- * @brief operator >>
- * @param in
- * @param hypervisor
- * @return
+ * @brief overloading >> operator to write hypervisor into stream
+ * @param in - data stream to be read from
+ * @param hypervisor - hypervisor to be read from stream
+ * @return data stream
+ *
+ * This overloading is needed for reading this object from settings
  */
 QDataStream &operator>>(QDataStream &in, Hypervisor &hypervisor)
 {
