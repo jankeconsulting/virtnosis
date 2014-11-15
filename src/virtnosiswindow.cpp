@@ -11,8 +11,14 @@
 
 //    TODO: Refactor threading
 /**
- * @brief VirtnosisWindow::VirtnosisWindow
- * @param parent
+ * @brief contructor from virtnosis window object
+ * @param parent - parent object
+ *
+ * The virtnosis window object contains the main window for
+ * the virtnosis application. All menus, toolsbars, the status bar
+ * as well as the main view of the hypervisors and domains are
+ * contained in this window.
+ *
  */
 VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -41,7 +47,7 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
 }
 
 /**
- * @brief VirtnosisWindow::~VirtnosisWindow
+ * @brief destroys main window object
  */
 VirtnosisWindow::~VirtnosisWindow()
 {
@@ -50,7 +56,7 @@ VirtnosisWindow::~VirtnosisWindow()
 }
 
 /**
- * @brief VirtnosisWindow::addHypervisor
+ * @brief adds a new hypervisor to the view of this window
  * @param hypervisor
  */
 void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
@@ -73,7 +79,7 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
 }
 
 /**
- * @brief VirtnosisWindow::dataChanged
+ * @brief slot to be called when data in the view changes
  */
 void VirtnosisWindow::dataChanged()
 {
@@ -81,7 +87,7 @@ void VirtnosisWindow::dataChanged()
 }
 
 /**
- * @brief VirtnosisWindow::setStatusMessage
+ * @brief sets status message in the window
  * @param text
  */
 void VirtnosisWindow::setStatusMessage(QString text)
@@ -90,8 +96,13 @@ void VirtnosisWindow::setStatusMessage(QString text)
 }
 
 /**
- * @brief VirtnosisWindow::contextMenuEvent
+ * @brief shows pop-up menu
  * @param event
+ *
+ * Reimplemented method that is called when pop-up
+ * menu is requested. Depending on the underlying
+ * context the pop-menu for a hypervisor, or for
+ * a domain is shown.
  */
 void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
 {
@@ -115,7 +126,11 @@ void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
 }
 
 /**
- * @brief VirtnosisWindow::on_menuHypervisorActionNew_triggered
+ * @brief slot that is called when the new hypervisor action is called
+ *
+ * When this slot is called, the Hypervisor dialog is shown
+ * and a new hypervisor with the entered information is created
+ * and added to the model.
  */
 void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 {
@@ -124,7 +139,9 @@ void VirtnosisWindow::on_menuHypervisorActionNew_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuHypervisorActionConnect_triggered
+ * @brief slot that is called when Hypervisor is to be connected
+ *
+ * When this slot is called, the currently selected hypervisor is connected
  */
 void VirtnosisWindow::on_menuHypervisorActionConnect_triggered()
 {
@@ -132,7 +149,9 @@ void VirtnosisWindow::on_menuHypervisorActionConnect_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered
+ * @brief slot that is called when Hypervisor is to be disconnected
+ *
+ * When this slot is called, the currently selected hypervisor is disconnected
  */
 void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
 {
@@ -140,7 +159,9 @@ void VirtnosisWindow::on_menuHypervisorActionDisconnect_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuHypervisorActionRemove_triggered
+ * @brief slot that is called when Hypervisor is to be deleted
+ *
+ * When this slot is called, the currently selected hypervisor is deleted
  */
 void VirtnosisWindow::on_menuHypervisorActionRemove_triggered()
 {
@@ -149,7 +170,7 @@ void VirtnosisWindow::on_menuHypervisorActionRemove_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuVmActionStart_triggered
+ * @brief slot that is called when domain is to be started
  */
 void VirtnosisWindow::on_menuVmActionStart_triggered()
 {
@@ -159,7 +180,7 @@ void VirtnosisWindow::on_menuVmActionStart_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuVmActionReboot_triggered
+ * @brief slot that is called when domain is to be rebooted
  */
 void VirtnosisWindow::on_menuVmActionReboot_triggered()
 {
@@ -169,7 +190,7 @@ void VirtnosisWindow::on_menuVmActionReboot_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuVmActionShutoff_triggered
+ * @brief slot that is called when domain is to be shutoff
  */
 void VirtnosisWindow::on_menuVmActionShutoff_triggered()
 {
@@ -181,7 +202,7 @@ void VirtnosisWindow::on_menuVmActionShutoff_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuVmActionDestroy_triggered
+ * @brief slot that is called when domain is to be forcefully shutoff
  */
 void VirtnosisWindow::on_menuVmActionDestroy_triggered()
 {
@@ -193,7 +214,7 @@ void VirtnosisWindow::on_menuVmActionDestroy_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuVmActionPause_triggered
+ * @brief slot that is called when domain is to be paused
  */
 void VirtnosisWindow::on_menuVmActionPause_triggered()
 {
@@ -203,7 +224,7 @@ void VirtnosisWindow::on_menuVmActionPause_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuVmActionResume_triggered
+ * @brief slot that is called when domain is to be resumed
  */
 void VirtnosisWindow::on_menuVmActionResume_triggered()
 {
@@ -213,8 +234,12 @@ void VirtnosisWindow::on_menuVmActionResume_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::enableVirtualMachineActions
- * @param index
+ * @brief enables/disables available actions according to context
+ * @param index - index of selected item
+ *
+ * Depending on the item (hypervisor or domain) and their state
+ * certain actions are available which are enabled, or unavailable
+ * which are disabled.
  */
 void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
 {
@@ -252,8 +277,8 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
 }
 
 /**
- * @brief VirtnosisWindow::selectedDomain
- * @return
+ * @brief provides the selected domain
+ * @return selected domain object
  */
 Domain VirtnosisWindow::selectedDomain()
 {
@@ -262,8 +287,8 @@ Domain VirtnosisWindow::selectedDomain()
 }
 
 /**
- * @brief VirtnosisWindow::selectedHypervisor
- * @return
+ * @brief provides the selected hypervisor
+ * @return selected hypervisor object
  */
 Hypervisor VirtnosisWindow::selectedHypervisor()
 {
@@ -272,7 +297,7 @@ Hypervisor VirtnosisWindow::selectedHypervisor()
 }
 
 /**
- * @brief VirtnosisWindow::selectedDataChanged
+ * @brief triggers refresh of view for item that has changed
  */
 void VirtnosisWindow::selectedDataChanged()
 {
@@ -281,8 +306,8 @@ void VirtnosisWindow::selectedDataChanged()
 }
 
 /**
- * @brief VirtnosisWindow::model
- * @return
+ * @brief provides the model used in the view
+ * @return model object
  */
 DomainViewModel *VirtnosisWindow::model()
 {
@@ -293,8 +318,8 @@ DomainViewModel *VirtnosisWindow::model()
 }
 
 /**
- * @brief VirtnosisWindow::currentIndex
- * @return
+ * @brief provides current index
+ * @return currently selected index object
  */
 QModelIndex VirtnosisWindow::currentIndex()
 {
@@ -302,7 +327,7 @@ QModelIndex VirtnosisWindow::currentIndex()
 }
 
 /**
- * @brief VirtnosisWindow::readSettings
+ * @brief reads the stored settings from previous session
  */
 void VirtnosisWindow::readSettings()
 {
@@ -314,7 +339,7 @@ void VirtnosisWindow::readSettings()
 }
 
 /**
- * @brief VirtnosisWindow::writeSettings
+ * @brief writes the current settings into storage for next session
  */
 void VirtnosisWindow::writeSettings()
 {
@@ -325,7 +350,7 @@ void VirtnosisWindow::writeSettings()
 }
 
 /**
- * @brief VirtnosisWindow::writeHypervisorSettings
+ * @brief writes all hypervisors into settings
  */
 void VirtnosisWindow::writeHypervisorSettings()
 {
@@ -347,7 +372,7 @@ void VirtnosisWindow::writeHypervisorSettings()
 }
 
 /**
- * @brief VirtnosisWindow::readHypervisorSettings
+ * @brief reads all hypervisors from settings
  */
 void VirtnosisWindow::readHypervisorSettings()
 {
@@ -366,7 +391,7 @@ void VirtnosisWindow::readHypervisorSettings()
 }
 
 /**
- * @brief VirtnosisWindow::createStatusBar
+ * @brief creates the status bar for the main window
  */
 void VirtnosisWindow::createStatusBar()
 {
@@ -375,8 +400,11 @@ void VirtnosisWindow::createStatusBar()
 }
 
 /**
- * @brief VirtnosisWindow::connectHypervisor
- * @param index
+ * @brief connects the given hypervisor
+ * @param index - index object refering to hypervisor
+ *
+ * The connection is created in separate thread since it may take a
+ * while to retrieve all the domain data associated
  */
 void VirtnosisWindow::connectHypervisor(QModelIndex index)
 {
@@ -385,9 +413,13 @@ void VirtnosisWindow::connectHypervisor(QModelIndex index)
 }
 
 /**
- * @brief VirtnosisWindow::checkDomainStateChange
- * @param index
- * @param state
+ * @brief checks if domain state changed after command
+ * @param index - index object refering to domain
+ * @param state - expected state after change
+ *
+ * This is basically a watchdog functionality that checks if a change
+ * action for a domain succeeds. If after a timeout the change has
+ * not happened, an alert dialog is shown
  */
 void VirtnosisWindow::checkDomainStateChange(QModelIndex index, int state)
 {
@@ -402,8 +434,10 @@ void VirtnosisWindow::checkDomainStateChange(QModelIndex index, int state)
 }
 
 /**
- * @brief VirtnosisWindow::displayViewer
- * @param command
+ * @brief calls a system command
+ * @param command - string represent the command to be executed
+ *
+ * This method is used to call external executables
  */
 void VirtnosisWindow::displayViewer(QString command)
 {
@@ -411,9 +445,11 @@ void VirtnosisWindow::displayViewer(QString command)
 }
 
 /**
- * @brief VirtnosisWindow::selectionChanged
- * @param current
- * @param previous
+ * @brief slot that is called when the selection in the view has been changed
+ * @param current - current selection
+ * @param previous - previous selection
+ *
+ * When the selection is changed, the available actions are reset
  */
 void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelIndex &previous)
 {
@@ -422,7 +458,7 @@ void VirtnosisWindow::selectionChanged(const QModelIndex &current, const QModelI
 }
 
 /**
- * @brief VirtnosisWindow::handleConnectingStarted
+ * @brief sets status text when connection to hypervisor is started
  */
 void VirtnosisWindow::handleConnectingStarted()
 {
@@ -430,7 +466,7 @@ void VirtnosisWindow::handleConnectingStarted()
 }
 
 /**
- * @brief VirtnosisWindow::handleConnectingFinished
+ * @brief sets status text when connection to hypervisor is finished
  */
 void VirtnosisWindow::handleConnectingFinished()
 {
@@ -438,7 +474,9 @@ void VirtnosisWindow::handleConnectingFinished()
 }
 
 /**
- * @brief VirtnosisWindow::on_actionAbout_triggered
+ * @brief slot that is called when About dialog is requested
+ *
+ * Shows the About dialog
  */
 void VirtnosisWindow::on_actionAbout_triggered()
 {
@@ -446,7 +484,9 @@ void VirtnosisWindow::on_actionAbout_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_actionAboutQt_triggered
+ * @brief slot that is called when Qt-About dialog is requested
+ *
+ * Shows the Qt-About dialog
  */
 void VirtnosisWindow::on_actionAboutQt_triggered()
 {
@@ -454,7 +494,10 @@ void VirtnosisWindow::on_actionAboutQt_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_actionExit_triggered
+ * @brief slot that is called when the main window is exited
+ *
+ * When the main window is closed, the settings are written
+ * into storage, remaining threads are canceled.
  */
 void VirtnosisWindow::on_actionExit_triggered()
 {
@@ -464,7 +507,9 @@ void VirtnosisWindow::on_actionExit_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_actionPreferences_triggered
+ * @brief slot that is called when the Preferences dialog is requested
+ *
+ * Shows the Preferences dialog
  */
 void VirtnosisWindow::on_actionPreferences_triggered()
 {
@@ -472,7 +517,11 @@ void VirtnosisWindow::on_actionPreferences_triggered()
 }
 
 /**
- * @brief VirtnosisWindow::on_menuVmActionViewer_triggered
+ * @brief slot that is called when the domain viewer is called
+ *
+ * Currently the virt-viewer is called in a separate thread to
+ * keep the main window accessible while the vnc screen of the
+ * domain is shown in a different window.
  */
 void VirtnosisWindow::on_menuVmActionViewer_triggered()
 {

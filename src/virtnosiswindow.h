@@ -33,6 +33,11 @@ class VirtnosisWindow;
 
 /**
  * @brief The VirtnosisWindow class
+ *
+ * The virtnosis window object contains the main window for
+ * the virtnosis application. All menus, toolsbars, the status bar
+ * as well as the main view of the hypervisors and domains are
+ * contained in this window.
  */
 class VirtnosisWindow : public QMainWindow
 {
