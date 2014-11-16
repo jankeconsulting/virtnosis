@@ -9,8 +9,8 @@
 #include <QDebug>
 
 /**
- * @brief SettingsDialog::SettingsDialog
- * @param parent
+ * @brief constructs the SettingsDialog object
+ * @param parent - parent of the constructed object
  */
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -22,7 +22,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 }
 
 /**
- * @brief SettingsDialog::~SettingsDialog
+ * @brief destroys the SettingsDialog object
  */
 SettingsDialog::~SettingsDialog()
 {
@@ -30,7 +30,7 @@ SettingsDialog::~SettingsDialog()
 }
 
 /**
- * @brief SettingsDialog::changeTimeout
+ * @brief provides the timeout for the watchdog function
  * @return
  */
 int SettingsDialog::changeTimeout()
@@ -39,7 +39,7 @@ int SettingsDialog::changeTimeout()
 }
 
 /**
- * @brief SettingsDialog::setChangeTimeout
+ * @brief sets the timeout for the watchdog function
  * @param value
  */
 void SettingsDialog::setChangeTimeout(int value)
@@ -49,7 +49,9 @@ void SettingsDialog::setChangeTimeout(int value)
 }
 
 /**
- * @brief SettingsDialog::on_buttonBox_accepted
+ * @brief slot that is called when the the accept button is called
+ *
+ * Saves all the settings in the dialog
  */
 void SettingsDialog::on_buttonBox_accepted()
 {
@@ -57,7 +59,9 @@ void SettingsDialog::on_buttonBox_accepted()
 }
 
 /**
- * @brief SettingsDialog::on_buttonBox_rejected
+ * @brief slot that is called when the reject button is called
+ *
+ * Resets the settings in the dialog
  */
 void SettingsDialog::on_buttonBox_rejected()
 {
