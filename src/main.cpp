@@ -8,10 +8,17 @@
 #include <QApplication>
 
 /**
- * @brief main
- * @param argc
- * @param argv
- * @return
+ * @brief Main function of the application
+ * @param argc - number of arguments
+ * @param argv - list of arguments
+ * @return error code of the application
+ *
+ * This function creates a QApplication object
+ * and sets the application wide information.
+ *
+ * It then creates the main window (VirtnosisWindow),
+ * makes it visibles and calles the main event
+ * loop of the application
  */
 int main(int argc, char *argv[])
 {
