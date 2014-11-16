@@ -28,7 +28,7 @@ HypervisorDialog::HypervisorDialog(QWidget *parent, QString host, QString accoun
     QRegExp host_reg_exp("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$");
     QValidator *host_validator = new QRegExpValidator(host_reg_exp, this);
     ui->hostField->setValidator(host_validator);
-    QIntValidator *port_validator = new QIntValidator(1,65355, this);
+    QIntValidator *port_validator = new QIntValidator(1, 65355, this);
     ui->portField->setValidator(port_validator);
 
 }

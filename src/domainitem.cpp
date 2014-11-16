@@ -15,4 +15,3 @@ DomainItem::DomainItem(const QString &text) :
 {
 
 }
-

@@ -24,13 +24,15 @@ class Hypervisor : public QObject
  public:
     explicit Hypervisor(QObject *parent = 0);
     Hypervisor(const Hypervisor& hypervisor);
-    explicit Hypervisor(QString host, QString user, int port = 22, QString protocol = "qemu+ssh", QString path = "system", QObject *parent = 0);
+    explicit Hypervisor(QString host, QString user, int port = 22, QString protocol = "qemu+ssh",
+                        QString path = "system", QObject *parent = 0);
     ~Hypervisor();
     void write(QDataStream &out) const;
     void read(QDataStream &in);
 
     QString uri();
-    static QString uri(QString host, QString account, int port, QString protocol = "qemu+ssh", QString path = "system");
+    static QString uri(QString host, QString account, int port, QString protocol = "qemu+ssh",
+                       QString path = "system");
     QString name();
     virConnectPtr connection();
     void disconnect();

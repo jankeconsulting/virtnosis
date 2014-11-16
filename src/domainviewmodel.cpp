@@ -27,19 +27,25 @@ DomainViewModel::DomainViewModel(QObject *parent) :
  */
 QVariant DomainViewModel::data(const QModelIndex &index, int role) const
 {
-    if(role == domainStateRole) {
-        if(indexIsDomain(index)) {
+    if (role == domainStateRole)
+    {
+        if (indexIsDomain(index))
+        {
             Domain item = domain(index);
             return QVariant(item.state());
-        } else {
+        } else
+        {
             return QVariant();
         }
     }
-    if(role == hypervisorConnectedRole) {
-        if(indexIsHypervisor(index)) {
+    if (role == hypervisorConnectedRole)
+    {
+        if (indexIsHypervisor(index))
+        {
             Hypervisor item = hypervisor(index);
             return QVariant(item.alive());
-        } else {
+        } else
+        {
             return QVariant();
         }
     }
@@ -52,13 +58,16 @@ QVariant DomainViewModel::data(const QModelIndex &index, int role) const
  */
 void DomainViewModel::connectHypervisor(const QModelIndex &index)
 {
-    if(indexIsHypervisor(index)) {
+    if (indexIsHypervisor(index))
+    {
         HypervisorItem *item = static_cast<HypervisorItem *>(itemFromIndex(index));
         Hypervisor hypervisorobj = hypervisor(index);
         hypervisorobj.setAutoConnect(true);
         item->addDomainsFromHypervisor(&hypervisorobj);
         setHypervisor(index, &hypervisorobj);
-        dataChanged(index, index, QVector<int>(Qt::DisplayRole, hypervisorConnectedRole));
+        dataChanged(index,
+                    index,
+                    QVector<int>(Qt::DisplayRole, hypervisorConnectedRole));
     }
 }
 
@@ -68,7 +77,8 @@ void DomainViewModel::connectHypervisor(const QModelIndex &index)
  */
 void DomainViewModel::disconnectHypervisor(const QModelIndex &index)
 {
-    if(indexIsHypervisor(index)) {
+    if (indexIsHypervisor(index))
+    {
         HypervisorItem *item = static_cast<HypervisorItem *>(itemFromIndex(index));
         Hypervisor hypervisorobj = hypervisor(index);
         item->removeDomainsFromItem(&hypervisorobj);

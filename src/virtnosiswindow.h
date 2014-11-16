@@ -27,8 +27,9 @@
 #define VIRTNOSIS_REVISION "1.0.0"
 #endif
 
-namespace Ui {
-class VirtnosisWindow;
+namespace Ui
+{
+    class VirtnosisWindow;
 }
 
 /**

@@ -31,7 +31,8 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
     hypervisor->connection();
     QList<Domain *> list = hypervisor->domains();
     QListIterator<Domain *> i(list);
-    while (i.hasNext()){
+    while (i.hasNext())
+    {
 
         Domain *domain = i.next();
         domain_item = new DomainItem(domain->name());

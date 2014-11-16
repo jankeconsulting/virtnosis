@@ -39,8 +39,10 @@ VirtnosisWindow::VirtnosisWindow(QWidget *parent) :
     ui->domainView->setModel(model);
     DomainViewItemDelegate *delegate = new DomainViewItemDelegate(this);
     ui->domainView->setItemDelegate(qobject_cast<QAbstractItemDelegate *>(delegate));
-    connect(ui->domainView->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
-    connect(ui->domainView->model(), SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(selectionChanged(QModelIndex,QModelIndex)));
+    connect(ui->domainView->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)),
+            this, SLOT(selectionChanged(QModelIndex, QModelIndex)));
+    connect(ui->domainView->model(), SIGNAL(dataChanged(QModelIndex, QModelIndex)),
+            this, SLOT(selectionChanged(QModelIndex, QModelIndex)));
     connect(&connectingThreadWatcher, SIGNAL(started()), this, SLOT(handleConnectingStarted()));
     connect(&connectingThreadWatcher, SIGNAL(finished()), this, SLOT(handleConnectingFinished()));
     readSettings();
@@ -73,7 +75,8 @@ void VirtnosisWindow::addHypervisor(Hypervisor *hypervisor)
     test.setValue(*hypervisor);
     model->setData(index, test, DomainViewModel::domainHypervisorRole);
     model->setData(index, DomainViewModel::typeHypervisor, DomainViewModel::domainTypeRole);
-    if(hypervisor->autoConnect()) {
+    if (hypervisor->autoConnect())
+    {
         connectHypervisor(index);
     }
 }
@@ -107,13 +110,15 @@ void VirtnosisWindow::setStatusMessage(QString text)
 void VirtnosisWindow::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
-    if(model()->indexIsHypervisor(currentIndex())) {
+    if (model()->indexIsHypervisor(currentIndex()))
+    {
         menu.addAction(ui->menuHypervisorActionConnect);
         menu.addAction(ui->menuHypervisorActionDisconnect);
         menu.addAction(ui->menuHypervisorActionRemove);
         menu.exec(event->globalPos());
     }
-    if(model()->indexIsDomain(currentIndex())) {
+    if (model()->indexIsDomain(currentIndex()))
+    {
         menu.addAction(ui->menuVmActionStart);
         menu.addAction(ui->menuVmActionReboot);
         menu.addAction(ui->menuVmActionShutoff);
@@ -197,7 +202,10 @@ void VirtnosisWindow::on_menuVmActionShutoff_triggered()
     Domain domain = selectedDomain();
     domain.shutdown();
     dataChanged();
-    checkDomainStateChangeTread = QtConcurrent::run(this, &VirtnosisWindow::checkDomainStateChange, currentIndex(), VIR_DOMAIN_SHUTOFF);
+    checkDomainStateChangeTread = QtConcurrent::run(this,
+                                                    &VirtnosisWindow::checkDomainStateChange,
+                                                    currentIndex(),
+                                                    VIR_DOMAIN_SHUTOFF);
     checkDomainStateChangeTreadWatcher.setFuture(checkDomainStateChangeTread);
 }
 
@@ -209,7 +217,10 @@ void VirtnosisWindow::on_menuVmActionDestroy_triggered()
     Domain domain = selectedDomain();
     domain.destroy();
     dataChanged();
-    checkDomainStateChangeTread = QtConcurrent::run(this, &VirtnosisWindow::checkDomainStateChange, currentIndex(), VIR_DOMAIN_SHUTOFF);
+    checkDomainStateChangeTread = QtConcurrent::run(this,
+                                                    &VirtnosisWindow::checkDomainStateChange,
+                                                    currentIndex(),
+                                                    VIR_DOMAIN_SHUTOFF);
     checkDomainStateChangeTreadWatcher.setFuture(checkDomainStateChangeTread);
 }
 
@@ -253,27 +264,35 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
     ui->menuHypervisorActionDisconnect->setDisabled(true);
     ui->menuHypervisorActionRemove->setDisabled(true);
 
-    if(index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor) {
-        Hypervisor hypervisor = qvariant_cast<Hypervisor>(index.data(DomainViewModel::domainHypervisorRole));
+    if (index.data(DomainViewModel::domainTypeRole) == DomainViewModel::typeHypervisor)
+    {
+        Hypervisor hypervisor = qvariant_cast<Hypervisor>(
+                    index.data(DomainViewModel::domainHypervisorRole));
         ui->menuHypervisorActionRemove->setEnabled(true);
-        if(hypervisor.alive()) {
+        if (hypervisor.alive())
+        {
             ui->menuHypervisorActionDisconnect->setEnabled(true);
-        } else {
+        } else
+        {
             ui->menuHypervisorActionConnect->setEnabled(true);
         }
-    } else {
+    } else
+    {
         Domain domain = qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
-        if(domain.isRunning()) {
+        if (domain.isRunning())
+        {
             ui->menuVmActionShutoff->setEnabled(true);
             ui->menuVmActionDestroy->setEnabled(true);
             ui->menuVmActionPause->setEnabled(true);
             ui->menuVmActionReboot->setEnabled(true);
-        } else if (domain.isPaused()) {
+        } else if (domain.isPaused())
+        {
             ui->menuVmActionResume->setEnabled(true);
-        } else {
+        } else
+        {
             ui->menuVmActionStart->setEnabled(true);
         }
-    }    
+    }
 }
 
 /**
@@ -311,7 +330,8 @@ void VirtnosisWindow::selectedDataChanged()
  */
 DomainViewModel *VirtnosisWindow::model()
 {
-    if(ui->domainView->model()) {
+    if (ui->domainView->model())
+    {
         return qobject_cast<DomainViewModel *>(ui->domainView->model());
     }
     return 0;
@@ -356,7 +376,8 @@ void VirtnosisWindow::writeHypervisorSettings()
 {
     m_settings.beginGroup("Hypervisor");
     m_settings.beginWriteArray("hypervisors");
-    for(int i=0; i<(ui->domainView->model()->rowCount()); i++) {
+    for (int i=0; i<(ui->domainView->model()->rowCount()); i++)
+    {
         m_settings.setArrayIndex(i);
         QVariant var_hypervisor;
         var_hypervisor.setValue(model()->hypervisor(i));
@@ -378,7 +399,8 @@ void VirtnosisWindow::readHypervisorSettings()
 {
     m_settings.beginGroup("Hypervisor");
     int size = m_settings.beginReadArray("hypervisors");
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i)
+    {
          m_settings.setArrayIndex(i);
          Hypervisor hypervisor = qvariant_cast<Hypervisor>(m_settings.value("hypervisor"));
          addHypervisor(&hypervisor);
@@ -386,7 +408,8 @@ void VirtnosisWindow::readHypervisorSettings()
     m_settings.endArray();
     m_settings.endGroup();
     m_settings.beginGroup("Settings");
-    settingsDialog->setChangeTimeout(qvariant_cast<int>(m_settings.value("changeTimeout", VIRTNOSIS_DEFAULT_CHANGE_TIME)));
+    settingsDialog->setChangeTimeout(qvariant_cast<int>(m_settings.value("changeTimeout",
+                                                        VIRTNOSIS_DEFAULT_CHANGE_TIME)));
     m_settings.endGroup();
 }
 
@@ -423,9 +446,11 @@ void VirtnosisWindow::connectHypervisor(QModelIndex index)
  */
 void VirtnosisWindow::checkDomainStateChange(QModelIndex index, int state)
 {
-    if(model()) {
+    if (model())
+    {
         QThread::sleep(VIRTNOSIS_DEFAULT_CHANGE_TIME);
-        if(model() && model()->data(index, DomainViewModel::domainStateRole) != state) {
+        if (model() && model()->data(index, DomainViewModel::domainStateRole) != state)
+        {
             QMessageBox dialog;
             dialog.setText(tr("Domain did not change to requested state"));
             dialog.exec();
@@ -535,4 +560,3 @@ void VirtnosisWindow::on_menuVmActionViewer_triggered()
     qDebug() << "VirtnosisWindow::on_menuVmActionViewer_triggered: command = " << command;
     QtConcurrent::run(this, &VirtnosisWindow::displayViewer, command);
 }
-

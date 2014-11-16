@@ -9,8 +9,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class LicenseDialog;
+namespace Ui
+{
+    class LicenseDialog;
 }
 
 /**

@@ -10,8 +10,9 @@
 #include <QDialog>
 #include "./licensedialog.h"
 
-namespace Ui {
-class AboutDialog;
+namespace Ui
+{
+    class AboutDialog;
 }
 
 /**

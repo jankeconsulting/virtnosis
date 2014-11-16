@@ -31,7 +31,8 @@ class DomainViewModel : public QStandardItemModel
     /**
      * @brief contains the possible roles for the item in the model
      */
-    enum datarole {
+    enum datarole
+    {
         domainTypeRole = Qt::UserRole + 100,
         domainStateRole = Qt::UserRole + 101,
         domainHypervisorRole = Qt::UserRole + 102,
@@ -42,7 +43,8 @@ class DomainViewModel : public QStandardItemModel
     /**
      * @brief contains the possible types of the item in the model
      */
-    enum datatype {
+    enum datatype
+    {
         typeHypervisor,
         typeDomain,
     };

@@ -74,8 +74,10 @@ Domain::Domain(const Domain &domain) :
  */
 Domain::~Domain()
 {
-    if(m_domain)
+    if (m_domain)
+    {
         virDomainFree(m_domain);
+    }
 }
 
 /**
@@ -102,14 +104,19 @@ int Domain::state()
     int state;
     int reason;
 
-    if(m_domain) {
-        if(m_libVersion > 8000) {
-            if(virDomainGetState(m_domain, &state, &reason, 0) != -1) {
+    if (m_domain)
+    {
+        if (m_libVersion > 8000)
+        {
+            if (virDomainGetState(m_domain, &state, &reason, 0) != -1)
+            {
                 return state;
             }
-        } else {
+        } else
+        {
             virDomainInfo info;
-            if(virDomainGetInfo(m_domain, &info) != -1) {
+            if (virDomainGetInfo(m_domain, &info) != -1)
+            {
                 return info.state;
             }
         }
@@ -124,7 +131,8 @@ int Domain::state()
  */
 bool Domain::isRunning()
 {
-    if(state() == VIR_DOMAIN_RUNNING) {
+    if (state() == VIR_DOMAIN_RUNNING)
+    {
         return true;
     }
 
@@ -137,7 +145,8 @@ bool Domain::isRunning()
  */
 bool Domain::isPaused()
 {
-    if(state() == VIR_DOMAIN_PAUSED) {
+    if (state() == VIR_DOMAIN_PAUSED)
+    {
         return true;
     }
 
@@ -223,7 +232,8 @@ bool Domain::info()
  */
 int Domain::cpu_count()
 {
-    if(info()) {
+    if (info())
+    {
         return (m_info->nrVirtCpu);
     }
     return 1;
@@ -235,7 +245,8 @@ int Domain::cpu_count()
  */
 long Domain::memory()
 {
-    if(info()) {
+    if (info())
+    {
         return (m_info->memory);
     }
     return 0;
@@ -248,7 +259,8 @@ long Domain::memory()
 bool Domain::cpustats()
 {
     unsigned int nparams = cpu_count();
-    virTypedParameterPtr params = static_cast<virTypedParameterPtr>(calloc(nparams, sizeof(virTypedParameter)));
+    virTypedParameterPtr params = static_cast<virTypedParameterPtr>(
+                calloc(nparams, sizeof(virTypedParameter)));
     int start_cpu = 0;
     unsigned int ncpus = cpu_count();
     unsigned int flags = 0;
@@ -264,6 +276,3 @@ QString Domain::uri()
     virConnectPtr conn = virDomainGetConnect(m_domain);
     return QString(virConnectGetURI(conn));
 }
-
-
-

@@ -61,7 +61,8 @@ Hypervisor::Hypervisor(const Hypervisor &hypervisor) :
  *
  * Constructs the Hypervisor object from the uri information given in its parts
  */
-Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol, QString path, QObject *parent) :
+Hypervisor::Hypervisor(QString host, QString user, int port, QString protocol,
+                       QString path, QObject *parent) :
     QObject(parent),
     m_connection(0),
     m_libVersion(0)
@@ -126,13 +127,17 @@ QString Hypervisor::uri()
  * @param path - path to find the hypervisor on the host
  * @return uri string
  */
-QString Hypervisor::uri(QString host, QString account, int port, QString protocol, QString path)
+QString Hypervisor::uri(QString host, QString account, int port,
+                        QString protocol, QString path)
 {
     QString result;
-    if(account.isEmpty()) {
+    if (account.isEmpty())
+    {
         result = protocol+"://"+host+":"+QString("%1").arg(port)+"/"+path;
-    } else {
-        result = protocol+"://"+account+"@"+host+":"+QString("%1").arg(port)+"/"+path;
+    } else
+    {
+        result = protocol+"://"+account+"@"+host+":"+
+                   QString("%1").arg(port)+"/"+path;
     }
     return result;
 }
@@ -158,8 +163,10 @@ QString Hypervisor::name()
 virConnectPtr Hypervisor::connection()
 {
 //    TODO: error handling if connection fails
-    if(alive() < 1)
-      m_connection = virConnectOpen(this->uri().toLatin1().data());
+    if (alive() < 1)
+    {
+        m_connection = virConnectOpen(this->uri().toLatin1().data());
+    }
 #ifdef DEBUG
     qDebug() << "Hypervisor::connection: version = " << version();
     qDebug() << "Hypervisor::connection: libVersion = " << libVersion();
@@ -183,8 +190,10 @@ void Hypervisor::disconnect()
  */
 int Hypervisor::alive()
 {
-    if(m_connection)
+    if (m_connection)
+    {
         return virConnectIsAlive(m_connection);
+    }
     return 0;
 }
 
@@ -204,30 +213,38 @@ QList<Domain *> Hypervisor::domains()
     QList<Domain *> list = QList<Domain *>();
     ulong version = libVersion();
 
-    if(version > 8000) {
+    if (version > 8000)
+    {
         number_of_domains = virConnectListAllDomains(m_connection, &domains, 0);
 
-        if (number_of_domains < 1) {
+        if (number_of_domains < 1)
+        {
             return list;
         }
 
-        for (i = 0; i < number_of_domains; i++) {
+        for (i = 0; i < number_of_domains; i++)
+        {
             domain = new Domain(domains[i], version);
             list.append(domain);
             virDomainFree(domains[i]);
         }
 
         free(domains);
-    } else {
+    } else
+    {
         number_of_domains = virConnectNumOfDomains(m_connection);
         int domain_ids[number_of_domains];
-        number_of_domains = virConnectListDomains(m_connection, domain_ids, number_of_domains);
+        number_of_domains = virConnectListDomains(m_connection,
+                                                  domain_ids,
+                                                  number_of_domains);
 
-        if (number_of_domains < 1) {
+        if (number_of_domains < 1)
+        {
             return list;
         }
 
-        for (i = 0; i < number_of_domains; i++) {
+        for (i = 0; i < number_of_domains; i++)
+        {
             domain = new Domain(virDomainLookupByID(m_connection, domain_ids[i]), version);
             list.append(domain);
         }
@@ -236,11 +253,13 @@ QList<Domain *> Hypervisor::domains()
         char *names[number_of_domains];
         number_of_domains = virConnectListDefinedDomains(m_connection, names, number_of_domains);
 
-        if (number_of_domains < 1) {
+        if (number_of_domains < 1)
+        {
             return list;
         }
 
-        for (i = 0; i < number_of_domains; i++) {
+        for (i = 0; i < number_of_domains; i++)
+        {
             domain = new Domain(virDomainLookupByName(m_connection, names[i]), version);
             list.append(domain);
             free(names[i]);
@@ -280,7 +299,9 @@ ulong Hypervisor::version()
     ulong hvVer;
     int error = virConnectGetVersion(m_connection, &hvVer);
     if (error)
+    {
         return -1;
+    }
 
     return hvVer;
 }
@@ -291,12 +312,17 @@ ulong Hypervisor::version()
  */
 ulong Hypervisor::libVersion()
 {
-    if(m_libVersion) return m_libVersion;
+    if (m_libVersion)
+    {
+        return m_libVersion;
+    }
 
     ulong libVer;
     int error = virConnectGetLibVersion(m_connection, &libVer);
     if (error)
+    {
         return -1;
+    }
 
     return libVer;
 }
@@ -307,7 +333,8 @@ ulong Hypervisor::libVersion()
  */
 QString Hypervisor::capabilities()
 {
-    if(alive()) {
+    if (alive())
+    {
         char *str = virConnectGetCapabilities(m_connection);
         QString result = QString(str);
         free(str);
