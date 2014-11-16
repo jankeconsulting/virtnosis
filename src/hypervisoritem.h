@@ -12,7 +12,10 @@
 #include "./domainviewmodel.h"
 
 /**
- * @brief The HypervisorItem class
+ * @brief handles the view item displaying the hypervisor information
+ *
+ * The domains of the associated hypervisor are added as children
+ * to this item in form of DomainItem objects.
  */
 class HypervisorItem : public QStandardItem
 {

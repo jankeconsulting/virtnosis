@@ -8,8 +8,8 @@
 #include <QDebug>
 
 /**
- * @brief HypervisorItem::HypervisorItem
- * @param hypervisor
+ * @brief constructs object
+ * @param hypervisor to be associated with view item
  */
 HypervisorItem::HypervisorItem(Hypervisor *hypervisor) :
     QStandardItem(hypervisor->name())
@@ -17,8 +17,12 @@ HypervisorItem::HypervisorItem(Hypervisor *hypervisor) :
 }
 
 /**
- * @brief HypervisorItem::addDomainsFromHypervisor
+ * @brief collects the defined domains from the hypervisor
  * @param hypervisor
+ *
+ * The domain information is collected through the Hypervisor class
+ * and added as children to this object so they display in the view
+ * as such
  */
 void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
 {
@@ -46,8 +50,11 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
 }
 
 /**
- * @brief HypervisorItem::removeDomainsFromItem
+ * @brief removes all domains as children from this object
  * @param hypervisor
+ *
+ * The domains are not removed from the hypervisor itself,
+ * but only from the view display
  */
 void HypervisorItem::removeDomainsFromItem(Hypervisor *hypervisor)
 {
