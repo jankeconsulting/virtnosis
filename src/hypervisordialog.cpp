@@ -10,11 +10,11 @@
 #include <QDebug>
 
 /**
- * @brief HypervisorDialog::HypervisorDialog
- * @param parent
- * @param host
- * @param account
- * @param port
+ * @brief constructs HypervisorDialog object
+ * @param parent - parent of the constructed object
+ * @param host - host of the hypervisor
+ * @param account - account for the connection
+ * @param port - port for the connection
  */
 HypervisorDialog::HypervisorDialog(QWidget *parent, QString host, QString account, int port) :
     QDialog(parent),
@@ -34,7 +34,7 @@ HypervisorDialog::HypervisorDialog(QWidget *parent, QString host, QString accoun
 }
 
 /**
- * @brief HypervisorDialog::~HypervisorDialog
+ * @brief destroys the object
  */
 HypervisorDialog::~HypervisorDialog()
 {
@@ -42,8 +42,8 @@ HypervisorDialog::~HypervisorDialog()
 }
 
 /**
- * @brief HypervisorDialog::host
- * @return
+ * @brief provides the host entered into the dialog
+ * @return - hostname
  */
 QString HypervisorDialog::host()
 {
@@ -51,8 +51,8 @@ QString HypervisorDialog::host()
 }
 
 /**
- * @brief HypervisorDialog::account
- * @return
+ * @brief provides the account entered into the dialog
+ * @return account
  */
 QString HypervisorDialog::account()
 {
@@ -60,8 +60,8 @@ QString HypervisorDialog::account()
 }
 
 /**
- * @brief HypervisorDialog::port
- * @return
+ * @brief provides the port entered into the dialog
+ * @return port
  */
 int HypervisorDialog::port()
 {
@@ -70,7 +70,10 @@ int HypervisorDialog::port()
 }
 
 /**
- * @brief HypervisorDialog::updateUri
+ * @brief updates the uri displayed in the dialog
+ *
+ * The uri is build from the information entered into
+ * the host, account and port fields in the dialog
  */
 void HypervisorDialog::updateUri()
 {
@@ -78,7 +81,11 @@ void HypervisorDialog::updateUri()
 }
 
 /**
- * @brief HypervisorDialog::on_hypervisorDialogbuttonBox_accepted
+ * @brief slot that is called when dialog is accepted
+ *
+ * A hypervisor object is created, set to auto-connect and
+ * added to the view (and due to auto-connect, automatically
+ * connected)
  */
 void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
 {
@@ -89,8 +96,10 @@ void HypervisorDialog::on_hypervisorDialogbuttonBox_accepted()
 }
 
 /**
- * @brief HypervisorDialog::on_hostField_textChanged
- * @param text
+ * @brief slot that is called when dialog field for the host is changed
+ * @param text - hostname
+ *
+ * Calls updateUri so that changed uri is displayed
  */
 void HypervisorDialog::on_hostField_textChanged(const QString &text)
 {
@@ -99,8 +108,10 @@ void HypervisorDialog::on_hostField_textChanged(const QString &text)
 }
 
 /**
- * @brief HypervisorDialog::on_accountField_textChanged
- * @param text
+ * @brief slot that is called when dialog field for the account is changed
+ * @param text - account
+ *
+ * Calls updateUri so that changed uri is displayed
  */
 void HypervisorDialog::on_accountField_textChanged(const QString &text)
 {
@@ -110,8 +121,10 @@ void HypervisorDialog::on_accountField_textChanged(const QString &text)
 
 
 /**
- * @brief HypervisorDialog::on_portField_textChanged
- * @param text
+ * @brief slot that is called when dialog field for the port is changed
+ * @param text - port
+ *
+ * Calls updateUri so that changed uri is displayed
  */
 void HypervisorDialog::on_portField_textChanged(const QString &text)
 {

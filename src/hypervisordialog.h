@@ -17,6 +17,11 @@ class HypervisorDialog;
 
 /**
  * @brief The HypervisorDialog class
+ *
+ * The HypervisorDialog class defines a dialog to enter
+ * the information needed to create a connection to
+ * a hypervisor.
+ *
  */
 class HypervisorDialog : public QDialog
 {
