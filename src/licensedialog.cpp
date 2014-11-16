@@ -8,8 +8,8 @@
 #include "ui_licensedialog.h"
 
 /**
- * @brief LicenseDialog::LicenseDialog
- * @param parent
+ * @brief constructs the LicenseDialog object
+ * @param parent - parent of the constructed object
  */
 LicenseDialog::LicenseDialog(QWidget *parent) :
     QDialog(parent),
@@ -19,7 +19,7 @@ LicenseDialog::LicenseDialog(QWidget *parent) :
 }
 
 /**
- * @brief LicenseDialog::~LicenseDialog
+ * @brief destroys the LicenseDialog object
  */
 LicenseDialog::~LicenseDialog()
 {
