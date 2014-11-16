@@ -19,7 +19,6 @@
  */
 class HypervisorItem : public QStandardItem
 {
-
  public:
     explicit HypervisorItem(Hypervisor *hypervisor);
     void addDomainsFromHypervisor(Hypervisor *hypervisor);

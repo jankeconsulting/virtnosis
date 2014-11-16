@@ -4,8 +4,8 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#include "virtnosiswindow.h"
 #include <QApplication>
+#include "./virtnosiswindow.h"
 
 /**
  * @brief Main function of the application

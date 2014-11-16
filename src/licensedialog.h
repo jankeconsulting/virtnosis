@@ -11,7 +11,7 @@
 
 namespace Ui
 {
-    class LicenseDialog;
+class LicenseDialog;
 }
 
 /**

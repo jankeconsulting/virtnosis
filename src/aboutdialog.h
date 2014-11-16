@@ -12,7 +12,7 @@
 
 namespace Ui
 {
-    class AboutDialog;
+class AboutDialog;
 }
 
 /**

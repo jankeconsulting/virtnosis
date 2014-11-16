@@ -4,7 +4,7 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#include "domain.h"
+#include "./domain.h"
 #include <QDebug>
 
 /**
@@ -21,7 +21,6 @@ Domain::Domain(QObject *parent) :
     QObject(parent),
     m_domain(0)
 {
-
 }
 
 /**
@@ -112,7 +111,8 @@ int Domain::state()
             {
                 return state;
             }
-        } else
+        }
+        else
         {
             virDomainInfo info;
             if (virDomainGetInfo(m_domain, &info) != -1)
@@ -159,7 +159,7 @@ bool Domain::isPaused()
  */
 bool Domain::start()
 {
-//    TODO: check if it can be started
+// TODO(txwikinger): check if it can be started
     return (virDomainCreate(m_domain) == 0);
 }
 
@@ -169,7 +169,7 @@ bool Domain::start()
  */
 bool Domain::reboot()
 {
-//    TODO: check if it can be rebooted
+// TODO(txwikinger): check if it can be rebooted
     return (virDomainReboot(m_domain, 0) == 0);
 }
 
@@ -179,7 +179,7 @@ bool Domain::reboot()
  */
 bool Domain::shutdown()
 {
-//    TODO: check if it can be stopped
+// TODO(txwikinger): check if it can be stopped
     return (virDomainShutdown(m_domain) == 0);
 }
 
@@ -192,7 +192,7 @@ bool Domain::shutdown()
  */
 bool Domain::destroy()
 {
-//    TODO: check if it can be stopped
+// TODO(txwikinger): check if it can be stopped
     return (virDomainDestroy(m_domain) == 0);
 }
 
@@ -202,7 +202,7 @@ bool Domain::destroy()
  */
 bool Domain::pause()
 {
-//    TODO: check if it can be paused
+// TODO(txwikinger): check if it can be paused
     return (virDomainSuspend(m_domain) == 0);
 }
 
@@ -212,7 +212,7 @@ bool Domain::pause()
  */
 bool Domain::resume()
 {
-//    TODO: check if it can be resumed
+// TODO(txwikinger): check if it can be resumed
     return (virDomainResume(m_domain) == 0);
 }
 

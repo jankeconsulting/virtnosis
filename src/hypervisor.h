@@ -42,7 +42,7 @@ class Hypervisor : public QObject
     bool autoConnect();
 
 
-private:
+ private:
     QString protocol;
     QString account;
     QString host;

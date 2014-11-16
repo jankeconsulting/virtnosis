@@ -4,8 +4,8 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#include "licensedialog.h"
-#include "ui_licensedialog.h"
+#include "./licensedialog.h"
+#include "./ui_licensedialog.h"
 
 /**
  * @brief constructs the LicenseDialog object

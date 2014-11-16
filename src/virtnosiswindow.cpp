@@ -4,12 +4,11 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#include "virtnosiswindow.h"
-#include "ui_virtnosiswindow.h"
-
 #include <QDebug>
+#include "./virtnosiswindow.h"
+#include "./ui_virtnosiswindow.h"
 
-//    TODO: Refactor threading
+// TODO(txwikinger): Refactor threading
 /**
  * @brief contructor from virtnosis window object
  * @param parent - parent object
@@ -272,11 +271,13 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
         if (hypervisor.alive())
         {
             ui->menuHypervisorActionDisconnect->setEnabled(true);
-        } else
+        }
+        else
         {
             ui->menuHypervisorActionConnect->setEnabled(true);
         }
-    } else
+    }
+    else
     {
         Domain domain = qvariant_cast<Domain>(index.data(DomainViewModel::domainDomainRole));
         if (domain.isRunning())
@@ -285,10 +286,12 @@ void VirtnosisWindow::enableVirtualMachineActions(const QModelIndex &index)
             ui->menuVmActionDestroy->setEnabled(true);
             ui->menuVmActionPause->setEnabled(true);
             ui->menuVmActionReboot->setEnabled(true);
-        } else if (domain.isPaused())
+        }
+        else if (domain.isPaused())
         {
             ui->menuVmActionResume->setEnabled(true);
-        } else
+        }
+        else
         {
             ui->menuVmActionStart->setEnabled(true);
         }
@@ -376,7 +379,7 @@ void VirtnosisWindow::writeHypervisorSettings()
 {
     m_settings.beginGroup("Hypervisor");
     m_settings.beginWriteArray("hypervisors");
-    for (int i=0; i<(ui->domainView->model()->rowCount()); i++)
+    for (int i = 0; i < (ui->domainView->model()->rowCount()); i++)
     {
         m_settings.setArrayIndex(i);
         QVariant var_hypervisor;
@@ -550,7 +553,7 @@ void VirtnosisWindow::on_actionPreferences_triggered()
  */
 void VirtnosisWindow::on_menuVmActionViewer_triggered()
 {
-//    TODO: temporarily using virt-viewer. Replace with Qt-based implementation
+// TODO(txwikinger): temporarily using virt-viewer. Replace with Qt-based implementation
     Domain domain = selectedDomain();
     QString command = QString("virt-viewer -c ");
 //    command.append(domain.hypervisor().uri());

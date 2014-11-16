@@ -4,8 +4,8 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#include "hypervisor.h"
 #include <QDebug>
+#include "./hypervisor.h"
 
 /**
  * @brief contructs hypervisor
@@ -134,7 +134,8 @@ QString Hypervisor::uri(QString host, QString account, int port,
     if (account.isEmpty())
     {
         result = protocol+"://"+host+":"+QString("%1").arg(port)+"/"+path;
-    } else
+    }
+    else
     {
         result = protocol+"://"+account+"@"+host+":"+
                    QString("%1").arg(port)+"/"+path;
@@ -162,7 +163,7 @@ QString Hypervisor::name()
  */
 virConnectPtr Hypervisor::connection()
 {
-//    TODO: error handling if connection fails
+// TODO(txwikinger): error handling if connection fails
     if (alive() < 1)
     {
         m_connection = virConnectOpen(this->uri().toLatin1().data());
@@ -230,7 +231,8 @@ QList<Domain *> Hypervisor::domains()
         }
 
         free(domains);
-    } else
+    }
+    else
     {
         number_of_domains = virConnectNumOfDomains(m_connection);
         int domain_ids[number_of_domains];

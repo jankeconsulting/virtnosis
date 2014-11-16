@@ -4,7 +4,7 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#include "domainitem.h"
+#include "./domainitem.h"
 
 /**
  * @brief constructs domain item
@@ -13,5 +13,4 @@
 DomainItem::DomainItem(const QString &text) :
     QStandardItem(text)
 {
-
 }

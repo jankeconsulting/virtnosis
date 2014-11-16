@@ -4,7 +4,7 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#include "hypervisoritem.h"
+#include "./hypervisoritem.h"
 #include <QDebug>
 
 /**
@@ -33,7 +33,6 @@ void HypervisorItem::addDomainsFromHypervisor(Hypervisor *hypervisor)
     QListIterator<Domain *> i(list);
     while (i.hasNext())
     {
-
         Domain *domain = i.next();
         domain_item = new DomainItem(domain->name());
         this->appendRow(domain_item);

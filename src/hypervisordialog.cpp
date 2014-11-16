@@ -4,9 +4,9 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#include "hypervisordialog.h"
-#include "ui_hypervisordialog.h"
-#include "virtnosiswindow.h"
+#include "./hypervisordialog.h"
+#include "./ui_hypervisordialog.h"
+#include "./virtnosiswindow.h"
 #include <QDebug>
 
 /**
@@ -30,7 +30,6 @@ HypervisorDialog::HypervisorDialog(QWidget *parent, QString host, QString accoun
     ui->hostField->setValidator(host_validator);
     QIntValidator *port_validator = new QIntValidator(1, 65355, this);
     ui->portField->setValidator(port_validator);
-
 }
 
 /**
@@ -66,7 +65,6 @@ QString HypervisorDialog::account()
 int HypervisorDialog::port()
 {
     return ui->portField->text().toInt();
-
 }
 
 /**

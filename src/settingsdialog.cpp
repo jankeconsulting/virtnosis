@@ -4,9 +4,9 @@
  * Author: Ralph Janke virtnosis@jankeconsulting.ca
  */
 
-#include "settingsdialog.h"
-#include "ui_settingsdialog.h"
 #include <QDebug>
+#include "./settingsdialog.h"
+#include "./ui_settingsdialog.h"
 
 /**
  * @brief constructs the SettingsDialog object

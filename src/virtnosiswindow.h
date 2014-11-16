@@ -14,14 +14,14 @@
 #include <QContextMenuEvent>
 #include <QtConcurrent/QtConcurrent>
 #include <QMessageBox>
-#include "hypervisor.h"
-#include "hypervisordialog.h"
-#include "hypervisoritem.h"
-#include <domainviewmodel.h>
-#include "domainitem.h"
-#include "domainviewitemdelegate.h"
-#include "aboutdialog.h"
-#include "settingsdialog.h"
+#include "./hypervisor.h"
+#include "./hypervisordialog.h"
+#include "./hypervisoritem.h"
+#include "./domainviewmodel.h"
+#include "./domainitem.h"
+#include "./domainviewitemdelegate.h"
+#include "./aboutdialog.h"
+#include "./settingsdialog.h"
 
 #ifndef VIRTNOSIS_REVISION
 #define VIRTNOSIS_REVISION "1.0.0"
@@ -29,7 +29,7 @@
 
 namespace Ui
 {
-    class VirtnosisWindow;
+class VirtnosisWindow;
 }
 
 /**

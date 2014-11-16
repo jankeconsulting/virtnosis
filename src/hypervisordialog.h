@@ -9,11 +9,11 @@
 
 #include <QDialog>
 #include <QStandardItem>
-#include "hypervisor.h"
+#include "./hypervisor.h"
 
 namespace Ui
 {
-    class HypervisorDialog;
+class HypervisorDialog;
 }
 
 /**

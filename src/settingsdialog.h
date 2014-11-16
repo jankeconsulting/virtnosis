@@ -15,7 +15,7 @@
 
 namespace Ui
 {
-    class SettingsDialog;
+class SettingsDialog;
 }
 
 /**
