@@ -68,8 +68,7 @@ void DomainViewItemDelegate::paint(QPainter *painter,
         domainNameRect.setLeft(domainNameRect.left()+iconsize.width()*2+5);
         painter->drawText(domainStateRect,
                           stateText(index.data(DomainViewModel::domainStateRole)));
-    }
-    else if (index.data(DomainViewModel::domainTypeRole) ==
+    } else if (index.data(DomainViewModel::domainTypeRole) ==
                          DomainViewModel::typeHypervisor)
     {
         QIcon icon = connectionIcon(index.data(DomainViewModel::hypervisorConnectedRole));
