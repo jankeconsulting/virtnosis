@@ -134,9 +134,7 @@ QString Hypervisor::uri(QString host, QString account, int port,
     if (account.isEmpty())
     {
         result = protocol+"://"+host+":"+QString("%1").arg(port)+"/"+path;
-    }
-    else
-    {
+    } else {
         result = protocol+"://"+account+"@"+host+":"+
                    QString("%1").arg(port)+"/"+path;
     }
@@ -172,7 +170,7 @@ virConnectPtr Hypervisor::connection()
     qDebug() << "Hypervisor::connection: version = " << version();
     qDebug() << "Hypervisor::connection: libVersion = " << libVersion();
 #endif
-   return m_connection;
+    return m_connection;
 }
 
 /**
@@ -231,9 +229,7 @@ QList<Domain *> Hypervisor::domains()
         }
 
         free(domains);
-    }
-    else
-    {
+    } else {
         number_of_domains = virConnectNumOfDomains(m_connection);
         int domain_ids[number_of_domains];
         number_of_domains = virConnectListDomains(m_connection,
