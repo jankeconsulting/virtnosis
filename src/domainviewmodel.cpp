@@ -33,9 +33,7 @@ QVariant DomainViewModel::data(const QModelIndex &index, int role) const
         {
             Domain item = domain(index);
             return QVariant(item.state());
-        }
-        else
-        {
+        } else {
             return QVariant();
         }
     }
@@ -45,9 +43,7 @@ QVariant DomainViewModel::data(const QModelIndex &index, int role) const
         {
             Hypervisor item = hypervisor(index);
             return QVariant(item.alive());
-        }
-        else
-        {
+        } else {
             return QVariant();
         }
     }
