@@ -111,9 +111,7 @@ int Domain::state()
             {
                 return state;
             }
-        }
-        else
-        {
+        } else {
             virDomainInfo info;
             if (virDomainGetInfo(m_domain, &info) != -1)
             {
